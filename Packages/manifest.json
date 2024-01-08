@@ -2,6 +2,7 @@
   "dependencies": {
     "com.annulusgames.alchemy": "https://github.com/AnnulusGames/Alchemy.git?path=/Alchemy/Assets/Alchemy",
     "com.annulusgames.burst-linq": "https://github.com/AnnulusGames/BurstLinq.git?path=/Assets/BurstLinq",
+    "com.annulusgames.chaining-assertion": "https://github.com/AnnulusGames/ChainingAssertion-Unity.git?path=Assets/ChainingAssertion",
     "com.annulusgames.lit-motion": "https://github.com/AnnulusGames/LitMotion.git?path=src/LitMotion/Assets/LitMotion",
     "com.annulusgames.magic-tween": "https://github.com/AnnulusGames/MagicTween.git?path=/MagicTween/Assets/MagicTween",
     "com.neuecc.unirx": "https://github.com/neuecc/UniRx.git?path=Assets/Plugins/UniRx/Scripts",
