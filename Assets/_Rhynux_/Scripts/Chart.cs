@@ -10,7 +10,7 @@ public class Chart : ScriptableObject {
 	public float m_BPM;
 	[LabelText("Offset (ms)")] public float m_Offset;
 
-	public AudioClip m_MusicClip;
+	public AudioClip m_Clip;
 
 	public List<Note> m_Notes;
 }

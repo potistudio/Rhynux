@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class GameStarter : MonoBehaviour {
 	[SerializeField] private MusicPlayer m_MusicPlayer;
-	[SerializeField] private AudioClip m_SongClip;
+	[SerializeField] private Chart m_Chart;
 
 	private void Start() {
-		m_MusicPlayer.Clip = m_SongClip;
+		m_MusicPlayer.Clip = m_Chart.m_Clip;
 		m_MusicPlayer.Play();
 	}
 }
