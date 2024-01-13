@@ -17,7 +17,7 @@ public class Chart : ScriptableObject {
 
 [System.Serializable]
 public class Note {
-	Note (float _time, float _pos) {
+	public Note (float _time, float _pos) {
 		Time = _time;
 		Pos = _pos;
 	}
