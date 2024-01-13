@@ -258,7 +258,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AudioSource: {fileID: 496397087}
-  m_SongClip: {fileID: 8300000, guid: 79e5d2520c2744c4ebc4b29f49145f3f, type: 3}
 --- !u!4 &496397086
 Transform:
   m_ObjectHideFlags: 0
@@ -382,6 +381,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d0052c9c37f42c4e895da62425e17ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_MusicPlayer: {fileID: 496397085}
+  m_Chart: {fileID: 11400000, guid: a2e4df620355a2549b997394f55a73c1, type: 2}
 --- !u!1 &656222127
 GameObject:
   m_ObjectHideFlags: 0
