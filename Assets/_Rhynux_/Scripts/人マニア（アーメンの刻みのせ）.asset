@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 498be60e7a3b7ff48b655b6862d3e195, type: 3}
+  m_Name: "\u4EBA\u30DE\u30CB\u30A2\uFF08\u30A2\u30FC\u30E1\u30F3\u306E\u523B\u307F\u306E\u305B\uFF09"
+  m_EditorClassIdentifier: 
+  m_Title: "\u4EBA\u30DE\u30CB\u30A2\uFF08\u30A2\u30FC\u30E1\u30F3\u306E\u523B\u307F\u306E\u305B\uFF09"
+  Artist: FTN-NKNK
+  m_BPM: 240
+  m_Offset: 4000
+  m_MusicClip: {fileID: 8300000, guid: 79e5d2520c2744c4ebc4b29f49145f3f, type: 3}
+  m_Notes:
+  - <Time>k__BackingField: 0
+    <Pos>k__BackingField: 0
+  - <Time>k__BackingField: 1
+    <Pos>k__BackingField: 0
+  - <Time>k__BackingField: 2
+    <Pos>k__BackingField: 0
+  - <Time>k__BackingField: 3
+    <Pos>k__BackingField: 0
