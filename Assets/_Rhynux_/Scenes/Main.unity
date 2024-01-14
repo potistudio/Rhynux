@@ -231,6 +231,7 @@ GameObject:
   - component: {fileID: 496397087}
   - component: {fileID: 496397088}
   - component: {fileID: 496397085}
+  - component: {fileID: 496397089}
   m_Layer: 0
   m_Name: Music Player
   m_TagString: Untagged
@@ -376,6 +377,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MusicPlayer: {fileID: 496397085}
   m_Chart: {fileID: 11400000, guid: a2e4df620355a2549b997394f55a73c1, type: 2}
+--- !u!114 &496397089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 496397084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2942e652a45dd9a40b26ab2ffb30215c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AudioSource: {fileID: 496397087}
+  m_NotesChart: {fileID: 11400000, guid: a2e4df620355a2549b997394f55a73c1, type: 2}
+  m_NotesGenerator:
+    rid: 2661267055194406913
+  references:
+    version: 2
+    RefIds:
+    - rid: 2661267055194406913
+      type: {class: SingleLineConstantIntervalNotesGenerator, ns: , asm: Assembly-CSharp}
+      data:
 --- !u!1 &656222127
 GameObject:
   m_ObjectHideFlags: 0
