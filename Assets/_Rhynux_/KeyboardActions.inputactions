@@ -1,0 +1,34 @@
+{
+    "name": "KeyboardActions",
+    "maps": [
+        {
+            "name": "Pressed",
+            "id": "c4ca0624-5c30-4a73-afe5-d767bff21f9e",
+            "actions": [
+                {
+                    "name": "F",
+                    "type": "Button",
+                    "id": "6f8b9644-efbf-4f8e-b9ef-9119a0ce7023",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "1bf9706e-4d81-4f65-9583-799b8d63c2ad",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "F",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
