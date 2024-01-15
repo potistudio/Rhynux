@@ -9,8 +9,8 @@ public class KeyboardInput : IInputInterface {
 	private readonly UniRx.Subject<int> m_OnReleased = new();
 	public System.IObservable<int> OnReleased => m_OnReleased;
 
-	public KeyboardInput() {
-		m_KeyboardActions = new KeyboardActions();
+	public KeyboardInput (KeyboardActions _actions) {
+		m_KeyboardActions = _actions;
 		Enable();
 	}
 
