@@ -6,9 +6,36 @@
             "id": "c4ca0624-5c30-4a73-afe5-d767bff21f9e",
             "actions": [
                 {
+                    "name": "D",
+                    "type": "Button",
+                    "id": "09e3f0ee-9cdc-4a49-a543-05cbd1a9e0bb",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "F",
                     "type": "Button",
                     "id": "6f8b9644-efbf-4f8e-b9ef-9119a0ce7023",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "J",
+                    "type": "Button",
+                    "id": "f3a85b9f-315f-4d84-858a-fc9633d3cff5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "K",
+                    "type": "Button",
+                    "id": "0409f99a-685d-4318-8b62-56743be209e1",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Press",
@@ -24,6 +51,127 @@
                     "processors": "",
                     "groups": "",
                     "action": "F",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cbc61313-df8e-4999-9998-cc0d2059878e",
+                    "path": "<Keyboard>/j",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "J",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3c749566-e3ff-4302-8e56-ad83749279c0",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "D",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "352d1f48-4d91-4010-bb01-b1dea13fad8e",
+                    "path": "<Keyboard>/k",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "K",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Released",
+            "id": "2a886ca7-1d80-45eb-95e4-ff39fe205f03",
+            "actions": [
+                {
+                    "name": "D",
+                    "type": "Button",
+                    "id": "2199cb06-53e2-4529-b8d2-eaca4d588a32",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "F",
+                    "type": "Button",
+                    "id": "49fb5949-2069-43a2-93ef-1e49aa9e2769",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "J",
+                    "type": "Button",
+                    "id": "df563929-99f9-4486-bf7b-7e38c76c3b55",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "K",
+                    "type": "Button",
+                    "id": "51a33477-7824-4ec7-a308-af64f4bc9567",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "a8e74c5f-b1ad-4fcf-9c1d-5856ca9a0eda",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "D",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "516b980e-a9bb-4816-9592-865cb46fd72a",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "F",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4f6bf504-681e-4da1-af3d-849b24e526b7",
+                    "path": "<Keyboard>/j",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "J",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f4c4c2e3-66f4-49ee-8030-b31aeaff9663",
+                    "path": "<Keyboard>/k",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "K",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
