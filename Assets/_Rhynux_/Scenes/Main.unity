@@ -378,6 +378,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MusicPlayer: {fileID: 496397085}
   m_Chart: {fileID: 11400000, guid: a2e4df620355a2549b997394f55a73c1, type: 2}
+  m_NotesGenerator:
+    rid: 2661267094324903936
+  m_InputReferee: {fileID: 496397089}
+  references:
+    version: 2
+    RefIds:
+    - rid: 2661267094324903936
+      type: {class: SingleLineConstantIntervalNotesGenerator, ns: , asm: Assembly-CSharp}
+      data:
+        m_TargetLine: 0
 --- !u!114 &496397089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -391,16 +401,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AudioSource: {fileID: 496397087}
-  m_NotesChart: {fileID: 11400000, guid: a2e4df620355a2549b997394f55a73c1, type: 2}
-  m_NotesGenerator:
-    rid: 2661267055194406913
-  references:
-    version: 2
-    RefIds:
-    - rid: 2661267055194406913
-      type: {class: SingleLineConstantIntervalNotesGenerator, ns: , asm: Assembly-CSharp}
-      data:
-        m_TargetLine: 0
 --- !u!114 &496397090
 MonoBehaviour:
   m_ObjectHideFlags: 0
