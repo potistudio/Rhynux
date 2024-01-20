@@ -1,10 +1,11 @@
 
 using System.Linq;
 
+/* Model */
 public class ReactiveNotesReferee {
-	private System.Collections.Generic.List<Note> m_NotesList = new();
+	private readonly System.Collections.Generic.IReadOnlyList<Note> m_NotesList;
 
-	public ReactiveNotesReferee (System.Collections.Generic.List<Note> _notes) {
+	public ReactiveNotesReferee (System.Collections.Generic.IReadOnlyList<Note> _notes) {
 		m_NotesList = _notes;
 	}
 
@@ -19,7 +20,7 @@ public class ReactiveNotesReferee {
 
 		for (int i = 0; i < m_NotesList.Count; i++) {
 			if (m_NotesList[i].Position == _lane) {
-				float gap = System.Math.Abs (_time - m_NotesList[i].Time); // 距離差 (絶対値)
+				float gap = System.Math.Abs (_time - m_NotesList[i].Time);
 
 				if (gap > minDistance) {
 					currentIndex = preventIndex;
@@ -33,6 +34,7 @@ public class ReactiveNotesReferee {
 
 				minDistance = gap;
 				preventIndex = i;
+
 				count++;
 			}
 		}
