@@ -1,10 +1,15 @@
 
+using System.Collections.Generic;
+
 [System.Serializable]
 public class SingleLineConstantIntervalNotesGenerator : INotesGenerator {
 	[UnityEngine.SerializeField] private int m_TargetLine;
 
-	public System.Collections.Generic.List<Note> Generate (Chart _chart) {
-		System.Collections.Generic.List<Note> notes = new();
+	private readonly UniRx.Subject<IReadOnlyList<Note>> m_OnNotesGenerated = new();
+	public System.IObservable<IReadOnlyList<Note>> OnNotesGenerated => m_OnNotesGenerated;
+
+	public List<Note> Generate (Chart _chart) {
+		List<Note> notes = new();
 
 		float length = _chart.m_Clip.length;
 		float currentTime = 0f;
@@ -15,6 +20,7 @@ public class SingleLineConstantIntervalNotesGenerator : INotesGenerator {
 			notes.Add (new Note(currentTime, m_TargetLine));
 		}
 
+		m_OnNotesGenerated.OnNext (notes);
 		return notes;
 	}
 }

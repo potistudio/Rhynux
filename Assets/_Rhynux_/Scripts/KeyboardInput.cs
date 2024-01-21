@@ -1,7 +1,7 @@
 
 [System.Serializable]
 public class KeyboardInput : IInputInterface {
-	private KeyboardActions m_KeyboardActions;
+	private readonly KeyboardActions m_KeyboardActions;
 
 	private readonly UniRx.Subject<int> m_OnPressed = new();
 	public System.IObservable<int> OnPressed => m_OnPressed;
