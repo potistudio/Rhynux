@@ -2,9 +2,6 @@
 using UnityEngine;
 using UniRx;
 
-/* Controller */
-// <-- InputInterface
-// --> ReactiveNotesReferee
 public class InputReferee : MonoBehaviour {
 	[SerializeField] private MusicPlayer m_MusicPlayer;
 

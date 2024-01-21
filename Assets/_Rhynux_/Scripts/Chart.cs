@@ -1,5 +1,4 @@
 
-using System.Collections.Generic;
 using UnityEngine;
 using Alchemy.Inspector;
 
@@ -12,7 +11,7 @@ public class Chart : ScriptableObject {
 
 	public AudioClip m_Clip;
 
-	public List<Note> m_Notes;
+	public System.Collections.Generic.List<Note> m_Notes;
 }
 
 [System.Serializable]

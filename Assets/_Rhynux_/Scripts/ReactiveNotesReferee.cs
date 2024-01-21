@@ -1,7 +1,6 @@
 
 using System.Linq;
 
-/* Model */
 public class ReactiveNotesReferee {
 	private readonly System.Collections.Generic.IReadOnlyList<Note> m_NotesList;
 
