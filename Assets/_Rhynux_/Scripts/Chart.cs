@@ -16,11 +16,11 @@ public class Chart : ScriptableObject {
 
 [System.Serializable]
 public class Note {
+	[field: SerializeField] public float Time { get; set; }
+	[field: SerializeField] public float Position { get; set; }
+
 	public Note (float _time, float _pos) {
 		Time = _time;
 		Position = _pos;
 	}
-
-	[field: SerializeField] public float Time { get; set; }
-	[field: SerializeField] public float Position { get; set; }
 }
