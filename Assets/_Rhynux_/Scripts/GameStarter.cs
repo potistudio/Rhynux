@@ -15,7 +15,7 @@ public class GameStarter : MonoBehaviour {
 	private void Start() {
 		m_NotesGenerator.Generate (m_Chart);
 
-		m_MusicPlayer.Clip = m_Chart.m_Clip;
+		m_MusicPlayer.Clip = m_Chart.Clip;
 		m_MusicPlayer.Play();
 	}
 }

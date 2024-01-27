@@ -13,16 +13,16 @@ MonoBehaviour:
   m_Name: "\u4EBA\u30DE\u30CB\u30A2\uFF08\u30A2\u30FC\u30E1\u30F3\u306E\u523B\u307F\u306E\u305B\uFF09"
   m_EditorClassIdentifier: 
   m_Title: "\u4EBA\u30DE\u30CB\u30A2\uFF08\u30A2\u30FC\u30E1\u30F3\u306E\u523B\u307F\u306E\u305B\uFF09"
-  Artist: FTN-NKNK
+  m_Artist: FTN-NKNK
   m_BPM: 240
   m_Offset: 4000
   m_Clip: {fileID: 8300000, guid: 79e5d2520c2744c4ebc4b29f49145f3f, type: 3}
   m_Notes:
   - <Time>k__BackingField: 0
-    <Pos>k__BackingField: 0
+    <Position>k__BackingField: 0
   - <Time>k__BackingField: 1
-    <Pos>k__BackingField: 0
+    <Position>k__BackingField: 0
   - <Time>k__BackingField: 2
-    <Pos>k__BackingField: 0
+    <Position>k__BackingField: 0
   - <Time>k__BackingField: 3
-    <Pos>k__BackingField: 0
+    <Position>k__BackingField: 0
