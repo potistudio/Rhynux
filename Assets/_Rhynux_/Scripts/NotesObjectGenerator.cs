@@ -8,8 +8,12 @@ public class NotesObjectGenerator : MonoBehaviour {
 	[VContainer.Inject]
 	public void Init (INotesGenerator _notesGenerator) {
 		_notesGenerator.OnNotesGenerated.Subscribe (notes => {
-			foreach (Note note in notes)
-				Instantiate (m_NotePrefab, new Vector3(note.Position, 0, note.Time), Quaternion.identity);
+			Transform notesParent = new GameObject ("Notes Parent").transform;
+
+			foreach (Note note in notes) {
+				Transform noteObj = Instantiate (m_NotePrefab, new Vector3(note.Position, 0, note.Time), Quaternion.identity).transform;
+				noteObj.SetParent (notesParent);
+			}
 		});
 	}
 }
