@@ -117,10 +117,10 @@ public class AudioSpectrum : MonoBehaviour {
 
 		audioBuffer = audioBuffer.Select (x => x * (audioBuffer.Length / normalized)).ToArray();
 
-		float[] resuleBuffer = CalcGoertzelSpectrum (audioBuffer);
+		float[] resultBuffer = CalcGoertzelSpectrum (audioBuffer);
 
-		float[] dataArray = new float[resuleBuffer.Length];
-		ApplySmoothingTimeConstatnt (ref dataArray, resuleBuffer.Select((x, i) => {
+		float[] dataArray = new float[resultBuffer.Length];
+		ApplySmoothingTimeConstant (ref dataArray, resultBuffer.Select((x, i) => {
 			Freq[] freqBands = GenerateFreqBands (SAMPLES_OUT, MIN_FREQ, MAX_FREQ);
 			return x * DBToLinear (OUTPUT_MULTIPLIER) * CalcFreqTilt (freqBands[i].Mid, 440f, 0f) * ApplyWeight (freqBands[i].Mid, 0f);
 		}).ToArray(), SMOOTHING_TIME_CONSTANT);
