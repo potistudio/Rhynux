@@ -1,8 +1,8 @@
 
 using UnityEngine;
+using System.Linq;
 
 #if UNITY_EDITOR
-	using System.Linq;
 	using UnityEditor;
 #endif
 
