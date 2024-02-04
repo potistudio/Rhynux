@@ -1,14 +1,13 @@
 
 using Unity.Collections;
 using Unity.Jobs;
-using System.Linq;
 
 [Unity.Burst.BurstCompile]
 public struct GoertzelSpectrumJob : IJob {
-	public NativeArray<float> m_WaveformInput;
-	public NativeArray<float> m_SpectrumOutput;
-	public int m_SampleRate;
+	[ReadOnly] public NativeArray<float> m_WaveformInput;
+	[WriteOnly] public NativeArray<float> m_SpectrumOutput;
 
+	public int m_SampleRate;
 	public int m_SamplesOut;
 	public float m_OutputMultiplier;
 	public int m_FreqMin;
@@ -49,21 +48,17 @@ public struct GoertzelSpectrumJob : IJob {
 		return (float)System.Math.Abs (_amount) > 0f ? (float)System.Math.Pow (10f, (float)System.Math.Log(_freq / _centerFreq, 2) * _amount / 20f) : 1f;
 	}
 
-	private Freq[] GenerateFreqBands (int _samples, int _min, int _max) {
-		Freq[] freqArray = new Freq[_samples];
-
+	private void GenerateFreqBands (ref NativeArray<Freq> _targetArray, int _samples, int _min, int _max) {
 		for (int i = 0; i < _samples; i++) {
-			freqArray[i] = new Freq (
+			_targetArray[i] = new Freq (
 				Remap (i - 0.5f, 0f, _samples - 1f, _min, _max),
 				Remap (i, 0f, _samples - 1f, _min, _max),
 				Remap (i + 0.5f, 0f, _samples - 1f, _min, _max)
 			);
 		}
-
-		return freqArray;
 	}
 
-	private float CalcGoertzel (float[] _waveform, float _coeff) {
+	private float CalcGoertzel (NativeArray<float> _waveform, float _coeff) {
 		float f1 = 0f, f2 = 0f, sine;
 
 		foreach (float x in _waveform) {
@@ -75,26 +70,28 @@ public struct GoertzelSpectrumJob : IJob {
 		return (float)System.Math.Sqrt ((float)System.Math.Pow(f1, 2) + (float)System.Math.Pow(f2, 2) - _coeff * f1 * f2) / _waveform.Length;
 	}
 
-	private float[] CalcGoertzelSpectrum (float[] _waveform) {
-		GoertzelSpectrumJob thisJob = this;
+	private void CalcGoertzelSpectrum (ref NativeArray<float> _resultArray, NativeArray<float> _waveform) {
+		NativeArray<Freq> freqBands = new (m_SamplesOut, Allocator.Temp);
+		GenerateFreqBands (ref freqBands, m_SamplesOut, m_FreqMin, m_FreqMax);
 
-		return GenerateFreqBands (m_SamplesOut, m_FreqMin, m_FreqMax).Select (x => {
-			float coeff = 2f * (float)System.Math.Cos (2f * (float)System.Math.PI * x.Mid / thisJob.m_SampleRate);
-			return thisJob.CalcGoertzel (_waveform, coeff);
-		}).ToArray();
+		for (int i = 0; i < freqBands.Length; i++) {
+			float coeff = 2f * (float)System.Math.Cos (2f * (float)System.Math.PI * freqBands[i].Mid / m_SampleRate);
+			_resultArray[i] = CalcGoertzel (_waveform, coeff);
+		}
+
+		freqBands.Dispose();
 	}
 
-	private void ApplySmoothingTimeConstant (ref float[] _targetArray, in float[] _sourceArray, float _factor = 0.5f) {
+	private void ApplySmoothingTimeConstant (ref NativeArray<float> _targetArray, in NativeArray<float> _sourceArray, float _factor = 0.5f) {
 		for (int i = 0; i < _targetArray.Length; i++) {
 			_targetArray[i] = (float.NaN == _targetArray[i] ? 0f : _targetArray[i]) * _factor + (float.NaN == _sourceArray[i] ? 0f : _sourceArray[i]) * (1f - _factor);
 		}
 	}
 
 	public void Execute() {
-		GoertzelSpectrumJob thisJob = this;
 		int FFT_SIZE = (int)System.Math.Round (m_AudioDuration * (m_SampleRate * 0.001f));
 
-		float[] audioBuffer = new float[FFT_SIZE];
+		NativeArray<float> audioBuffer = new (FFT_SIZE, Allocator.Temp);
 		float normalized = 0f;
 
 		for (int i = 0; i < FFT_SIZE; i++) {
@@ -105,19 +102,31 @@ public struct GoertzelSpectrumJob : IJob {
 			normalized += w;
 		}
 
-		audioBuffer = audioBuffer.Select (x => x * (audioBuffer.Length / normalized)).ToArray();
+		for (int i = 0; i < audioBuffer.Length; i++) {
+			audioBuffer[i] = audioBuffer[i] * (audioBuffer.Length / normalized);
+		}
 
-		float[] resultBuffer = CalcGoertzelSpectrum (audioBuffer);
+		NativeArray<float> resultBuffer = new (m_SamplesOut, Allocator.Temp);
+		CalcGoertzelSpectrum (ref resultBuffer, audioBuffer);
+		NativeArray<float> dataArray = new (resultBuffer.Length, Allocator.Temp);
+		NativeArray<float> rs = new (m_SamplesOut, Allocator.Temp);
 
-		float[] dataArray = new float[resultBuffer.Length];
-		ApplySmoothingTimeConstant (ref dataArray, resultBuffer.Select((x, i) => {
-			Freq[] freqBands = thisJob.GenerateFreqBands (thisJob.m_SamplesOut, thisJob.m_FreqMin, thisJob.m_FreqMax);
-			return x * thisJob.DBToLinear (thisJob.m_OutputMultiplier) * thisJob.CalcFreqTilt (freqBands[i].Mid, 440f, 0f) * thisJob.ApplyWeight (freqBands[i].Mid, 0f);
-		}).ToArray(), m_SmoothingTimeConstant);
-		float[] processedResult = dataArray.Select((x, i) => {
-			return (float)System.Math.Max(thisJob.Ascale(x, 1f, false, 70f, true), 0f);
-		}).ToArray();
+		for (int i = 0; i < resultBuffer.Length; i++) {
+			NativeArray<Freq> freqBands = new (m_SamplesOut, Allocator.Temp);
+			GenerateFreqBands (ref freqBands, m_SamplesOut, m_FreqMin, m_FreqMax);
+			rs[i] = resultBuffer[i] * DBToLinear (m_OutputMultiplier) * CalcFreqTilt (freqBands[i].Mid, 440f, 0f) * ApplyWeight (freqBands[i].Mid, 0f);
+			freqBands.Dispose();
+		}
 
-		m_SpectrumOutput.CopyFrom (processedResult);
+		ApplySmoothingTimeConstant (ref dataArray, rs, m_SmoothingTimeConstant);
+
+		for (int i = 0; i < dataArray.Length; i++) {
+			m_SpectrumOutput[i] = (float)System.Math.Max (Ascale(dataArray[i], 1f, false, 70f, true), 0f);
+		}
+
+		audioBuffer.Dispose();
+		resultBuffer.Dispose();
+		dataArray.Dispose();
+		rs.Dispose();
 	}
 }

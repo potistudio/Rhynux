@@ -40,7 +40,7 @@ public class AudioSpectrum : MonoBehaviour {
 		//* Use Mono *// 17ms
 		// ProcessedAudioData = m_GoertzelSpectrumMono.Execute (m_OutputAudioData);
 
-		//* Use Job System *// ?ms
+		//* Use Job System *// 5ms
 		// Prepare Output Buffer
 		float[] processedSpectrum = new float[SAMPLES_OUT];
 		Unity.Collections.NativeArray<float> processedSpectrumBuffer = new (SAMPLES_OUT, Unity.Collections.Allocator.TempJob);
