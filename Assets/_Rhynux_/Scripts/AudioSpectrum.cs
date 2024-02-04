@@ -88,7 +88,7 @@ public class AudioSpectrum : MonoBehaviour {
 		}).ToArray();
 	}
 
-	private void ApplySmoothingTimeConstatnt (ref float[] _targetArray, in float[] _sourceArray, float _factor = 0.5f) {
+	private void ApplySmoothingTimeConstant (ref float[] _targetArray, in float[] _sourceArray, float _factor = 0.5f) {
 		for (int i = 0; i < _targetArray.Length; i++) {
 			_targetArray[i] = (float.NaN == _targetArray[i] ? 0f : _targetArray[i]) * _factor + (float.NaN == _sourceArray[i] ? 0f : _sourceArray[i]) * (1f - _factor);
 		}
