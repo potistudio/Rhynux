@@ -22,9 +22,14 @@ public class AudioSpectrum : MonoBehaviour {
 	private const int MIN_FREQ = 20;
 	private const int MAX_FREQ = 400;
 	private const float OUTPUT_MULTIPLIER = 48f;
+	private const float DRAW_WIDTH = 1920f;
 
 	private const float WINDOW_SKEW = 0f;
 	private const float SMOOTHING_TIME_CONSTANT = 0f;
+
+	private float Remap (float _x, float _inMin, float _inMax, float _outMin, float _outMax) {
+		return (_x - _inMax) / (_inMax - _inMin) * (_outMax - _outMin) + _outMin;
+	}
 
 	private void Start() {
 		m_SampleRate = AudioSettings.outputSampleRate;
@@ -77,8 +82,12 @@ public class AudioSpectrum : MonoBehaviour {
 		private void OnDrawGizmos() {
 			Handles.color = Color.white;
 
-			if (ProcessedAudioData != null)
-				Handles.DrawAAPolyLine (2f, ProcessedAudioData.Select((x, i) => new Vector3(i * 2f, x, 0)).ToArray());
+			if (ProcessedAudioData != null) {
+				Handles.DrawAAPolyLine (2f, ProcessedAudioData.Select((y, i) => {
+					float remappedPosX = Remap (i / (ProcessedAudioData.Length - 1f), 0f, 1f, 0f, -DRAW_WIDTH);
+					return new Vector3 (remappedPosX, y, 0);
+				}).ToArray());
+			}
 		}
 	#endif
 }
