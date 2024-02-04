@@ -1,6 +1,8 @@
 
 using UnityEngine;
 using System.Linq;
+using Unity.Jobs;
+
 
 #if UNITY_EDITOR
 	using UnityEditor;
@@ -36,7 +38,7 @@ public class AudioSpectrum : MonoBehaviour {
 		m_AudioSource.GetOutputData (m_OutputAudioData, 0);
 
 		//* Use Mono *// 17ms
-		ProcessedAudioData = m_GoertzelSpectrumMono.Execute(m_OutputAudioData);
+		// ProcessedAudioData = m_GoertzelSpectrumMono.Execute (m_OutputAudioData);
 
 		//* Use Job System *// ?ms
 		// Prepare Output Buffer
@@ -67,7 +69,7 @@ public class AudioSpectrum : MonoBehaviour {
 
 		// Copy Processed Job Buffer to Managed Array
 		processedSpectrumBuffer.CopyTo (processedSpectrum);
-		Debug.Log (processedSpectrum[0]);
+		ProcessedAudioData = processedSpectrum;
 
 		// Dispose NativeArray
 		source.Dispose();
