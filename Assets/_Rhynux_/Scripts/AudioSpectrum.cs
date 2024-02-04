@@ -26,11 +26,8 @@ public class AudioSpectrum : MonoBehaviour {
 	private const float WINDOW_SKEW = 0f;
 	private const float SMOOTHING_TIME_CONSTANT = 0f;
 
-	private GoertzelSpectrumMono m_GoertzelSpectrumMono;
-
 	private void Start() {
 		m_SampleRate = AudioSettings.outputSampleRate;
-		m_GoertzelSpectrumMono = new (SAMPLES_OUT, m_SampleRate, MIN_FREQ, MAX_FREQ, SMOOTHING_TIME_CONSTANT, WINDOW_SKEW, OUTPUT_MULTIPLIER, AUDIO_DURATION);
 	}
 
 	private void Update() {
