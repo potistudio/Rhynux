@@ -37,6 +37,41 @@ public class AudioSpectrum : MonoBehaviour {
 
 		//* Use Mono *// 17ms
 		ProcessedAudioData = m_GoertzelSpectrumMono.Execute(m_OutputAudioData);
+
+		//* Use Job System *// ?ms
+		// Prepare Output Buffer
+		float[] processedSpectrum = new float[SAMPLES_OUT];
+		Unity.Collections.NativeArray<float> processedSpectrumBuffer = new (SAMPLES_OUT, Unity.Collections.Allocator.TempJob);
+
+		// Prepare Waveform Data as NativeArray
+		Unity.Collections.NativeArray<float> source = new (8196, Unity.Collections.Allocator.TempJob);
+		source.CopyFrom (m_OutputAudioData);
+
+		// Create Job
+		GoertzelSpectrumJob job = new() {
+			m_WaveformInput = source,
+			m_SpectrumOutput = processedSpectrumBuffer,
+			m_SampleRate = m_SampleRate,
+			m_SamplesOut = SAMPLES_OUT,
+			m_OutputMultiplier = OUTPUT_MULTIPLIER,
+			m_FreqMin = MIN_FREQ,
+			m_FreqMax = MAX_FREQ,
+			m_AudioDuration = AUDIO_DURATION,
+			m_SmoothingTimeConstant = SMOOTHING_TIME_CONSTANT,
+			m_WindowSkew = WINDOW_SKEW
+		};
+
+		// Execute Job
+		JobHandle jobHandle = job.Schedule();
+		jobHandle.Complete();
+
+		// Copy Processed Job Buffer to Managed Array
+		processedSpectrumBuffer.CopyTo (processedSpectrum);
+		Debug.Log (processedSpectrum[0]);
+
+		// Dispose NativeArray
+		source.Dispose();
+		processedSpectrumBuffer.Dispose();
 	}
 
 	#if UNITY_EDITOR
