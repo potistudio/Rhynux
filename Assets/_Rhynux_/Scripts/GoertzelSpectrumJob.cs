@@ -84,7 +84,7 @@ public struct GoertzelSpectrumJob : IJob {
 
 	private void ApplySmoothingTimeConstant (ref NativeArray<float> _targetArray, in NativeArray<float> _sourceArray, float _factor = 0.5f) {
 		for (int i = 0; i < _targetArray.Length; i++) {
-			_targetArray[i] = (float.NaN == _targetArray[i] ? 0f : _targetArray[i]) * _factor + (float.NaN == _sourceArray[i] ? 0f : _sourceArray[i]) * (1f - _factor);
+			_targetArray[i] = (float.IsNaN(_targetArray[i]) ? 0f : _targetArray[i]) * _factor + (float.IsNaN(_sourceArray[i]) ? 0f : _sourceArray[i]) * (1f - _factor);
 		}
 	}
 
