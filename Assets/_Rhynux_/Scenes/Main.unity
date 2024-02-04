@@ -255,6 +255,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AudioSource: {fileID: 496397087}
+  m_AudioDuration: 170
+  m_MinFrequency: 20
+  m_MaxFrequency: 400
+  m_OutputResolution: 960
+  m_OutputMultiplier: 64
+  m_DrawWidth: 960
+  m_WindowSkew: 0
+  m_SmoothingTimeConstant: 0
 --- !u!4 &336430721
 Transform:
   m_ObjectHideFlags: 0

@@ -1,8 +1,8 @@
 
-using UnityEngine;
 using System.Linq;
+using UnityEngine;
 using Unity.Jobs;
-
+using Alchemy.Inspector;
 
 #if UNITY_EDITOR
 	using UnityEditor;
@@ -11,24 +11,41 @@ using Unity.Jobs;
 public class AudioSpectrum : MonoBehaviour {
 	[SerializeField] private AudioSource m_AudioSource;
 
-	private float[] m_OutputAudioData = new float[8196];
-	public float[] OutputAudioData => m_OutputAudioData;
+	[Title("Audio Settings")]
+	[SerializeField] private int m_AudioDuration;
+	[SerializeField] private int m_MinFrequency;
+	[SerializeField] private int m_MaxFrequency;
+
+	[Title("Output Settings")]
+	[SerializeField, LabelText("Resolution")] private int m_OutputResolution;
+	[SerializeField, LabelText("Multiplier")] private float m_OutputMultiplier;
+	[SerializeField, LabelText("Width")] private float m_DrawWidth;
+
+	[Title("Legacy Settings")]
+	[SerializeField] private float m_WindowSkew;
+	[SerializeField, Range(0f, 1f)] private float m_SmoothingTimeConstant;
+
 	public float[] ProcessedAudioData { get; private set; }
 
+	private readonly float[] m_OutputAudioData = new float[8196];
 	private int m_SampleRate = 48000;
-
-	private const int AUDIO_DURATION = 160;
-	private const int SAMPLES_OUT = 200;
-	private const int MIN_FREQ = 20;
-	private const int MAX_FREQ = 400;
-	private const float OUTPUT_MULTIPLIER = 48f;
-	private const float DRAW_WIDTH = 1920f;
-
-	private const float WINDOW_SKEW = 0f;
-	private const float SMOOTHING_TIME_CONSTANT = 0f;
 
 	private float Remap (float _x, float _inMin, float _inMax, float _outMin, float _outMax) {
 		return (_x - _inMax) / (_inMax - _inMin) * (_outMax - _outMin) + _outMin;
+	}
+
+	private void OnValidate() {
+		int maxAudioDuration = Mathf.FloorToInt (8196 / (m_SampleRate * 0.001f));
+
+		if (m_AudioDuration < 0) m_AudioDuration = 0;
+		if (m_AudioDuration > maxAudioDuration) m_AudioDuration = maxAudioDuration;
+		if (m_OutputResolution < 0) m_OutputResolution = 0;
+		if (m_MinFrequency < 0) m_MinFrequency = 0;
+		if (m_MaxFrequency < 0) m_MaxFrequency = 0;
+		if (m_DrawWidth < 0f) m_DrawWidth = 0f;
+		if (m_WindowSkew < 0f) m_WindowSkew = 0f;
+		if (m_SmoothingTimeConstant < 0f) m_SmoothingTimeConstant = 0f;
+		if (m_SmoothingTimeConstant > 1f) m_SmoothingTimeConstant = 1f;
 	}
 
 	private void Start() {
@@ -44,8 +61,8 @@ public class AudioSpectrum : MonoBehaviour {
 
 		//* Use Job System *// 5ms
 		// Prepare Output Buffer
-		float[] processedSpectrum = new float[SAMPLES_OUT];
-		Unity.Collections.NativeArray<float> processedSpectrumBuffer = new (SAMPLES_OUT, Unity.Collections.Allocator.TempJob);
+		float[] processedSpectrum = new float[m_OutputResolution];
+		Unity.Collections.NativeArray<float> processedSpectrumBuffer = new (m_OutputResolution, Unity.Collections.Allocator.TempJob);
 
 		// Prepare Waveform Data as NativeArray
 		Unity.Collections.NativeArray<float> source = new (8196, Unity.Collections.Allocator.TempJob);
@@ -56,13 +73,13 @@ public class AudioSpectrum : MonoBehaviour {
 			m_WaveformInput = source,
 			m_SpectrumOutput = processedSpectrumBuffer,
 			m_SampleRate = m_SampleRate,
-			m_SamplesOut = SAMPLES_OUT,
-			m_OutputMultiplier = OUTPUT_MULTIPLIER,
-			m_FreqMin = MIN_FREQ,
-			m_FreqMax = MAX_FREQ,
-			m_AudioDuration = AUDIO_DURATION,
-			m_SmoothingTimeConstant = SMOOTHING_TIME_CONSTANT,
-			m_WindowSkew = WINDOW_SKEW
+			m_SamplesOut = m_OutputResolution,
+			m_OutputMultiplier = m_OutputMultiplier,
+			m_FreqMin = -m_MinFrequency,
+			m_FreqMax = m_MaxFrequency,
+			m_AudioDuration = m_AudioDuration,
+			m_SmoothingTimeConstant = m_SmoothingTimeConstant,
+			m_WindowSkew = m_WindowSkew
 		};
 
 		// Execute Job
@@ -84,7 +101,7 @@ public class AudioSpectrum : MonoBehaviour {
 
 			if (ProcessedAudioData != null) {
 				Handles.DrawAAPolyLine (2f, ProcessedAudioData.Select((y, i) => {
-					float remappedPosX = Remap (i / (ProcessedAudioData.Length - 1f), 0f, 1f, 0f, -DRAW_WIDTH);
+					float remappedPosX = Remap (i / (ProcessedAudioData.Length - 1f), 0f, 1f, 0f, -m_DrawWidth);
 					return new Vector3 (remappedPosX, y, 0);
 				}).ToArray());
 			}
