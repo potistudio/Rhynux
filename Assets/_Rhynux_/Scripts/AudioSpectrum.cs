@@ -96,7 +96,7 @@ public class AudioSpectrum : MonoBehaviour {
 	}
 
 	#if UNITY_EDITOR
-		private void OnDrawGizmos() {
+		private void OnDrawGizmosSelected() {
 			Handles.color = Color.white;
 
 			if (ProcessedAudioData != null) {
