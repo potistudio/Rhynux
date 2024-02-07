@@ -1,11 +1,10 @@
 
 using Unity.Collections;
-using Unity.Jobs;
 
 [Unity.Burst.BurstCompile]
-public struct GoertzelSpectrumJob : IJob {
-	[ReadOnly] public NativeArray<float> m_WaveformInput;
-	[WriteOnly] public NativeArray<float> m_SpectrumOutput;
+public struct GoertzelSpectrumJob : Unity.Jobs.IJob {
+	[ReadOnly] public NativeArray<float> m_WaveformInput; // Input
+	[WriteOnly] public NativeArray<float> m_SpectrumOutput; // Output
 
 	public int m_SampleRate;
 	public int m_SamplesOut;
@@ -17,11 +16,11 @@ public struct GoertzelSpectrumJob : IJob {
 	public float m_SmoothingTimeConstant;
 	public float m_WindowSkew;
 
-	private float Remap (float _x, float _inMin, float _inMax, float _outMin, float _outMax) {
+	private readonly float Remap (float _x, float _inMin, float _inMax, float _outMin, float _outMax) {
 		return (_x - _inMax) / (_inMax - _inMin) * (_outMax - _outMin) + _outMin;
 	}
 
-	private float ApplyWindow (float _posX, bool _truncate, float _skew) {
+	private readonly float ApplyWindow (float _posX, bool _truncate, float _skew) {
 		float x = _skew > 0 ? (_posX / 2f - 0.5f) / (1f - (_posX / 2f - 0.5f) * 10f * (float)(float)System.Math.Pow((float)_skew, (float)2f)) / (1f / (1f + 10f * (float)(float)System.Math.Pow((float)_skew, (float)2f))) * 2f + 1 : (_posX / 2f + 0.5f) / (1f + (_posX / 2f + 0.5f) * 10f * (float)(float)System.Math.Pow((float)_skew, (float)2f)) / (1f / (1f + 10f * (float)(float)System.Math.Pow((float)_skew, (float)2f))) * 2f - 1f;
 
 		if (_truncate && (float)System.Math.Abs(x) > 1)
@@ -30,25 +29,25 @@ public struct GoertzelSpectrumJob : IJob {
 		return 0.54f + 0.46f * (float)(float)System.Math.Cos (x * (float)System.Math.PI);
 	}
 
-	private float ApplyWeight (float _freq, float _amount) {
+	private readonly float ApplyWeight (float _freq, float _amount) {
 		float f2 = (float)System.Math.Pow (_freq, 2);
 
 		return (float)System.Math.Pow (1.2588966f * 148840000f * (float)System.Math.Pow(f2, 2) / ((f2 + 424.36f) * (float)System.Math.Sqrt((f2 + 11599.29f) * (f2 + 544496.41f)) * (f2 + 148840000f)), _amount);
 	}
 
-	private float Ascale (float _x, float _nthRoot, bool _logarithmic, float _dbRange, bool _useAbsoluteValue) {
+	private readonly float Ascale (float _x, float _nthRoot, bool _logarithmic, float _dbRange, bool _useAbsoluteValue) {
 		return Remap ((float)System.Math.Pow(_x, 1f / _nthRoot), _useAbsoluteValue ? 0f : (float)System.Math.Pow(DBToLinear(-_dbRange), 1f / _nthRoot), 1f, 0f, 1f);
 	}
 
-	private float DBToLinear (float _dB) {
+	private readonly float DBToLinear (float _dB) {
 		return (float)System.Math.Pow (10f, _dB / 20f);
 	}
 
-	private float CalcFreqTilt (float _freq, float _centerFreq = 440f, float _amount = 3f) {
+	private readonly float CalcFreqTilt (float _freq, float _centerFreq = 440f, float _amount = 3f) {
 		return (float)System.Math.Abs (_amount) > 0f ? (float)System.Math.Pow (10f, (float)System.Math.Log(_freq / _centerFreq, 2) * _amount / 20f) : 1f;
 	}
 
-	private void GenerateFreqBands (ref NativeArray<Freq> _targetArray, int _samples, int _min, int _max) {
+	private readonly void GenerateFreqBands (ref NativeArray<Freq> _targetArray, int _samples, int _min, int _max) {
 		for (int i = 0; i < _samples; i++) {
 			_targetArray[i] = new Freq (
 				Remap (i - 0.5f, 0f, _samples - 1f, _min, _max),
@@ -58,7 +57,7 @@ public struct GoertzelSpectrumJob : IJob {
 		}
 	}
 
-	private float CalcGoertzel (NativeArray<float> _waveform, float _coeff) {
+	private readonly float CalcGoertzel (NativeArray<float> _waveform, float _coeff) {
 		float f1 = 0f, f2 = 0f, sine;
 
 		foreach (float x in _waveform) {
@@ -70,7 +69,7 @@ public struct GoertzelSpectrumJob : IJob {
 		return (float)System.Math.Sqrt ((float)System.Math.Pow(f1, 2) + (float)System.Math.Pow(f2, 2) - _coeff * f1 * f2) / _waveform.Length;
 	}
 
-	private void CalcGoertzelSpectrum (ref NativeArray<float> _resultArray, NativeArray<float> _waveform) {
+	private readonly void CalcGoertzelSpectrum (ref NativeArray<float> _resultArray, NativeArray<float> _waveform) {
 		NativeArray<Freq> freqBands = new (m_SamplesOut, Allocator.Temp);
 		GenerateFreqBands (ref freqBands, m_SamplesOut, m_FreqMin, m_FreqMax);
 
@@ -82,7 +81,7 @@ public struct GoertzelSpectrumJob : IJob {
 		freqBands.Dispose();
 	}
 
-	private void ApplySmoothingTimeConstant (ref NativeArray<float> _targetArray, in NativeArray<float> _sourceArray, float _factor = 0.5f) {
+	private readonly void ApplySmoothingTimeConstant (ref NativeArray<float> _targetArray, in NativeArray<float> _sourceArray, float _factor = 0.5f) {
 		for (int i = 0; i < _targetArray.Length; i++) {
 			_targetArray[i] = (float.IsNaN(_targetArray[i]) ? 0f : _targetArray[i]) * _factor + (float.IsNaN(_sourceArray[i]) ? 0f : _sourceArray[i]) * (1f - _factor);
 		}

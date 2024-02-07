@@ -111,9 +111,9 @@ public class AudioSpectrum : MonoBehaviour {
 
 public struct Freq {
 	public Freq (float _low, float _mid, float _high) {
-		this.Low = _low;
-		this.Mid = _mid;
-		this.High = _high;
+		Low = _low;
+		Mid = _mid;
+		High = _high;
 	}
 
 	public float Low { get; private set; }
