@@ -14,16 +14,6 @@
       "dependencies": {},
       "hash": "bd8729e0f457462d2a7ec9479b64ae80cec4cc5c"
     },
-    "com.annulusgames.chaining-assertion": {
-      "version": "https://github.com/AnnulusGames/ChainingAssertion-Unity.git?path=Assets/ChainingAssertion",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {
-        "com.unity.test-framework": "1.0.0",
-        "com.unity.ext.nunit": "1.0.0"
-      },
-      "hash": "233a62d477bceb5c6100a47b6c17b551dae669ac"
-    },
     "com.annulusgames.lit-motion": {
       "version": "https://github.com/AnnulusGames/LitMotion.git?path=src/LitMotion/Assets/LitMotion",
       "depth": 0,
