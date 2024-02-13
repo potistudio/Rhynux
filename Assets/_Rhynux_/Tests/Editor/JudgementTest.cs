@@ -6,10 +6,10 @@ public class JudgementTest {
 
 	[SetUp]
 	public void SetUp() {
-		var a = System.Collections.Generic.List<Note> notes = new() {
+		System.Collections.Generic.List<Note> notes = new() {
 			new Note (0f, 0), new Note (1000f, 0), new Note (2000f, 0), new Note (3000f, 0)
 		};
-		m_RealtimeReferee = new (a);
+		m_RealtimeReferee = new (notes);
 	}
 
 	[Test]

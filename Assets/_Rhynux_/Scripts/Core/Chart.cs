@@ -23,9 +23,16 @@ public class Chart : ScriptableObject {
 public class Note {
 	[field: SerializeField] public float Time { get; set; }
 	[field: SerializeField] public float Position { get; set; }
+	public NoteAvailableStatus AvailableStatus { get; set; }
 
 	public Note (float _time, float _pos) {
 		Time = _time;
 		Position = _pos;
 	}
+}
+
+public enum NoteAvailableStatus {
+	Available,
+	Fell,
+	Hit,
 }
