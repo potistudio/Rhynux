@@ -174,15 +174,16 @@ MonoBehaviour:
   m_InputInterface:
     rid: 2661267205357305856
   m_NotesGenerator:
-    rid: 2661267218926665728
+    rid: 3710786080818855936
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 2661267205357305856
       type: {class: KeyboardInput, ns: , asm: Assembly-CSharp}
-      data: 
-    - rid: 2661267218926665728
-      type: {class: SingleLineConstantIntervalNotesGenerator, ns: , asm: Assembly-CSharp}
+    - rid: 3710786080818855936
+      type: {class: SingleLineConstantIntervalNotesGenerator, ns: , asm: Rhynux.Main.View}
       data:
         m_TargetLine: 0
 --- !u!1 &399901445
