@@ -17,14 +17,14 @@ public class SessionManager {
 	public System.IObservable<Note> OnNoteDisabled => OnNoteDisabled;
 	public System.IObservable<Note> OnNoteEnabled => OnNoteEnabled;
 
-	private void SetNoteStatus (int _noteIndex, NoteAvailableStatus _status) {
-		m_NotesCollection[_noteIndex].AvailableStatus = _status;
+	public void SetNoteStatus (int _targetNoteIndex, NoteAvailableStatus _status) {
+		m_NotesCollection[_targetNoteIndex].AvailableStatus = _status;
 
 		if (_status == NoteAvailableStatus.Available)
-			m_NoteEnabled.OnNext (m_NotesCollection[_noteIndex]);
+			m_NoteEnabled.OnNext (m_NotesCollection[_targetNoteIndex]);
 
 		if (_status == NoteAvailableStatus.Fell || _status == NoteAvailableStatus.Hit)
-			m_NoteDisabled.OnNext (m_NotesCollection[_noteIndex]);
+			m_NoteDisabled.OnNext (m_NotesCollection[_targetNoteIndex]);
 	}
 
 	//* Score
