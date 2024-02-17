@@ -8,8 +8,6 @@ public class RealtimeReferee {
 	private readonly UniRx.Subject<(int, bool)> m_NoteStatusChanged = new();
 	public System.IObservable<(int, bool)> OnNoteStatusChanged => m_NoteStatusChanged;
 
-	public System.Collections.Generic.List<NoteAvailableStatus> L => m_NotesCollection.Select (x => x.AvailableStatus).ToList();
-
 	private readonly float m_Margin = 160f;
 
 	public RealtimeReferee (System.Collections.Generic.IList<Note> _notes) {
