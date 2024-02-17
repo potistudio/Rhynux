@@ -5,8 +5,8 @@ public class RealtimeReferee {
 	private readonly System.Collections.ObjectModel.ReadOnlyCollection<Note> m_NotesCollection;
 	private float m_LastUpdatedTime = 0f;
 
-	private readonly UniRx.Subject<(int, bool)> m_NoteStatusChanged = new();
-	public System.IObservable<(int, bool)> OnNoteStatusChanged => m_NoteStatusChanged;
+	private readonly UniRx.Subject<(int, NoteAvailableStatus)> m_NoteStatusChanged = new();
+	public System.IObservable<(int, NoteAvailableStatus)> OnNoteStatusChanged => m_NoteStatusChanged;
 
 	private readonly float m_Margin = 160f;
 
@@ -32,11 +32,11 @@ public class RealtimeReferee {
 
 	private void DisableNote (int _targetNoteIndex) {
 		m_NotesCollection[_targetNoteIndex].AvailableStatus = NoteAvailableStatus.Fell;
-		m_NoteStatusChanged.OnNext((_targetNoteIndex, false));
+		m_NoteStatusChanged.OnNext((_targetNoteIndex, NoteAvailableStatus.Fell));
 	}
 
 	private void EnableNote (int _targetNoteIndex) {
 		m_NotesCollection[_targetNoteIndex].AvailableStatus = NoteAvailableStatus.Available;
-		m_NoteStatusChanged.OnNext((_targetNoteIndex, true));
+		m_NoteStatusChanged.OnNext((_targetNoteIndex, NoteAvailableStatus.Available));
 	}
 }
