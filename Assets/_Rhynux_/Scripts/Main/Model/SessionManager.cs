@@ -39,7 +39,7 @@ public class SessionManager {
 	//* Time
 	private float m_CurrentTime = 0f;
 	public float CurrentTime => m_CurrentTime;
-	public ReactiveProperty<float> CurrentTimeProperty => new (m_CurrentTime);
+	public ReactiveProperty<float> OnTimeUpdated => new (m_CurrentTime);
 
 	public void UpdateTime (float _time) {
 		m_CurrentTime = _time;
