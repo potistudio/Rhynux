@@ -1,16 +1,36 @@
 
+using UniRx;
+
+/// <summary>
+/// Manage(Contain) the All of Information of Current Game Session.<br/>
+/// exp. Score, Combo, Notes, Time, Chart etc...
+/// </summary>
 public class SessionManager {
 	//* Notes
-	private System.Collections.Generic.List<Note> m_NotesCollection;
+	private readonly System.Collections.Generic.List<Note> m_NotesCollection;
 	public System.Collections.ObjectModel.ReadOnlyCollection<Note> NotesCollection => m_NotesCollection.AsReadOnly();
 
-	private void SetNotes (System.Collections.Generic.List<Note> _notes) {
-		m_NotesCollection = _notes;
+	// Emit Events when the Notes Are Enabled/Disabled
+	private readonly Subject<Note> m_NoteDisabled = new();
+	private readonly Subject<Note> m_NoteEnabled = new();
+
+	public System.IObservable<Note> OnNoteDisabled => OnNoteDisabled;
+	public System.IObservable<Note> OnNoteEnabled => OnNoteEnabled;
+
+	private void SetNoteStatus (int _noteIndex, NoteAvailableStatus _status) {
+		m_NotesCollection[_noteIndex].AvailableStatus = _status;
+
+		if (_status == NoteAvailableStatus.Available)
+			m_NoteEnabled.OnNext (m_NotesCollection[_noteIndex]);
+
+		if (_status == NoteAvailableStatus.Fell || _status == NoteAvailableStatus.Hit)
+			m_NoteDisabled.OnNext (m_NotesCollection[_noteIndex]);
 	}
 
 	//* Score
 	private int m_CurrentScore = 0;
 	public int CurrentScore => m_CurrentScore;
+	public ReactiveProperty<int> CurrentScoreProperty => new (m_CurrentScore);
 
 	public void AddScore (int _deltaScore) {
 		m_CurrentScore += _deltaScore;
@@ -19,6 +39,7 @@ public class SessionManager {
 	//* Time
 	private float m_CurrentTime = 0f;
 	public float CurrentTime => m_CurrentTime;
+	public ReactiveProperty<float> CurrentTimeProperty => new (m_CurrentTime);
 
 	public void UpdateTime (float _time) {
 		m_CurrentTime = _time;
@@ -27,6 +48,7 @@ public class SessionManager {
 	//* Combo
 	private int m_CurrentCombo = 0;
 	public int CurrentCombo => m_CurrentCombo;
+	public ReactiveProperty<int> CurrentComboProperty => new (m_CurrentCombo);
 
 	public void IncreaseCombo() {
 		m_CurrentCombo++;
@@ -48,6 +70,6 @@ public class SessionManager {
 
 	public SessionManager (Chart _chart) {
 		SetChart (_chart);
-		SetNotes (_chart.Notes);
+		m_NotesCollection = _chart.Notes;
 	}
 }
