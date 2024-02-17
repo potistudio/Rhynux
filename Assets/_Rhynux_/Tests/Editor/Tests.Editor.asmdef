@@ -5,6 +5,8 @@
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "Unity.PerformanceTesting",
+        "Unity.ResourceManager",
+        "Unity.Addressables",
         "VContainer",
         "Rhynux.Core",
         "Rhynux.Main.Model"
