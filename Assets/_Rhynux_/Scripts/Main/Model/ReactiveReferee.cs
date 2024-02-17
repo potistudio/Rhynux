@@ -1,10 +1,10 @@
 
 using System.Linq;
 
-public class ReactiveNotesReferee {
+public class ReactiveReferee {
 	private readonly System.Collections.Generic.IReadOnlyList<Note> m_NotesList;
 
-	public ReactiveNotesReferee (System.Collections.Generic.IReadOnlyList<Note> _notes) {
+	public ReactiveReferee (System.Collections.Generic.IReadOnlyList<Note> _notes) {
 		m_NotesList = _notes;
 	}
 
