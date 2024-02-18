@@ -8,6 +8,8 @@ public class SingleLineConstantIntervalNotesGenerator : INotesGenerator {
 	private readonly UniRx.Subject<IReadOnlyList<Note>> m_OnNotesGenerated = new();
 	public System.IObservable<IReadOnlyList<Note>> OnNotesGenerated => m_OnNotesGenerated;
 
+	public List<Note> GeneratedNotes { get; private set; }
+
 	public List<Note> Generate (Chart _chart) {
 		List<Note> notes = new();
 
@@ -21,6 +23,7 @@ public class SingleLineConstantIntervalNotesGenerator : INotesGenerator {
 		}
 
 		m_OnNotesGenerated.OnNext (notes);
+		GeneratedNotes = notes;
 		return notes;
 	}
 }
