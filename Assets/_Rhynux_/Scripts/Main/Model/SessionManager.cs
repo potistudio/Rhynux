@@ -83,7 +83,7 @@ public class SessionManager {
 	/// </summary>
 	/// <param name="chart">Chart</param>
 	/// <param name="notes">List of Notes</param>
-	public SessionManager (Chart _chart, List<Note> _notes) {
+	public SessionManager (Chart _chart, System.Collections.Generic.List<Note> _notes) {
 		SetChart (_chart);
 		m_NotesCollection = _notes;
 	}
