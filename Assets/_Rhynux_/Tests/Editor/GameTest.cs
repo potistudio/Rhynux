@@ -37,10 +37,11 @@ public class GameTest {
 		//* ↑ DI with VContainer ↑ *//
 
 		//* ↓ DI with Manual ↓ *//
-		m_SessionManager = new SessionManager (m_Chart);
-		m_RealtimeReferee = new RealtimeReferee (m_Chart.Notes);
+		INotesGenerator notesGenerator = new SingleLineConstantIntervalNotesGenerator();
+		System.Collections.Generic.List<Note> generatedNotes = notesGenerator.Generate (m_Chart);
 
-		//TODO: Insert Notes Generator
+		m_SessionManager = new SessionManager (m_Chart, generatedNotes);
+		m_RealtimeReferee = new RealtimeReferee (generatedNotes);
 
 		new RefereePresenter (m_SessionManager, m_RealtimeReferee);
 		//* ↑ DI with Manual ↑ *//
