@@ -62,4 +62,16 @@ public class GameTest {
 		Assert.That (m_SessionManager.NotesCollection[UnityEngine.Mathf.RoundToInt(m_NotesCount / 2)].AvailableStatus, Is.EqualTo(NoteAvailableStatus.Available));
 		Assert.That (m_SessionManager.NotesCollection[m_NotesCount - 1].AvailableStatus, Is.EqualTo(NoteAvailableStatus.Available));
 	}
+
+	[Test, Unity.PerformanceTesting.Performance]
+	public void TimeChangingPerformance() {
+		Unity.PerformanceTesting.Measure.Method (() => {
+			m_SessionManager.UpdateTime (m_SessionManager.NotesCollection[m_NotesCount - 1].Time + 161f);
+			m_SessionManager.UpdateTime (0f);
+		})
+		.WarmupCount (16)
+		.IterationsPerMeasurement (1000000)
+		.MeasurementCount (16)
+		.Run();
+	}
 }
