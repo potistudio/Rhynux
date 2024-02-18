@@ -3,7 +3,7 @@ using System.Linq;
 
 public class RealtimeReferee {
 	private readonly System.Collections.ObjectModel.ReadOnlyCollection<Note> m_NotesCollection;
-	private float m_LastUpdatedTime = 0f;
+	private float m_CurrentUpdatedTime = 0f;
 
 	private readonly UniRx.Subject<(int, NoteAvailableStatus)> m_NoteStatusChanged = new();
 	public System.IObservable<(int, NoteAvailableStatus)> OnNoteStatusChanged => m_NoteStatusChanged;
@@ -17,7 +17,7 @@ public class RealtimeReferee {
 	}
 
 	public void UpdateTime (float _targetTime) {
-		if (_targetTime == m_LastUpdatedTime)
+		if (_targetTime == m_CurrentUpdatedTime)
 			return;
 
 		for (int i = 0; i < m_NotesCollection.Count; i++) {
@@ -27,7 +27,7 @@ public class RealtimeReferee {
 				EnableNote (i);
 		}
 
-		m_LastUpdatedTime = _targetTime;
+		m_CurrentUpdatedTime = _targetTime;
 	}
 
 	private void DisableNote (int _targetNoteIndex) {
