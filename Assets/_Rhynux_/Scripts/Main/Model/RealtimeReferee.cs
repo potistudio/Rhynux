@@ -21,9 +21,9 @@ public class RealtimeReferee {
 			return;
 
 		for (int i = 0; i < m_NotesCollection.Count; i++) {
-			if (m_NotesCollection[i].Time < _targetTime + m_Margin)
+			if (m_NotesCollection[i].Time < _targetTime - m_Margin)
 				DisableNote (i);
-			else if (m_NotesCollection[i].Time >= _targetTime + m_Margin)
+			else if (m_NotesCollection[i].Time >= _targetTime - m_Margin)
 				EnableNote (i);
 		}
 
