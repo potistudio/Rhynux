@@ -3,6 +3,7 @@ using System.Linq;
 
 public class ReactiveReferee {
 	private readonly System.Collections.Generic.IReadOnlyList<Note> m_NotesList;
+	private float m_CurrentTime;
 
 	public ReactiveReferee (System.Collections.Generic.IReadOnlyList<Note> _notes) {
 		m_NotesList = _notes;
@@ -18,7 +19,7 @@ public class ReactiveReferee {
 		int preventIndex = 0;
 		int currentIndex = 0;
 
-		int notesCountByLane = m_NotesList.Where(x => x.Position == _lane).Count();
+		int notesCountByLane = m_NotesList.Where (x => x.Position == _lane).Count();
 		int count = 0;
 
 		float minDistance = float.PositiveInfinity;
@@ -46,5 +47,28 @@ public class ReactiveReferee {
 
 		return (currentIndex, minDistance);
 	}
+
+	private AccuracyLevel Judge (float _distance) {
+		return _distance switch {
+			<= 60f => AccuracyLevel.Perfect,
+			<= 120f => AccuracyLevel.Good,
+			<= 160f => AccuracyLevel.Miss,
+			_ => AccuracyLevel.Pass,
+		};
+	}
+
+	/// <summary>
+	/// Update Internal Time of this Referee.
+	/// </summary>
+	/// <param name="_targetTime">Target of Time to Shift</param>
+	public void UpdateTime (float _targetTime) {
+		m_CurrentTime = _targetTime;
+	}
+
+	public AccuracyLevel JudgeHit (int _targetLane) {
+		float nearestNoteDistance = FindNearestNote (m_CurrentTime, _targetLane).Item2;
+		AccuracyLevel accuracyLevel = Judge (nearestNoteDistance);
+
+		return accuracyLevel;
 	}
 }
