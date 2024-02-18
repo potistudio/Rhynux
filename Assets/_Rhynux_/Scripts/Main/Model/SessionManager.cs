@@ -69,10 +69,20 @@ public class SessionManager {
 
 	// etc.
 
+	/// <summary>
+	///
+	/// </summary>
+	/// <param name="chart">Chart</param>
 	public SessionManager (Chart _chart) {
 		SetChart (_chart);
 		m_NotesCollection = _chart.Notes;
 	}
+
+	/// <summary>
+	///
+	/// </summary>
+	/// <param name="chart">Chart</param>
+	/// <param name="notes">List of Notes</param>
 	public SessionManager (Chart _chart, List<Note> _notes) {
 		SetChart (_chart);
 		m_NotesCollection = _notes;
