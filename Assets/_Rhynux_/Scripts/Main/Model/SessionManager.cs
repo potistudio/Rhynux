@@ -73,4 +73,8 @@ public class SessionManager {
 		SetChart (_chart);
 		m_NotesCollection = _chart.Notes;
 	}
+	public SessionManager (Chart _chart, List<Note> _notes) {
+		SetChart (_chart);
+		m_NotesCollection = _notes;
+	}
 }
