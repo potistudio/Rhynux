@@ -14,8 +14,6 @@ public class InputReferee : MonoBehaviour {
 		}).AddTo (this);
 
 		_inputInterface.OnPressed.Subscribe (_ => {
-			int ind = m_NotesReferee.FindNearestNote (m_MusicPlayer.CurrentTime, _);
-			Debug.Log (ind);
 		}).AddTo (this);
 	}
 }

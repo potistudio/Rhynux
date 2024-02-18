@@ -8,7 +8,13 @@ public class ReactiveReferee {
 		m_NotesList = _notes;
 	}
 
-	public int FindNearestNote (float _time, int _lane) {
+	/// <summary>
+	///	Find the nearest Note from Given Time (Current Time).
+	/// </summary>
+	/// <param name="time">Time</param>
+	/// <param name="lane">Lane</param>
+	/// <returns>(int Index, float Distance)</returns>
+	private (int, float) FindNearestNote (float _time, int _lane) {
 		int preventIndex = 0;
 		int currentIndex = 0;
 
@@ -38,6 +44,7 @@ public class ReactiveReferee {
 			}
 		}
 
-		return currentIndex;
+		return (currentIndex, minDistance);
+	}
 	}
 }
