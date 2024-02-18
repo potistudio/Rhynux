@@ -8,6 +8,7 @@ public class GameTest {
 	private RealtimeReferee m_RealtimeReferee;
 
 	private Chart m_Chart;
+	private int m_NotesCount;
 
 	private const string CHART_ASSET_NAME = "人マニア（アーメンの刻みのせ）";
 
@@ -45,20 +46,20 @@ public class GameTest {
 
 		new RefereePresenter (m_SessionManager, m_RealtimeReferee);
 		//* ↑ DI with Manual ↑ *//
+
+		m_NotesCount = m_SessionManager.NotesCollection.Count;
 	}
 
 	[Test]
 	public void Test() {
-		int notesCount = m_SessionManager.NotesCollection.Count;
-
-		m_SessionManager.UpdateTime (m_SessionManager.NotesCollection[notesCount - 1].Time + 161f);
+		m_SessionManager.UpdateTime (m_SessionManager.NotesCollection[m_NotesCount - 1].Time + 161f);
 		Assert.That (m_SessionManager.NotesCollection[0].AvailableStatus, Is.EqualTo(NoteAvailableStatus.Fell));
-		Assert.That (m_SessionManager.NotesCollection[UnityEngine.Mathf.RoundToInt(notesCount / 2)].AvailableStatus, Is.EqualTo(NoteAvailableStatus.Fell));
-		Assert.That (m_SessionManager.NotesCollection[notesCount - 1].AvailableStatus, Is.EqualTo(NoteAvailableStatus.Fell));
+		Assert.That (m_SessionManager.NotesCollection[UnityEngine.Mathf.RoundToInt(m_NotesCount / 2)].AvailableStatus, Is.EqualTo(NoteAvailableStatus.Fell));
+		Assert.That (m_SessionManager.NotesCollection[m_NotesCount - 1].AvailableStatus, Is.EqualTo(NoteAvailableStatus.Fell));
 
 		m_SessionManager.UpdateTime (0f);
 		Assert.That (m_SessionManager.NotesCollection[0].AvailableStatus, Is.EqualTo(NoteAvailableStatus.Available));
-		Assert.That (m_SessionManager.NotesCollection[UnityEngine.Mathf.RoundToInt(notesCount / 2)].AvailableStatus, Is.EqualTo(NoteAvailableStatus.Available));
-		Assert.That (m_SessionManager.NotesCollection[notesCount - 1].AvailableStatus, Is.EqualTo(NoteAvailableStatus.Available));
+		Assert.That (m_SessionManager.NotesCollection[UnityEngine.Mathf.RoundToInt(m_NotesCount / 2)].AvailableStatus, Is.EqualTo(NoteAvailableStatus.Available));
+		Assert.That (m_SessionManager.NotesCollection[m_NotesCount - 1].AvailableStatus, Is.EqualTo(NoteAvailableStatus.Available));
 	}
 }
