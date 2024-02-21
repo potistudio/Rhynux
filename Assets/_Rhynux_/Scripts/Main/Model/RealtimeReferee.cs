@@ -31,11 +31,19 @@ public class RealtimeReferee {
 	}
 
 	private void DisableNote (int _targetNoteIndex) {
+		// If Target Note was already Fallen, Ignore
+		if (m_NotesCollection[_targetNoteIndex].AvailableStatus != NoteAvailableStatus.Available)
+			return;
+
 		m_NotesCollection[_targetNoteIndex].AvailableStatus = NoteAvailableStatus.Fell;
 		m_NoteStatusChanged.OnNext((_targetNoteIndex, NoteAvailableStatus.Fell));
 	}
 
 	private void EnableNote (int _targetNoteIndex) {
+		// If Target Note was already Fallen, Ignore
+		if (m_NotesCollection[_targetNoteIndex].AvailableStatus == NoteAvailableStatus.Available)
+			return;
+
 		m_NotesCollection[_targetNoteIndex].AvailableStatus = NoteAvailableStatus.Available;
 		m_NoteStatusChanged.OnNext((_targetNoteIndex, NoteAvailableStatus.Available));
 	}
