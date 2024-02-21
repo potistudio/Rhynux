@@ -21,5 +21,12 @@ public class RefereePresenter {
 		m_RealtimeReferee.OnNoteStatusChanged.Subscribe (x => {
 			m_SessionManager.SetNoteStatus (x.Item1, x.Item2);
 		});
+
+		m_ReactiveReferee.OnHit.Subscribe (x => {
+			if (x.Item2 == AccuracyLevel.Pass)
+				return;
+
+			m_SessionManager.SetNoteStatus (x.Item1, NoteAvailableStatus.Hit);
+		});
 	}
 }
