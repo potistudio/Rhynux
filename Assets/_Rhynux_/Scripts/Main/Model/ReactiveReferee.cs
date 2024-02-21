@@ -5,6 +5,9 @@ public class ReactiveReferee {
 	private readonly System.Collections.Generic.IReadOnlyList<Note> m_NotesList;
 	private float m_CurrentTime;
 
+	private UniRx.Subject<(int, AccuracyLevel)> m_OnHit = new();
+	public System.IObservable<(int, AccuracyLevel)> OnHit => m_OnHit;
+
 	public ReactiveReferee (System.Collections.Generic.IReadOnlyList<Note> _notes) {
 		m_NotesList = _notes;
 	}
@@ -66,9 +69,10 @@ public class ReactiveReferee {
 	}
 
 	public AccuracyLevel JudgeHit (int _targetLane) {
-		float nearestNoteDistance = FindNearestNote (m_CurrentTime, _targetLane).Item2;
+		(int a, float nearestNoteDistance) = FindNearestNote (m_CurrentTime, _targetLane);
 		AccuracyLevel accuracyLevel = Judge (nearestNoteDistance);
 
+		m_OnHit.OnNext ((a, accuracyLevel));
 		return accuracyLevel;
 	}
 }
