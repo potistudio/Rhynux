@@ -13,9 +13,10 @@ public class SingleLineConstantIntervalNotesGenerator : INotesGenerator {
 	public List<Note> Generate (Chart _chart) {
 		List<Note> notes = new();
 
-		float length = _chart.Clip.length;
+		// "s" to "ms" by multiplying 1000
+		float length = _chart.Clip.length * 1000;
 		float currentTime = 0f;
-		float interval = 60f / _chart.BPM;
+		float interval = 60f / _chart.BPM * 1000;
 
 		while (currentTime <= length) {
 			currentTime += interval;
