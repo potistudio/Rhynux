@@ -2,6 +2,7 @@
 using System.Linq;
 using UnityEngine;
 using UniRx;
+using BurstLinq;
 
 public class FPSCounter : MonoBehaviour {
 	[SerializeField] private TMPro.TextMeshProUGUI m_DisplayText;
@@ -17,7 +18,7 @@ public class FPSCounter : MonoBehaviour {
 
 					  float averageFPS = m_FPSHistory.Average();
 
-					  m_DisplayText.text = System.Math.Floor(currentFPS).ToString() + " | " + System.Math.Floor(averageFPS).ToString();
+					  m_DisplayText.text = System.Math.Floor (currentFPS).ToString() + " | " + System.Math.Floor (averageFPS).ToString();
 				  })
 				  .AddTo (this);
 	}
