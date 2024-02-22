@@ -18,6 +18,9 @@ public class SessionManager {
 	public System.IObservable<Note> OnNoteEnabled => OnNoteEnabled;
 
 	public void SetNoteStatus (int _targetNoteIndex, NoteAvailableStatus _status) {
+		if (m_NotesCollection[_targetNoteIndex].AvailableStatus == _status)
+			return;
+
 		m_NotesCollection[_targetNoteIndex].AvailableStatus = _status;
 
 		if (_status == NoteAvailableStatus.Available)
