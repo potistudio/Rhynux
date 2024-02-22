@@ -3,15 +3,15 @@ using UnityEngine;
 using Alchemy.Inspector;
 
 public class Metronome : MonoBehaviour {
-	[SerializeField] private AudioClip m_ClickSound;
-	[SerializeField] private AudioSource m_ReferenceAudioSource;
-	[SerializeField] private AudioSource m_ClickAudioSource;
 	[SerializeField] private float m_BPM;
+	[SerializeField] private AudioClip m_ClickSound;
+	[SerializeField] private AudioSource m_ClickAudioSource;
+	[SerializeField] private AudioSource m_ReferenceAudioSource;
 
 	public int BeatCount => m_BeatCount;
 	public float CurrentTime => m_ReferenceAudioSource.time - m_LastBeatTime;
 
-	[field: SerializeField, ReadOnly, HideInEditMode] private int m_BeatCount = 0;
+	[SerializeField, ReadOnly, HideInEditMode] private int m_BeatCount = 0;
 	private float m_LastBeatTime = 0f;
 
 	private void Update() {
