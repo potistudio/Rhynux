@@ -47,6 +47,7 @@ public class GameTest {
 		m_ReactiveReferee = new ReactiveReferee (generatedNotes);
 
 		new RefereePresenter (m_SessionManager, m_RealtimeReferee, m_ReactiveReferee);
+		new ComboOperator (m_SessionManager, m_ReactiveReferee, m_RealtimeReferee);
 		//* ↑ DI with Manual ↑ *//
 
 		m_NotesCount = m_SessionManager.NotesCollection.Count;
@@ -99,6 +100,24 @@ public class GameTest {
 
 		m_SessionManager.UpdateTime (m_SessionManager.NotesCollection[20].Time);
 		Assert.That (m_SessionManager.NotesCollection[0].AvailableStatus, Is.EqualTo(NoteAvailableStatus.Fell));
+	}
+
+	[Test] // コンボが正しく操作されているかテスト
+	public void ComboOperationTest() {
+		m_SessionManager.UpdateTime (m_SessionManager.NotesCollection[0].Time);
+		m_ReactiveReferee.JudgeHit(0);
+		Assert.That (m_SessionManager.CurrentCombo, Is.EqualTo(1));
+
+		m_SessionManager.UpdateTime (m_SessionManager.NotesCollection[3].Time); // Fall
+		Assert.That (m_SessionManager.CurrentCombo, Is.EqualTo(0));
+
+		m_SessionManager.UpdateTime (m_SessionManager.NotesCollection[3].Time + 120f); // Good
+		m_ReactiveReferee.JudgeHit(0);
+		Assert.That (m_SessionManager.CurrentCombo, Is.EqualTo(1));
+
+		m_SessionManager.UpdateTime (m_SessionManager.NotesCollection[4].Time + 121f); // Miss
+		m_ReactiveReferee.JudgeHit(0);
+		Assert.That (m_SessionManager.CurrentCombo, Is.EqualTo(0));
 	}
 
 	[Test, Unity.PerformanceTesting.Performance]
