@@ -19,10 +19,6 @@ public class RefereePresenter {
 
 		// When Notes Updated by Realtime Referee, also Update the Notes in Session Manager
 		m_RealtimeReferee.OnNoteStatusChanged.Subscribe (x => {
-			// Fall Note only when It is Available
-			if (m_SessionManager.NotesCollection[x.Item1].AvailableStatus != NoteAvailableStatus.Available)
-				return;
-
 			m_SessionManager.SetNoteStatus (x.Item1, x.Item2);
 		});
 

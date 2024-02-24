@@ -11,7 +11,7 @@ public class RealtimeReferee {
 	private readonly float m_Margin = 160f;
 
 	public RealtimeReferee (System.Collections.Generic.IList<Note> _notes) {
-		m_NotesCollection = _notes.ToList().AsReadOnly();
+		m_NotesCollection = _notes.DeepCopy().ToList().AsReadOnly();
 		// var a = (System.Collections.Generic.List<Queue>)m_NotesCollection; ← Cannot cast
 		// m_NotesCollection[0] = new Queue(_notes[0]); ← Cannot ReAssign
 	}
@@ -32,7 +32,7 @@ public class RealtimeReferee {
 
 	private void DisableNote (int _targetNoteIndex) {
 		// If Target Note was already Fallen, Ignore
-		if (m_NotesCollection[_targetNoteIndex].AvailableStatus != NoteAvailableStatus.Available)
+		if (m_NotesCollection[_targetNoteIndex].AvailableStatus == NoteAvailableStatus.Fell)
 			return;
 
 		m_NotesCollection[_targetNoteIndex].AvailableStatus = NoteAvailableStatus.Fell;

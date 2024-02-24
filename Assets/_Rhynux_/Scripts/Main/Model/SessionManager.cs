@@ -12,10 +12,10 @@ public class SessionManager {
 
 	// Emit Events when the Notes Are Enabled/Disabled
 	private readonly Subject<Note> m_NoteDisabled = new();
-	public System.IObservable<Note> OnNoteDisabled => OnNoteDisabled;
+	public System.IObservable<Note> OnNoteDisabled => m_NoteDisabled;
 
 	private readonly Subject<Note> m_NoteEnabled = new();
-	public System.IObservable<Note> OnNoteEnabled => OnNoteEnabled;
+	public System.IObservable<Note> OnNoteEnabled => m_NoteEnabled;
 
 	public void SetNoteStatus (int _targetNoteIndex, NoteAvailableStatus _status) {
 		if (m_NotesCollection[_targetNoteIndex].AvailableStatus == _status)

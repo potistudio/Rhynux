@@ -4,6 +4,8 @@
     "com.annulusgames.burst-linq": "https://github.com/AnnulusGames/BurstLinq.git?path=/Assets/BurstLinq",
     "com.annulusgames.lit-motion": "https://github.com/AnnulusGames/LitMotion.git?path=src/LitMotion/Assets/LitMotion",
     "com.annulusgames.magic-tween": "https://github.com/AnnulusGames/MagicTween.git?path=/MagicTween/Assets/MagicTween",
+    "com.annulusgames.u-pools": "https://github.com/AnnulusGames/uPools.git?path=/Assets/uPools",
+    "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
     "com.neuecc.unirx": "https://github.com/neuecc/UniRx.git?path=Assets/Plugins/UniRx/Scripts",
     "com.unity.addressables": "1.21.20",
     "com.unity.burst": "1.8.12",
@@ -49,5 +51,14 @@
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
     "com.unity.modules.xr": "1.0.0"
-  }
+  },
+  "scopedRegistries": [
+    {
+      "name": "Unity.NuGet",
+      "url": "https://unitynuget-registry.azurewebsites.net",
+      "scopes": [
+        "org.nuget"
+      ]
+    }
+  ]
 }

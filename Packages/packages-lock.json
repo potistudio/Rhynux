@@ -32,6 +32,20 @@
       "dependencies": {},
       "hash": "0a5b840044d206002b01f4f48f908592596e08b4"
     },
+    "com.annulusgames.u-pools": {
+      "version": "https://github.com/AnnulusGames/uPools.git?path=/Assets/uPools",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "10a5861dc9d2f125f5adf3961250e96c9a279309"
+    },
+    "com.cysharp.unitask": {
+      "version": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "809d23edae0df58fd0f61b4b6f67855c59d1b2fb"
+    },
     "com.neuecc.unirx": {
       "version": "https://github.com/neuecc/UniRx.git?path=Assets/Plugins/UniRx/Scripts",
       "depth": 0,
