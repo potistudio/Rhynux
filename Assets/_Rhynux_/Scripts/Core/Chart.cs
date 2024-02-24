@@ -18,9 +18,3 @@ public class Chart : ScriptableObject {
 	public AudioClip Clip => m_Clip;
 	public System.Collections.Generic.List<Note> Notes => m_Notes;
 }
-
-public enum NoteAvailableStatus {
-	Available,
-	Fell,
-	Hit,
-}
