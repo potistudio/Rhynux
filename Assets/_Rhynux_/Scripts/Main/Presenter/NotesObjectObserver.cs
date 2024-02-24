@@ -3,6 +3,7 @@ using System.Linq;
 using UniRx;
 
 public class NotesObjectObserver : UnityEngine.MonoBehaviour {
+	[UnityEngine.SerializeField] private JudgementDisplay m_JudgementDisplay;
 	[UnityEngine.SerializeField] private NotesObjectGenerator m_NotesObjectGenerator;
 	[UnityEngine.SerializeField] private float m_NotesScrollSpeed;
 
@@ -31,6 +32,8 @@ public class NotesObjectObserver : UnityEngine.MonoBehaviour {
 			//TODO: Optimize
 			var i = m_NotesList.FindIndex (y => y.Item1 == x);
 			m_NotesList[i].Item2.SetActive (false);
+
+			m_JudgementDisplay.ShowPopup ("Miss");
 		}).AddTo (this);
 	}
 
