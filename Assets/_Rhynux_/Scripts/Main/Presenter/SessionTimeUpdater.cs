@@ -14,6 +14,5 @@ public class SessionTimeUpdater : UnityEngine.MonoBehaviour {
 	private void Update() {
 		// To millisecond
 		m_SessionManager.UpdateTime (m_MusicPlayer.CurrentTime * 1000);
-		UnityEngine.Debug.Log (m_SessionManager.NotesCollection[20].AvailableStatus);
 	}
 }
