@@ -16,13 +16,5 @@ MonoBehaviour:
   m_Artist: FTN-NKNK
   m_BPM: 240
   m_Offset: 4000
-  m_Clip: {fileID: 8300000, guid: 79e5d2520c2744c4ebc4b29f49145f3f, type: 3}
-  m_Notes:
-  - <Time>k__BackingField: 0
-    <Position>k__BackingField: 0
-  - <Time>k__BackingField: 1000
-    <Position>k__BackingField: 0
-  - <Time>k__BackingField: 2000
-    <Position>k__BackingField: 0
-  - <Time>k__BackingField: 3000
-    <Position>k__BackingField: 0
+  m_Clip: {fileID: 8300000, guid: 5a9dd4fa8beee044aa69434a9618a84d, type: 3}
+  m_Notes: []
