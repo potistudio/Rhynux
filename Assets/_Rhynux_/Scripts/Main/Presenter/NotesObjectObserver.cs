@@ -26,6 +26,12 @@ public class NotesObjectObserver : UnityEngine.MonoBehaviour {
 		m_SessionManager.OnTimeUpdated.Subscribe (x => {
 			MoveNotes (x);
 		}).AddTo (this);
+
+		m_SessionManager.OnNoteDisabled.Subscribe (x => {
+			//TODO: Optimize
+			var i = m_NotesList.FindIndex (y => y.Item1 == x);
+			m_NotesList[i].Item2.SetActive (false);
+		}).AddTo (this);
 	}
 
 	private void MoveNotes (float _targetTime) {
