@@ -1,19 +1,15 @@
 
-using UnityEngine;
 using UniRx;
 
-public class InputReferee : MonoBehaviour {
-	[SerializeField] private MusicPlayer m_MusicPlayer;
-
-	private ReactiveReferee m_NotesReferee = default;
+public class InputReferee : UnityEngine.MonoBehaviour {
+	[UnityEngine.SerializeField] private MusicPlayer m_MusicPlayer;
 
 	[VContainer.Inject]
-	public void Init (IInputInterface _inputInterface, INotesGenerator _notesGenerator) {
-		_notesGenerator.OnNotesGenerated.Subscribe (notes => {
-			m_NotesReferee = new ReactiveReferee (notes);
-		}).AddTo (this);
+	private void Inject (ReactiveReferee _reactiveReferee) {
+		IInputInterface inputInterface = new KeyboardInput (new KeyboardActions());
 
-		_inputInterface.OnPressed.Subscribe (_ => {
+		inputInterface.OnPressed.Subscribe (_ => {
+			_reactiveReferee.JudgeHit (0);
 		}).AddTo (this);
 	}
 }
