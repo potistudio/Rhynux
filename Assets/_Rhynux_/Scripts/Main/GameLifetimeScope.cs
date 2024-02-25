@@ -3,7 +3,6 @@ using VContainer;
 using VContainer.Unity;
 
 public class GameLifetimeScope : LifetimeScope {
-	// [UnityEngine.SerializeReference] private IInputInterface m_InputInterface;
 	[UnityEngine.SerializeReference] private INotesGenerator m_NotesGenerator;
 	[UnityEngine.SerializeField] private Chart m_Chart;
 
@@ -12,7 +11,6 @@ public class GameLifetimeScope : LifetimeScope {
 	private ReactiveReferee m_ReactiveReferee;
 
     protected override void Configure (IContainerBuilder builder) {
-		// INotesGenerator notesGenerator = System.Activator.CreateInstance (m_NotesGenerator.GetType()) as INotesGenerator;
 		INotesGenerator notesGenerator = new SingleLineConstantIntervalNotesGenerator();
 		System.Collections.Generic.List<Note> generatedNotes = notesGenerator.Generate (m_Chart);
 
