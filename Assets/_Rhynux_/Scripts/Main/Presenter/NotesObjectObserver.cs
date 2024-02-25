@@ -33,7 +33,17 @@ public class NotesObjectObserver : UnityEngine.MonoBehaviour {
 			var i = m_NotesList.FindIndex (y => y.Item1 == x);
 			m_NotesList[i].Item2.SetActive (false);
 
-			m_JudgementDisplay.ShowPopup ("Miss");
+			string popupMessage = "";
+			switch (x.AvailableStatus) {
+				case NoteAvailableStatus.Hit:
+					popupMessage = "Perfect";
+					break;
+				case NoteAvailableStatus.Fell:
+					popupMessage = "Miss";
+					break;
+			}
+
+			m_JudgementDisplay.ShowPopup (popupMessage);
 		}).AddTo (this);
 	}
 
