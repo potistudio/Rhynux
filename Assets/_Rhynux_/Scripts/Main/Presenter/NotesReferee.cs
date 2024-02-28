@@ -6,6 +6,9 @@ public class NotesReferee {
 	private readonly RealtimeReferee m_RealtimeReferee;
 	private readonly ReactiveReferee m_ReactiveReferee;
 
+	private readonly Subject<AccuracyLevel> m_OnHit = new ();
+	public System.IObservable<AccuracyLevel> OnHit => m_OnHit;
+
 	public NotesReferee (SessionManager _sessionManager, RealtimeReferee _realtimeReferee, ReactiveReferee _reactiveReferee) {
 		m_SessionManager = _sessionManager;
 		m_RealtimeReferee = _realtimeReferee;
@@ -29,6 +32,9 @@ public class NotesReferee {
 		m_ReactiveReferee.OnHit.Subscribe (x => {
 			if (x.Item2 == AccuracyLevel.Pass)
 				return;
+
+			if (m_SessionManager.NotesCollection[x.Item1].AvailableStatus == NoteAvailableStatus.Available)
+				m_OnHit.OnNext (x.Item2);
 
 			m_SessionManager.SetNoteStatus (x.Item1, NoteAvailableStatus.Hit);
 		});
