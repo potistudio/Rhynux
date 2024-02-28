@@ -31,12 +31,11 @@ public class SessionManager {
 	}
 
 	//* Score
-	private int m_CurrentScore = 0;
-	public int CurrentScore => m_CurrentScore;
-	public ReactiveProperty<int> CurrentScoreProperty => new (m_CurrentScore);
+	private ReactiveProperty<int> m_CurrentScore = new();
+	public ReadOnlyReactiveProperty<int> CurrentScore => m_CurrentScore.ToReadOnlyReactiveProperty();
 
 	public void AddScore (int _deltaScore) {
-		m_CurrentScore += _deltaScore;
+		m_CurrentScore.Value += _deltaScore;
 	}
 
 	//* Time
@@ -50,16 +49,15 @@ public class SessionManager {
 	}
 
 	//* Combo
-	private int m_CurrentCombo = 0;
-	public int CurrentCombo => m_CurrentCombo;
-	public ReactiveProperty<int> CurrentComboProperty => new (m_CurrentCombo);
+	private ReactiveProperty<int> m_CurrentCombo => new();
+	public ReadOnlyReactiveProperty<int> CurrentCombo => m_CurrentCombo.ToReadOnlyReactiveProperty();
 
 	public void IncreaseCombo() {
-		m_CurrentCombo++;
+		m_CurrentCombo.Value++;
 	}
 
 	public void ResetCombo() {
-		m_CurrentCombo = 0;
+		m_CurrentCombo.Value = 0;
 	}
 
 	//* Chart
