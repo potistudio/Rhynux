@@ -2,12 +2,19 @@
 using UniRx;
 
 public class NotesReferee {
-	private readonly SessionManager m_SessionManager;
-	private readonly RealtimeReferee m_RealtimeReferee;
-	private readonly ReactiveReferee m_ReactiveReferee;
+	#region Private Member
+		private readonly SessionManager m_SessionManager;
+		private readonly RealtimeReferee m_RealtimeReferee;
+		private readonly ReactiveReferee m_ReactiveReferee;
+	#endregion
 
-	private readonly Subject<AccuracyLevel> m_OnHit = new ();
-	public System.IObservable<AccuracyLevel> OnHit => m_OnHit;
+	#region UniRx Events
+		private readonly Subject<AccuracyLevel> m_OnHit = new ();
+		public System.IObservable<AccuracyLevel> OnHit => m_OnHit;
+
+		private readonly Subject<AccuracyLevel> m_OnFall = new ();
+		public System.IObservable<AccuracyLevel> OnFall => m_OnFall;
+	#endregion
 
 	public NotesReferee (SessionManager _sessionManager, RealtimeReferee _realtimeReferee, ReactiveReferee _reactiveReferee) {
 		m_SessionManager = _sessionManager;
