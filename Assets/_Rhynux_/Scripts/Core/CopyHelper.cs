@@ -19,7 +19,7 @@ public static class CopyHelper {
 
 		return (T)formatter.Deserialize (stream);
 
-		//* Using JSON Serializer *//
+		//* Using JSON Serializer (not working correctly) *//
 		// var o = new System.Text.Json.JsonSerializerOptions(){ IncludeFields = true };
 		// System.ReadOnlySpan<byte> b = System.Text.Json.JsonSerializer.SerializeToUtf8Bytes<T>(src);
 		// return System.Text.Json.JsonSerializer.Deserialize<T>(b);
