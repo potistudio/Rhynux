@@ -1,12 +1,12 @@
 
 using UniRx;
 
-public class RefereePresenter {
+public class NotesReferee {
 	private readonly SessionManager m_SessionManager;
 	private readonly RealtimeReferee m_RealtimeReferee;
 	private readonly ReactiveReferee m_ReactiveReferee;
 
-	public RefereePresenter (SessionManager _sessionManager, RealtimeReferee _realtimeReferee, ReactiveReferee _reactiveReferee) {
+	public NotesReferee (SessionManager _sessionManager, RealtimeReferee _realtimeReferee, ReactiveReferee _reactiveReferee) {
 		m_SessionManager = _sessionManager;
 		m_RealtimeReferee = _realtimeReferee;
 		m_ReactiveReferee = _reactiveReferee;

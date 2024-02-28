@@ -46,7 +46,7 @@ public class GameTest {
 		m_RealtimeReferee = new RealtimeReferee (generatedNotes);
 		m_ReactiveReferee = new ReactiveReferee (generatedNotes);
 
-		new RefereePresenter (m_SessionManager, m_RealtimeReferee, m_ReactiveReferee);
+		new NotesReferee (m_SessionManager, m_RealtimeReferee, m_ReactiveReferee);
 		new ComboOperator (m_SessionManager, m_ReactiveReferee, m_RealtimeReferee);
 		//* ↑ DI with Manual ↑ *//
 
