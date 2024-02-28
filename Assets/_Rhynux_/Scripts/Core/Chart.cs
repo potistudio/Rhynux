@@ -1,13 +1,12 @@
 
 using UnityEngine;
-using Alchemy.Inspector;
 
 [CreateAssetMenu(fileName = "Chart", menuName = "Rhynux/Chart")]
 public class Chart : ScriptableObject {
 	[SerializeField] private string m_Title;
 	[SerializeField] private string m_Artist;
 	[SerializeField] private float m_BPM;
-	[SerializeField, LabelText("Offset (ms)")] private float m_Offset;
+	[SerializeField, Alchemy.Inspector.LabelText("Offset (ms)")] private float m_Offset;
 	[SerializeField] private AudioClip m_Clip;
 	[SerializeField] private System.Collections.Generic.List<Note> m_Notes;
 
