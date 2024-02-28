@@ -38,16 +38,6 @@ public class SessionManager {
 		m_CurrentScore.Value += _deltaScore;
 	}
 
-	//* Time
-	private float m_CurrentTime = 0f;
-	public float CurrentTime => m_CurrentTime;
-	public ReactiveProperty<float> OnTimeUpdated = new();
-
-	public void UpdateTime (float _time) {
-		m_CurrentTime = _time;
-		OnTimeUpdated.Value = m_CurrentTime;
-	}
-
 	//* Combo
 	private ReactiveProperty<int> m_CurrentCombo => new();
 	public ReadOnlyReactiveProperty<int> CurrentCombo => m_CurrentCombo.ToReadOnlyReactiveProperty();
@@ -58,6 +48,16 @@ public class SessionManager {
 
 	public void ResetCombo() {
 		m_CurrentCombo.Value = 0;
+	}
+
+	//* Time
+	private float m_CurrentTime = 0f;
+	public float CurrentTime => m_CurrentTime;
+	public ReactiveProperty<float> OnTimeUpdated = new();
+
+	public void UpdateTime (float _time) {
+		m_CurrentTime = _time;
+		OnTimeUpdated.Value = m_CurrentTime;
 	}
 
 	//* Chart
