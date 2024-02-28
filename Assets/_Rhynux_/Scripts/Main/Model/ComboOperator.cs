@@ -1,10 +1,13 @@
 
 using UniRx;
 
+/// <summary>
+/// Observe Referee Activity and Update Combo
+/// </summary>
 public class ComboOperator {
-	public ComboOperator (SessionManager _sessionManager, ReactiveReferee _reactiveReferee, RealtimeReferee _realtimeReferee) {
-		_reactiveReferee.OnHit.Subscribe (x => {
-			switch (x.Item2) {
+	public ComboOperator (SessionManager _sessionManager, NotesReferee _notesReferee) {
+		_notesReferee.OnHit.Subscribe (x => {
+			switch (x) {
 				case AccuracyLevel.Perfect or AccuracyLevel.Good:
 					_sessionManager.IncreaseCombo();
 					break;
@@ -14,12 +17,8 @@ public class ComboOperator {
 			}
 		});
 
-		_realtimeReferee.OnNoteStatusChanged.Subscribe (x => {
-			switch (x.Item2) {
-				case NoteAvailableStatus.Fell:
-					_sessionManager.ResetCombo();
-					break;
-			}
+		_notesReferee.OnFall.Subscribe (x => {
+			_sessionManager.ResetCombo();
 		});
 	}
 }

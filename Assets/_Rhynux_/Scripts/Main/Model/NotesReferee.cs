@@ -12,8 +12,8 @@ public class NotesReferee {
 		private readonly Subject<AccuracyLevel> m_OnHit = new ();
 		public System.IObservable<AccuracyLevel> OnHit => m_OnHit;
 
-		private readonly Subject<AccuracyLevel> m_OnFall = new ();
-		public System.IObservable<AccuracyLevel> OnFall => m_OnFall;
+		private readonly Subject<Unit> m_OnFall = new ();
+		public System.IObservable<Unit> OnFall => m_OnFall;
 	#endregion
 
 	public NotesReferee (SessionManager _sessionManager, RealtimeReferee _realtimeReferee, ReactiveReferee _reactiveReferee) {
