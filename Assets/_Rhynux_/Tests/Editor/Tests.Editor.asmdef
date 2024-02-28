@@ -9,6 +9,7 @@
         "Unity.Addressables",
         "VContainer",
         "Rhynux.Core",
+        "Rhynux.Main.Presenter",
         "Rhynux.Main.Model"
     ],
     "includePlatforms": [
