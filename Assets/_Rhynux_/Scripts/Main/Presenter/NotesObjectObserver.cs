@@ -18,8 +18,8 @@ public class NotesObjectObserver : UnityEngine.MonoBehaviour {
 	}
 
 	private void Start() {
-		var a = m_SessionManager.NotesCollection;
-		var o = m_NotesObjectGenerator.GenerateNotes (a.Select(x => { var y = x.DeepCopy(); y.Time /= 1000f; return y; }).ToList());
+		System.Collections.ObjectModel.ReadOnlyCollection<Note> a = m_SessionManager.NotesCollection;
+		System.Collections.Generic.List<UnityEngine.GameObject> o = m_NotesObjectGenerator.GenerateNotes (a.Select(x => { var y = x.DeepCopy(); y.Time /= 1000f; return y; }).ToList());
 
 		for (int i = 0; i < o.Count; i++)
 			m_NotesList.Add ((a[i], o[i]));
@@ -29,9 +29,8 @@ public class NotesObjectObserver : UnityEngine.MonoBehaviour {
 		}).AddTo (this);
 
 		m_SessionManager.OnNoteDisabled.Subscribe (x => {
-			//TODO: Optimize
-			var i = m_NotesList.FindIndex (y => y.Item1 == x);
-			m_NotesList[i].Item2.SetActive (false);
+			int index = m_NotesList.FindIndex (y => y.Item1 == x);
+			m_NotesList[index].Item2.SetActive (false);
 
 			if (x.AvailableStatus == NoteAvailableStatus.Fell)
 				m_JudgementDisplay.ShowPopup ("Miss");
@@ -39,7 +38,7 @@ public class NotesObjectObserver : UnityEngine.MonoBehaviour {
 	}
 
 	private void MoveNotes (float _targetTime) {
-		foreach (var note in m_NotesList) {
+		foreach ((Note, UnityEngine.GameObject) note in m_NotesList) {
 			UnityEngine.Transform noteTransform = note.Item2.transform;
 			noteTransform.position = new UnityEngine.Vector3 (noteTransform.position.x, noteTransform.position.y, (note.Item1.Time / 1000f * m_NotesScrollSpeed) - (_targetTime / 1000f * m_NotesScrollSpeed));
 		}
