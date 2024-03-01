@@ -11,7 +11,7 @@ public class GameLifetimeScope : LifetimeScope {
 	private ReactiveReferee m_ReactiveReferee;
 	private NotesReferee m_NotesReferee;
 
-    protected override void Configure (IContainerBuilder builder) {
+	protected override void Configure (IContainerBuilder builder) {
 		INotesGenerator notesGenerator = new SingleLineConstantIntervalNotesGenerator();
 		System.Collections.Generic.List<Note> generatedNotes = notesGenerator.Generate (m_Chart);
 
@@ -26,5 +26,5 @@ public class GameLifetimeScope : LifetimeScope {
 		builder.Register (_ => m_RealtimeReferee, Lifetime.Singleton);
 		builder.Register (_ => m_ReactiveReferee, Lifetime.Singleton);
 		builder.Register (_ => m_NotesReferee, Lifetime.Singleton);
-    }
+	}
 }
