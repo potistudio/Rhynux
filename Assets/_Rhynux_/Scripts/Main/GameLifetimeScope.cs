@@ -20,7 +20,7 @@ public class GameLifetimeScope : LifetimeScope {
 		m_ReactiveReferee = new ReactiveReferee (generatedNotes);
 		m_NotesReferee = new NotesReferee (m_SessionManager, m_RealtimeReferee, m_ReactiveReferee);
 
-		new ComboOperator (m_SessionManager, m_ReactiveReferee, m_RealtimeReferee);
+		new ComboOperator (m_SessionManager, m_NotesReferee);
 
 		builder.Register (_ => m_SessionManager, Lifetime.Singleton);
 		builder.Register (_ => m_RealtimeReferee, Lifetime.Singleton);

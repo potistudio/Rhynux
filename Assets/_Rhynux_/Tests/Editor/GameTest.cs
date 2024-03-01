@@ -7,6 +7,7 @@ public class GameTest {
 	private SessionManager m_SessionManager;
 	private RealtimeReferee m_RealtimeReferee;
 	private ReactiveReferee m_ReactiveReferee;
+	private NotesReferee m_NotesReferee;
 
 	private Chart m_Chart;
 	private int m_NotesCount;
@@ -45,9 +46,10 @@ public class GameTest {
 		m_SessionManager = new SessionManager (m_Chart, generatedNotes);
 		m_RealtimeReferee = new RealtimeReferee (generatedNotes);
 		m_ReactiveReferee = new ReactiveReferee (generatedNotes);
+		m_NotesReferee = new NotesReferee (m_SessionManager, m_RealtimeReferee, m_ReactiveReferee);
 
 		new NotesReferee (m_SessionManager, m_RealtimeReferee, m_ReactiveReferee);
-		new ComboOperator (m_SessionManager, m_ReactiveReferee, m_RealtimeReferee);
+		new ComboOperator (m_SessionManager, m_NotesReferee);
 		//* ↑ DI with Manual ↑ *//
 
 		m_NotesCount = m_SessionManager.NotesCollection.Count;
@@ -106,18 +108,18 @@ public class GameTest {
 	public void ComboOperationTest() {
 		m_SessionManager.UpdateTime (m_SessionManager.NotesCollection[0].Time);
 		m_ReactiveReferee.JudgeHit(0);
-		Assert.That (m_SessionManager.CurrentCombo, Is.EqualTo(1));
+		Assert.That (m_SessionManager.CurrentCombo.Value, Is.EqualTo(1));
 
 		m_SessionManager.UpdateTime (m_SessionManager.NotesCollection[3].Time); // Fall
-		Assert.That (m_SessionManager.CurrentCombo, Is.EqualTo(0));
+		Assert.That (m_SessionManager.CurrentCombo.Value, Is.EqualTo(0));
 
 		m_SessionManager.UpdateTime (m_SessionManager.NotesCollection[3].Time + 120f); // Good
 		m_ReactiveReferee.JudgeHit(0);
-		Assert.That (m_SessionManager.CurrentCombo, Is.EqualTo(1));
+		Assert.That (m_SessionManager.CurrentCombo.Value, Is.EqualTo(1));
 
 		m_SessionManager.UpdateTime (m_SessionManager.NotesCollection[4].Time + 121f); // Miss
 		m_ReactiveReferee.JudgeHit(0);
-		Assert.That (m_SessionManager.CurrentCombo, Is.EqualTo(0));
+		Assert.That (m_SessionManager.CurrentCombo.Value, Is.EqualTo(0));
 	}
 
 	[Test, Unity.PerformanceTesting.Performance]

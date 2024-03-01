@@ -31,7 +31,7 @@ public class SessionManager {
 	}
 
 	//* Score
-	private ReactiveProperty<int> m_CurrentScore = new();
+	private readonly ReactiveProperty<int> m_CurrentScore = new();
 	public ReadOnlyReactiveProperty<int> CurrentScore => m_CurrentScore.ToReadOnlyReactiveProperty();
 
 	public void AddScore (int _deltaScore) {
