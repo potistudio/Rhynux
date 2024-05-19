@@ -12,7 +12,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "bd8729e0f457462d2a7ec9479b64ae80cec4cc5c"
+      "hash": "fc354905c8e40b1491ea8a750ee722ee07adf484"
     },
     "com.annulusgames.lit-motion": {
       "version": "https://github.com/AnnulusGames/LitMotion.git?path=src/LitMotion/Assets/LitMotion",
