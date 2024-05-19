@@ -5,7 +5,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "e21ac9e23156fcd24dc6765aedfcbd337fb2c509"
+      "hash": "5fef637954b6886c055a0d893b070470cf2c295c"
     },
     "com.annulusgames.burst-linq": {
       "version": "https://github.com/AnnulusGames/BurstLinq.git?path=/Assets/BurstLinq",
