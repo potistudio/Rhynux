@@ -46,6 +46,13 @@
       "dependencies": {},
       "hash": "fbe0bf85155f42f8832205f7b3ac3df571ada33e"
     },
+    "com.mackysoft.navigathena": {
+      "version": "https://github.com/mackysoft/Navigathena.git?path=Assets/MackySoft/MackySoft.Navigathena",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "09adc32031f0c671bc84045de3803a00bcc4e781"
+    },
     "com.neuecc.unirx": {
       "version": "https://github.com/neuecc/UniRx.git?path=Assets/Plugins/UniRx/Scripts",
       "depth": 0,
