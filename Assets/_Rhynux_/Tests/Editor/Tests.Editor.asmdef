@@ -10,6 +10,7 @@
         "VContainer",
         "UniRx",
         "Rhynux.Core",
+        "Rhynux.Main.Core",
         "Rhynux.Main.Presenter",
         "Rhynux.Main.Model"
     ],
