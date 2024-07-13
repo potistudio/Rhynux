@@ -15,5 +15,5 @@ public class Chart : ScriptableObject {
 	public float BPM => m_BPM;
 	public float Offset => m_Offset;
 	public AudioClip Clip => m_Clip;
-	public System.Collections.Generic.List<Note> Notes => m_Notes;
+	public System.Collections.Generic.List<Note> Notes => m_Notes.DeepCopy();
 }
