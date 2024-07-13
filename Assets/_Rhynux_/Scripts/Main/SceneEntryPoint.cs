@@ -4,6 +4,7 @@ using Cysharp.Threading.Tasks;
 using MackySoft.Navigathena.SceneManagement;
 
 public sealed class SceneEntryPoint : SceneEntryPointBase {
+	[SerializeReference] public INotesGenerator m_NotesGenerator;
 	[SerializeField] private MusicPlayer m_MusicPlayer;
 	[SerializeField] private Chart m_Chart;
 
@@ -11,6 +12,7 @@ public sealed class SceneEntryPoint : SceneEntryPointBase {
 		Debug.Log ("Initialize");
 
 		m_MusicPlayer.Clip = m_Chart.Clip;
+		m_NotesGenerator.Generate (m_Chart);
 
 		return base.OnInitialize (reader, progress, cancellationToken);
 	}

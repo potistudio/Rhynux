@@ -916,8 +916,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4f11c55432fd0b46aad3fe102446356, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_NotesGenerator:
+    rid: 3956438966607020032
   m_MusicPlayer: {fileID: 496397088}
   m_Chart: {fileID: 11400000, guid: a2e4df620355a2549b997394f55a73c1, type: 2}
+  references:
+    version: 2
+    RefIds:
+    - rid: 3956438966607020032
+      type: {class: ProceduralNotesGenerator, ns: , asm: Rhynux.Main.Model}
+      data: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
