@@ -10,11 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 498be60e7a3b7ff48b655b6862d3e195, type: 3}
-  m_Name: "\u4EBA\u30DE\u30CB\u30A2\uFF08\u30A2\u30FC\u30E1\u30F3\u306E\u523B\u307F\u306E\u305B\uFF09"
+  m_Name: MockChart
   m_EditorClassIdentifier: 
-  m_Title: "\u4EBA\u30DE\u30CB\u30A2\uFF08\u30A2\u30FC\u30E1\u30F3\u306E\u523B\u307F\u306E\u305B\uFF09"
-  m_Artist: FTN-NKNK
+  m_Title: NEO SAKURA
+  m_Artist: RYOQUCHA & CS4W
   m_BPM: 240
-  m_Offset: 4000
-  m_Clip: {fileID: 8300000, guid: 5a9dd4fa8beee044aa69434a9618a84d, type: 3}
-  m_Notes: []
+  m_Offset: 0
+  m_Clip: {fileID: 8300000, guid: 4c829944c7ddbed4cbec8d07194330d6, type: 3}
+  m_Notes:
+  - m_Time: 0
+    m_Position: -1
+  - m_Time: 1
+    m_Position: 1
+  - m_Time: 2
+    m_Position: -2
+  - m_Time: 3
+    m_Position: 2
