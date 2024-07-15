@@ -1,17 +1,15 @@
 {
-    "name": "Rhynux.Main.Model",
+    "name": "Rhynux.Game.Core",
     "rootNamespace": "",
     "references": [
-        "GUID:560b04d1a97f54a4e82edc0cbbb69285",
-        "GUID:048465f7c8ae7fd4c88015adf29aa9f6",
-        "GUID:b11338bb849a44848b44326146330eec"
+        "GUID:048465f7c8ae7fd4c88015adf29aa9f6"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
     "precompiledReferences": [],
-    "autoReferenced": false,
+    "autoReferenced": true,
     "defineConstraints": [],
     "versionDefines": [],
     "noEngineReferences": false

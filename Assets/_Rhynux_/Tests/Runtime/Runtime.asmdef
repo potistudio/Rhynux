@@ -5,7 +5,7 @@
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "Rhynux.Core",
-        "Rhynux.Main.View"
+        "Rhynux.Game.View"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
