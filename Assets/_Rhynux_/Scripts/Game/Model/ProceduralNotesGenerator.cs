@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public sealed class ProceduralNotesGenerator : INotesGenerator {
 	public IObservable<IReadOnlyList<Note>> OnNotesGenerated => throw new NotImplementedException();
 
-	public List<Note> Generate (Chart _chart) {
+	public IList<Note> Generate (Chart _chart) {
 		UnityEngine.Debug.Log ("Generated");
 		return _chart.Notes;
 	}

@@ -1,4 +1,5 @@
 
+using System.Linq;
 using UniRx;
 
 /// <summary>
@@ -76,7 +77,7 @@ public class SessionManager {
 	/// <param name="chart">Chart</param>
 	public SessionManager (Chart _chart) {
 		SetChart (_chart);
-		m_NotesCollection = _chart.Notes;
+		m_NotesCollection = _chart.Notes.ToList();
 	}
 
 	/// <summary>
