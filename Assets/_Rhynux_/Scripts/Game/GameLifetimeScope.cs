@@ -1,4 +1,4 @@
-
+using System.Linq;
 using VContainer;
 using VContainer.Unity;
 
@@ -13,7 +13,7 @@ public class GameLifetimeScope : LifetimeScope {
 
 	protected override void Configure (IContainerBuilder builder) {
 		INotesGenerator notesGenerator = new SingleLineConstantIntervalNotesGenerator();
-		System.Collections.Generic.List<Note> generatedNotes = notesGenerator.Generate (m_Chart);
+		System.Collections.Generic.List<Note> generatedNotes = notesGenerator.Generate (m_Chart).ToList();
 
 		m_SessionManager = new SessionManager (m_Chart, generatedNotes);
 		m_RealtimeReferee = new RealtimeReferee (generatedNotes);

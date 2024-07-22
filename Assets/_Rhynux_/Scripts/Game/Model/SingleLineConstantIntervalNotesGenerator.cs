@@ -10,7 +10,7 @@ public class SingleLineConstantIntervalNotesGenerator : INotesGenerator {
 
 	public List<Note> GeneratedNotes { get; private set; }
 
-	public List<Note> Generate (Chart _chart) {
+	public IList<Note> Generate (Chart _chart) {
 		List<Note> notes = new();
 
 		// "s" to "ms" by multiplying 1000

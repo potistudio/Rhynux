@@ -1,5 +1,5 @@
 {
-    "name": "Rhynux.Main.Presenter",
+    "name": "Rhynux.Game.Presenter",
     "rootNamespace": "",
     "references": [
         "GUID:b0214a6008ed146ff8f122a6a9c2f6cc",

@@ -58,7 +58,12 @@
     },
     "dotnet.defaultSolution": "Rhynux.sln",
     "cSpell.words": [
+        "Addressables",
         "Behaviour",
+        "Goertzel",
+        "Mathf",
+        "Rhynux",
+        "Scriptable",
         "UGUI"
     ]
 }
