@@ -988,7 +988,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ChartAsset: {fileID: 11400000, guid: ab6a0c5c3fb108748bcff013bf527d54, type: 2}
-  m_NotePrefab: {fileID: 4467260115818946886, guid: baba76ee28ad70e448c44fc713327651, type: 3}
+  m_NotePrefab: {fileID: 3098643999654750239, guid: 426151648244d7b4b95cec37690ae380, type: 3}
   m_MusicPlayer: {fileID: 496397088}
   m_ScrollSpeed: 20
 --- !u!1660057539 &9223372036854775807
