@@ -818,7 +818,6 @@ MonoBehaviour:
   - {fileID: 2101193733}
   m_NotesGenerator:
     rid: -2
-  m_Chart: {fileID: 11400000, guid: a2e4df620355a2549b997394f55a73c1, type: 2}
   references:
     version: 2
     RefIds:
@@ -931,6 +930,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2109308433}
   - component: {fileID: 2109308434}
+  - component: {fileID: 2109308435}
   m_Layer: 0
   m_Name: Scene Entry Point
   m_TagString: Untagged
@@ -966,15 +966,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_NotesGenerator:
-    rid: 3956438966607020032
+    rid: 3956439122013061120
   m_MusicPlayer: {fileID: 496397088}
-  m_Chart: {fileID: 11400000, guid: a2e4df620355a2549b997394f55a73c1, type: 2}
+  m_FullLogic: {fileID: 2109308435}
   references:
     version: 2
     RefIds:
-    - rid: 3956438966607020032
-      type: {class: ProceduralNotesGenerator, ns: , asm: Rhynux.Main.Model}
+    - rid: 3956439122013061120
+      type: {class: ProceduralNotesGenerator, ns: , asm: Rhynux.Game.Model}
       data: 
+--- !u!114 &2109308435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2109308432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34b48b026e8ffa64caabffd978be3325, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ChartAsset: {fileID: 11400000, guid: ab6a0c5c3fb108748bcff013bf527d54, type: 2}
+  m_NotePrefab: {fileID: 4467260115818946886, guid: baba76ee28ad70e448c44fc713327651, type: 3}
+  m_MusicPlayer: {fileID: 496397088}
+  m_ScrollSpeed: 20
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
