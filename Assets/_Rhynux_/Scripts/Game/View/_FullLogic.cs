@@ -8,6 +8,7 @@ public class _FullLogic : MonoBehaviour {
 	[SerializeField] private GameObject m_NotePrefab;
 	[SerializeField] private MusicPlayer m_MusicPlayer;
 	[SerializeField] private float m_ScrollSpeed;
+	[SerializeField] private float m_UserOffset;
 
 	private Chart m_Chart;
 	private System.Collections.Generic.List<(Note, GameObject)> m_NoteObjects = new();
@@ -28,7 +29,7 @@ public class _FullLogic : MonoBehaviour {
 			x.Item2.transform.position = new Vector3 (
 				x.Item1.Position,
 				0f,
-				((x.Item1.Time + m_Chart.Offset) + ((m_Chart.BPM / 60f) * -m_MusicPlayer.CurrentTime)) * m_ScrollSpeed
+				((x.Item1.Time + m_Chart.Offset + m_UserOffset) + ((m_Chart.BPM / 60f) * -m_MusicPlayer.CurrentTime)) * m_ScrollSpeed
 			);
 		}
 	}

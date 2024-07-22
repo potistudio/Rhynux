@@ -991,6 +991,7 @@ MonoBehaviour:
   m_NotePrefab: {fileID: 3098643999654750239, guid: 426151648244d7b4b95cec37690ae380, type: 3}
   m_MusicPlayer: {fileID: 496397088}
   m_ScrollSpeed: 20
+  m_UserOffset: -0.32
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
