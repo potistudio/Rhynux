@@ -7,6 +7,7 @@ public class RawChartAsset : ChartAsset {
 	[SerializeField] private float m_BPM;
 	[SerializeField] private float m_Offset;
 	[SerializeField] private AudioClip m_Clip;
+	[SerializeField] private SoundTrack m_SoundTrack;
 	[SerializeField] private System.Collections.Generic.List<Note> m_Notes;
 	[SerializeField] private bool m_Secured;
 

@@ -2,11 +2,12 @@
 using UnityEngine;
 using FancyScrollView;
 using VContainer;
+using System.Linq;
 
 
 public class ScrollView : FancyScrollView<Chart> {
     [SerializeField] private Scroller m_Scroller;
-    [SerializeField] private SongInfoView m_SongInfoView;
+    [SerializeField] private TrackInfoView m_SongInfoView;
     [SerializeField] private SongPreviewSource m_SongPreviewSource;
     [SerializeField] private GameObject m_CellPrefab;
 
@@ -19,10 +20,10 @@ public class ScrollView : FancyScrollView<Chart> {
 
     protected override GameObject CellPrefab => m_CellPrefab;
 
-    private System.Collections.ObjectModel.ReadOnlyCollection<Chart> m_Charts;
+    private Chart[] m_Charts;
 
     [Inject]
-    private void Init (SongInfoView _songInfoView) {
+    private void Init (TrackInfoView _songInfoView) {
         m_Scroller.OnValueChanged (OnValueChanged);
         m_Scroller.OnSelectionChanged (OnSelectionChanged);
 
@@ -32,10 +33,10 @@ public class ScrollView : FancyScrollView<Chart> {
         m_SongInfoView = _songInfoView;
     }
 
-    public void UpdateData (System.Collections.Generic.List<Chart> data) {
+    public void UpdateData (System.Collections.Generic.IList<Chart> data) {
         base.UpdateContents (data);
+        m_Charts = data.ToArray();
 
-        m_Charts = data.AsReadOnly();
         m_Scroller.SetTotalCount (data.Count);
 
         OnSelectionChanged (0);
