@@ -1874,6 +1874,7 @@ GameObject:
   - component: {fileID: 1585302202}
   - component: {fileID: 1585302201}
   - component: {fileID: 1585302199}
+  - component: {fileID: 1585302203}
   m_Layer: 5
   m_Name: Scroller
   m_TagString: Untagged
@@ -1966,6 +1967,18 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a5176732f9f493143a8b5ba8806ee017, type: 2}
   - {fileID: 11400000, guid: f4a83585701c38b49b4ac611a89ae19d, type: 2}
   - {fileID: 11400000, guid: 84948f7148a956645a20653e19adec49, type: 2}
+--- !u!114 &1585302203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1585302195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8b465e26acb82243a55561495fe84fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1669869981
 GameObject:
   m_ObjectHideFlags: 0
@@ -2744,8 +2757,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TitleTextTransform: {fileID: 7599197841185763138}
   m_ArtistTextTransform: {fileID: 3175160307948603942}
-  m_Backing: 40
-  m_Duration: 0.8
+  m_Backing: 20
+  m_Duration: 0.4
   m_Delay: 0.08
   m_Ease: 8
 --- !u!1660057539 &9223372036854775807

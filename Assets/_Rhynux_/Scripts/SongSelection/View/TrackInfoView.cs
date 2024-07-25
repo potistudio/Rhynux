@@ -18,6 +18,8 @@ public class TrackInfoView : MonoBehaviour {
 
 	[SerializeField] private Ease m_Ease;
 
+	private Sequence m_Sequence;
+
 	[VContainer.Inject]
 	private void Init() {
 		m_TitleTextMesh = m_TitleTextTransform.GetComponent<TextMeshProUGUI>();
@@ -25,6 +27,32 @@ public class TrackInfoView : MonoBehaviour {
 
 		m_DefaultTitleTextPosition = m_TitleTextTransform.localPosition;
 		m_DefaultArtistTextPosition = m_ArtistTextTransform.localPosition;
+
+		m_Sequence = Sequence.Create();
+		m_Sequence.SetAutoKill (false);
+		m_Sequence.SetAutoPlay (false);
+
+		m_Sequence.Append (
+			m_TitleTextTransform.TweenLocalPositionX (m_DefaultTitleTextPosition.x - m_Backing, m_DefaultTitleTextPosition.x, m_Duration)
+				.SetEase (m_Ease)
+		);
+
+		m_Sequence.Join (
+			m_ArtistTextTransform.TweenLocalPositionX (m_DefaultArtistTextPosition.x - m_Backing, m_DefaultArtistTextPosition.x, m_Duration)
+				.SetDelay (m_Delay)
+				.SetEase (m_Ease)
+		);
+
+		m_Sequence.Join (
+			Tween.FromTo (x => m_TitleTextMesh.alpha = x, 0f, 1f, m_Duration)
+				.SetEase (m_Ease)
+		);
+
+		m_Sequence.Join (
+			Tween.FromTo (x => m_ArtistTextMesh.alpha = x, 0f, 1f, m_Duration)
+				.SetDelay (m_Delay)
+				.SetEase (m_Ease)
+		);
 	}
 
 	public void ChangeInfoContent (string _title, string _artist) {
@@ -34,20 +62,6 @@ public class TrackInfoView : MonoBehaviour {
 		m_TitleTextMesh.text = _title;
 		m_ArtistTextMesh.text = _artist;
 
-		//* Animate Position
-		m_TitleTextTransform.TweenLocalPositionX (m_DefaultTitleTextPosition.x - m_Backing, m_DefaultTitleTextPosition.x, m_Duration)
-			.SetEase (m_Ease);
-
-		m_ArtistTextTransform.TweenLocalPositionX (m_DefaultArtistTextPosition.x - m_Backing, m_DefaultArtistTextPosition.x, m_Duration)
-			.SetDelay (m_Delay)
-			.SetEase (m_Ease);
-
-		//* Animate Opacity
-		Tween.FromTo (x => m_TitleTextMesh.alpha = x, 0f, 1f, m_Duration)
-			.SetEase (m_Ease);
-
-		Tween.FromTo (x => m_ArtistTextMesh.alpha = x, 0f, 1f, m_Duration)
-			.SetDelay (m_Delay)
-			.SetEase (m_Ease);
+		m_Sequence.Restart();
 	}
 }

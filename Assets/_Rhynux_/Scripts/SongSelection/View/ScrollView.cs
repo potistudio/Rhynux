@@ -59,4 +59,8 @@ public class ScrollView : FancyScrollView<Chart> {
 
         m_LastSelectedIndex = _index;
     }
+
+	public void Next() {
+		OnSelectionChanged ((m_LastSelectedIndex + 1) % m_Charts.Length);
+	}
 }
