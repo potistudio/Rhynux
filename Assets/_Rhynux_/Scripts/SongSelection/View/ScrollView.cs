@@ -1,5 +1,6 @@
 
 using UnityEngine;
+using UniRx;
 using FancyScrollView;
 using VContainer;
 using System.Linq;
@@ -22,6 +23,9 @@ public class ScrollView : FancyScrollView<Chart> {
     protected override GameObject CellPrefab => m_CellPrefab;
 
     private Chart[] m_Charts;
+
+	private readonly Subject<Unit> m_OnSelectionChange = new();
+	public System.IObservable<Unit> OnSelectionChange => m_OnSelectionChange;
 
     [Inject]
     private void Init (TrackInfoView _songInfoView) {
@@ -60,6 +64,7 @@ public class ScrollView : FancyScrollView<Chart> {
 
         m_LastSelectedIndex = _index;
 		m_Scroller.ScrollTo (_index, m_ScrollDuration, EasingCore.Ease.OutCubic);
+		m_OnSelectionChange.OnNext (Unit.Default);
     }
 
 	public void Next() {

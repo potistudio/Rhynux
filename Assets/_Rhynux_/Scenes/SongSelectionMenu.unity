@@ -830,6 +830,7 @@ GameObject:
   m_Component:
   - component: {fileID: 515186276}
   - component: {fileID: 515186275}
+  - component: {fileID: 515186277}
   m_Layer: 0
   m_Name: SFXSource
   m_TagString: Untagged
@@ -847,7 +848,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 1407168650263799623, guid: 301ab72c017cb6e419b799e08c3a1979, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 2cefcc16259e9b242814f55e6e2883c0, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -948,6 +949,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &515186277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 515186272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a5c241bc179c6b47a0b363057165bac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TapSound: {fileID: 8300000, guid: c800d16c852ef0c46babe87baf909025, type: 3}
+  m_AudioSource: {fileID: 515186275}
 --- !u!1 &627741365
 GameObject:
   m_ObjectHideFlags: 0
@@ -2575,7 +2590,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0.8}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

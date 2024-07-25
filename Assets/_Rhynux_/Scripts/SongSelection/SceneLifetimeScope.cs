@@ -12,5 +12,6 @@ public class SceneLifetimeScope : VContainer.Unity.LifetimeScope {
 		builder.RegisterComponentInHierarchy<TrackInfoView>();
 		builder.RegisterComponentInHierarchy<ScrollView>();
 		builder.RegisterComponentInHierarchy<ScrollerInput>();
+		builder.RegisterComponentInHierarchy<AudioEmitter>();
 	}
 }

@@ -49,7 +49,7 @@ public class TrackInfoView : MonoBehaviour {
 		);
 
 		m_Sequence.Join (
-			Tween.FromTo (x => m_ArtistTextMesh.alpha = x, 0f, 1f, m_Duration)
+			Tween.FromTo (x => m_ArtistTextMesh.alpha = x, 0f, 0.8f, m_Duration)
 				.SetDelay (m_Delay)
 				.SetEase (m_Ease)
 		);
