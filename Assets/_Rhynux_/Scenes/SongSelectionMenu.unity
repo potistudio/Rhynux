@@ -847,7 +847,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 1407168650263799623, guid: 301ab72c017cb6e419b799e08c3a1979, type: 2}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 2cefcc16259e9b242814f55e6e2883c0, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -1943,11 +1943,12 @@ MonoBehaviour:
   scrollOffset: 0.5
   loop: 0
   cellContainer: {fileID: 1585302196}
+  m_ScrollDuration: 0.24
   m_Scroller: {fileID: 1585302199}
   m_SongInfoView: {fileID: 8896216101871787105}
   m_SongPreviewSource: {fileID: 207809040}
   m_CellPrefab: {fileID: 1619177585710879620, guid: 070b13b547d65e4439ee81cf85a85506, type: 3}
-  m_TurnTable: {fileID: 805033246}
+  m_TurnTable: {fileID: 1015115641}
 --- !u!114 &1585302202
 MonoBehaviour:
   m_ObjectHideFlags: 0

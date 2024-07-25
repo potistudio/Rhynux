@@ -51,9 +51,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbdc9a9f429219c409f2485b73773bb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Radius: 1200
-  m_StartAngle: -90
-  m_EndAngle: 90
+  m_Radius: 1680
+  m_StartAngle: -20
+  m_EndAngle: 20
+  m_TitleTextField: {fileID: 983096026353941364}
+  m_ArtistTextField: {fileID: 445935450398852010}
 --- !u!1 &4009010114337046678
 GameObject:
   m_ObjectHideFlags: 0
@@ -119,10 +121,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u3074\u308C\u3093\u3069\u3089\u30FC"
+  m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 23c929aa36a7d94489941cb1ba620c8b, type: 2}
+  m_sharedMaterial: {fileID: 6107327133646438358, guid: 23c929aa36a7d94489941cb1ba620c8b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -253,10 +255,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: The Furry's Claim Aiming
+  m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: dfaf8f44df68fef4eb219027a3ff5ae2, type: 2}
+  m_sharedMaterial: {fileID: -1633899867157443970, guid: dfaf8f44df68fef4eb219027a3ff5ae2, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

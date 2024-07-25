@@ -6,6 +6,7 @@ using System.Linq;
 
 
 public class ScrollView : FancyScrollView<Chart> {
+	[SerializeField] private float m_ScrollDuration;
     [SerializeField] private Scroller m_Scroller;
     [SerializeField] private TrackInfoView m_SongInfoView;
     [SerializeField] private SongPreviewSource m_SongPreviewSource;
@@ -27,8 +28,8 @@ public class ScrollView : FancyScrollView<Chart> {
         m_Scroller.OnValueChanged (OnValueChanged);
         m_Scroller.OnSelectionChanged (OnSelectionChanged);
 
-        m_ViewStartAngle = m_CellPrefab.GetComponent<ScrollCell>().StartAngle;
-        m_ViewEndAngle = m_CellPrefab.GetComponent<ScrollCell>().EndAngle;
+        m_ViewStartAngle = m_CellPrefab.GetComponent<TrackCardElement>().StartAngle;
+        m_ViewEndAngle = m_CellPrefab.GetComponent<TrackCardElement>().EndAngle;
 
         m_SongInfoView = _songInfoView;
     }
@@ -58,6 +59,7 @@ public class ScrollView : FancyScrollView<Chart> {
         // m_SongInfoView.ChangeCoverImage (m_Charts[_index].Cover);
 
         m_LastSelectedIndex = _index;
+		m_Scroller.ScrollTo (_index, m_ScrollDuration, EasingCore.Ease.OutCubic);
     }
 
 	public void Next() {
