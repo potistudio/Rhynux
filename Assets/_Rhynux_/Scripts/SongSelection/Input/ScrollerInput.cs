@@ -8,8 +8,17 @@ public class ScrollerInput : UnityEngine.MonoBehaviour {
 		m_SelectionAction = new Selection();
 
 		m_SelectionAction.Track.TrackUp.performed += OnTrackUp;
+		m_SelectionAction.Track.TrackDown.performed += OnTrackDown;
 
 		m_SelectionAction.Enable();
+	}
+
+	private void OnEnable() {
+		m_SelectionAction?.Enable();
+	}
+
+	private void OnDisable() {
+		m_SelectionAction?.Disable();
 	}
 
 	public void OnDestroy() {
@@ -17,7 +26,10 @@ public class ScrollerInput : UnityEngine.MonoBehaviour {
 	}
 
 	private void OnTrackUp (UnityEngine.InputSystem.InputAction.CallbackContext _context) {
-		UnityEngine.Debug.Log ("Track Up");
 		m_ScrollView.Next();
+	}
+
+	private void OnTrackDown (UnityEngine.InputSystem.InputAction.CallbackContext _context) {
+		m_ScrollView.Back();
 	}
 }
