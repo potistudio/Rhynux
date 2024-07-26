@@ -5,6 +5,8 @@
     "com.annulusgames.lit-motion": "https://github.com/AnnulusGames/LitMotion.git?path=src/LitMotion/Assets/LitMotion",
     "com.annulusgames.magic-tween": "https://github.com/AnnulusGames/MagicTween.git?path=/MagicTween/Assets/MagicTween",
     "com.annulusgames.u-pools": "https://github.com/AnnulusGames/uPools.git?path=/Assets/uPools",
+    "com.baracuda.runtime-monitoring": "https://github.com/JohnBaracuda/com.baracuda.runtime-monitoring.git",
+    "com.baracuda.thread-dispatcher": "https://github.com/JohnBaracuda/com.baracuda.thread-dispatcher.git",
     "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
     "com.mackysoft.navigathena": "https://github.com/mackysoft/Navigathena.git?path=Assets/MackySoft/MackySoft.Navigathena",
     "com.needle.compilation-visualizer": "https://github.com/needle-tools/compilation-visualizer.git",

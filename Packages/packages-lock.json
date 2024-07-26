@@ -39,6 +39,20 @@
       "dependencies": {},
       "hash": "1f57d5e49abb6ba7990dc61f43c66ad7d5223438"
     },
+    "com.baracuda.runtime-monitoring": {
+      "version": "https://github.com/JohnBaracuda/com.baracuda.runtime-monitoring.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "6d24d331f37549b074775899bb2eaa498e12c334"
+    },
+    "com.baracuda.thread-dispatcher": {
+      "version": "https://github.com/JohnBaracuda/com.baracuda.thread-dispatcher.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "d78d8007c6bc56432b1aa9c79fbb351bdeabc26a"
+    },
     "com.cysharp.unitask": {
       "version": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
       "depth": 0,
