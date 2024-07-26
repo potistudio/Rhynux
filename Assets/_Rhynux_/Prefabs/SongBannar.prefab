@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 922693129650154028}
-  - component: {fileID: 3963029790984033958}
+  - component: {fileID: 5520581002194184378}
   m_Layer: 5
   m_Name: SongBannar
   m_TagString: Untagged
@@ -39,7 +39,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 800, y: 96}
   m_Pivot: {x: 0, y: 0.5}
---- !u!114 &3963029790984033958
+--- !u!114 &5520581002194184378
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1619177585710879620}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbdc9a9f429219c409f2485b73773bb4, type: 3}
+  m_Script: {fileID: 11500000, guid: 41406c1374fd5f049b159e076abe7626, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Radius: 1680
