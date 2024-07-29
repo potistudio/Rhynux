@@ -53,7 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Radius: 1680
   m_StartAngle: -20
-  m_EndAngle: 20
+  m_EndAngle: 32
   m_TitleTextField: {fileID: 983096026353941364}
   m_ArtistTextField: {fileID: 445935450398852010}
 --- !u!1 &4009010114337046678
