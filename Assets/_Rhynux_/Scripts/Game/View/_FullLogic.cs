@@ -20,7 +20,7 @@ public class _FullLogic : MonoBehaviour {
 			m_NoteObjects.Add ((note, Instantiate(m_NotePrefab, Vector3.zero, Quaternion.identity)));
 		}
 
-		m_MusicPlayer.Clip = m_Chart.Clip;
+		m_MusicPlayer.Clip = m_Chart.Track.SoundClip;
 		m_MusicPlayer.Play();
 	}
 

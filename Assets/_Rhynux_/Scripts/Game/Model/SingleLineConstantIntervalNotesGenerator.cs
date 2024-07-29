@@ -14,7 +14,7 @@ public class SingleLineConstantIntervalNotesGenerator : INotesGenerator {
 		List<Note> notes = new();
 
 		// "s" to "ms" by multiplying 1000
-		float length = _chart.Clip.length * 1000;
+		float length = _chart.Track.SoundClip.length * 1000;
 		float currentTime = 0f;
 		float interval = 60f / _chart.BPM * 1000;
 
