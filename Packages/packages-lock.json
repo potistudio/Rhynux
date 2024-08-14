@@ -53,6 +53,13 @@
       "dependencies": {},
       "hash": "d78d8007c6bc56432b1aa9c79fbb351bdeabc26a"
     },
+    "com.coffee.unmask": {
+      "version": "https://github.com/mob-sakai/UnmaskForUGUI.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "33356da2c43fa28397192baee70910c978e3169f"
+    },
     "com.cysharp.unitask": {
       "version": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
       "depth": 0,
@@ -340,6 +347,13 @@
       "dependencies": {},
       "hash": "b82cd291f930d25df0315c6ca0ac14240cb051d9"
     },
+    "jp.setchi.fancyscrollview": {
+      "version": "https://github.com/setchi/FancyScrollView.git#upm",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "e5d10d3e5961848f93be43c2911344750b509a88"
+    },
     "com.unity.modules.animation": {
       "version": "1.0.0",
       "depth": 0,
@@ -454,6 +468,16 @@
         "com.unity.modules.audio": "1.0.0",
         "com.unity.modules.assetbundle": "1.0.0",
         "com.unity.modules.imageconversion": "1.0.0"
+      }
+    },
+    "com.unity.modules.video": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.modules.audio": "1.0.0",
+        "com.unity.modules.ui": "1.0.0",
+        "com.unity.modules.unitywebrequest": "1.0.0"
       }
     }
   }
