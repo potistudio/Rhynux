@@ -26,6 +26,7 @@ public class ScrollView : FancyScrollView<Chart> {
 
 	private readonly Subject<Unit> m_OnSelectionChange = new();
 	public System.IObservable<Unit> OnSelectionChange => m_OnSelectionChange;
+	public int CurrentSelectingIndex { get; private set; }
 
     [Inject]
     private void Init (TrackInfoView _songInfoView) {
@@ -63,6 +64,7 @@ public class ScrollView : FancyScrollView<Chart> {
         // m_SongInfoView.ChangeCoverImage (m_Charts[_index].Cover);
 
         m_LastSelectedIndex = _index;
+		CurrentSelectingIndex = _index;
 		m_Scroller.ScrollTo (_index, m_ScrollDuration, EasingCore.Ease.OutCubic);
 		m_OnSelectionChange.OnNext (Unit.Default);
     }

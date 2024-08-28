@@ -9,6 +9,7 @@ public class ScrollItemRegistrar : MonoBehaviour {
     [SerializeField] private int m_GenerationCount;
 
     [SerializeField] private List<ChartAsset> m_Charts = new();
+	public List<Chart> Charts => m_Charts.Select(x => x.Chart).ToList();
 
 	[VContainer.Inject]
     private void Init (ScrollView _scrollView) {
