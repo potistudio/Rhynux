@@ -1,0 +1,23 @@
+{
+    "name": "Rhynux.Selection.Input",
+    "rootNamespace": "",
+    "references": [
+        "GUID:75469ad4d38634e559750d17036d5f7c",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23",
+        "GUID:b0214a6008ed146ff8f122a6a9c2f6cc",
+        "GUID:8a0ff85ce7ae944459caf8abb9313c06",
+        "GUID:19e824f9fd05b4f4a8cd9aaafc8c4550",
+        "GUID:59f6770f7492c42ff827a64ac010ac49",
+        "GUID:a331842067848f840979b0c62c8a6ecd",
+        "GUID:a8957e1376facd0488277028373f6733"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

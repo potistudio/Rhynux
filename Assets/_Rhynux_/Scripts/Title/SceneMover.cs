@@ -4,7 +4,7 @@ public sealed class SceneMover : UnityEngine.MonoBehaviour {
 	private ISceneIdentifier m_SceneIdentifier;
 
 	private void Awake() {
-		m_SceneIdentifier = new BuiltInSceneIdentifier ("Main");
+		m_SceneIdentifier = new BuiltInSceneIdentifier ("SongSelectionMenu");
 	}
 
 	public async void NextScene() {

@@ -6,6 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/_Rhynux_/Scenes/Title/Title.unity
+    guid: ee9fd1a98a8d6904f94ec1f7097e4e05
+  - enabled: 1
+    path: Assets/_Rhynux_/Scenes/SongSelectionMenu.unity
+    guid: 41155ee7d06bf5e40931e62fba36e36a
+  - enabled: 1
+    path: Assets/_Rhynux_/Scenes/Sample.unity
+    guid: 3f71ad1339a13cb489507bbc30dec8c2
+  - enabled: 0
     path: Assets/_Rhynux_/Scenes/Game.unity
     guid: 19c19f81f67d57f468a1b446fe083b16
   m_configObjects:

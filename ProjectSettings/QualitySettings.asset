@@ -4,8 +4,57 @@
 QualitySettings:
   m_ObjectHideFlags: 0
   serializedVersion: 5
-  m_CurrentQuality: 1
+  m_CurrentQuality: 2
   m_QualitySettings:
+  - serializedVersion: 3
+    name: Fastest
+    pixelLightCount: 4
+    shadows: 2
+    shadowResolution: 2
+    shadowProjection: 1
+    shadowCascades: 4
+    shadowDistance: 150
+    shadowNearPlaneOffset: 3
+    shadowCascade2Split: 0.33333334
+    shadowCascade4Split: {x: 0.06666667, y: 0.2, z: 0.46666667}
+    shadowmaskMode: 0
+    skinWeights: 1
+    globalTextureMipmapLimit: 3
+    textureMipmapLimitSettings: []
+    anisotropicTextures: 0
+    antiAliasing: 0
+    softParticles: 1
+    softVegetation: 1
+    realtimeReflectionProbes: 0
+    billboardsFaceCameraPosition: 0
+    useLegacyDetailDistribution: 0
+    vSyncCount: 1
+    realtimeGICPUUsage: 25
+    lodBias: 2
+    maximumLODLevel: 0
+    enableLODCrossFade: 0
+    streamingMipmapsActive: 0
+    streamingMipmapsAddAllCameras: 1
+    streamingMipmapsMemoryBudget: 512
+    streamingMipmapsRenderersPerFrame: 512
+    streamingMipmapsMaxLevelReduction: 2
+    streamingMipmapsMaxFileIORequests: 1024
+    particleRaycastBudget: 1024
+    asyncUploadTimeSlice: 2
+    asyncUploadBufferSize: 16
+    asyncUploadPersistentBuffer: 1
+    resolutionScalingFixedDPIFactor: 1
+    customRenderPipeline: {fileID: 11400000, guid: d3d96b590919c8d4e80799154ee82b90, type: 2}
+    terrainQualityOverrides: 0
+    terrainPixelError: 1
+    terrainDetailDensityScale: 1
+    terrainBasemapDistance: 1000
+    terrainDetailDistance: 80
+    terrainTreeDistance: 5000
+    terrainBillboardStart: 50
+    terrainFadeLength: 5
+    terrainMaxTrees: 50
+    excludedTargetPlatforms: []
   - serializedVersion: 3
     name: Normal
     pixelLightCount: 4
@@ -93,7 +142,7 @@ QualitySettings:
     asyncUploadBufferSize: 16
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
-    customRenderPipeline: {fileID: 11400000, guid: 28e38274168baa3408090f494e2b3c0a, type: 2}
+    customRenderPipeline: {fileID: 11400000, guid: d57f1e0eb49943b45a07e704faa2b8da, type: 2}
     terrainQualityOverrides: 0
     terrainPixelError: 1
     terrainDetailDensityScale: 1
@@ -116,7 +165,7 @@ QualitySettings:
     PS5: 0
     Server: 0
     Stadia: 0
-    Standalone: 0
+    Standalone: 2
     WebGL: 0
     Windows Store Apps: 0
     XboxOne: 0
