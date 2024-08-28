@@ -48,39 +48,6 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "One Modifier",
-                    "id": "1d914d16-014c-4c16-aebd-1091d12f0d4e",
-                    "path": "OneModifier",
-                    "interactions": "Press",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Track Up",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "modifier",
-                    "id": "cd70d69f-d63a-49a2-811a-a43ca9c6bd3e",
-                    "path": "<Keyboard>/upArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Track Up",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "binding",
-                    "id": "577a4df8-367a-4bd5-aa48-d02836632121",
-                    "path": "<Mouse>/scroll/up",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Track Up",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
                     "name": "",
                     "id": "25844b33-e7b5-48d7-b48e-b02f209e356f",
                     "path": "<Keyboard>/downArrow",
