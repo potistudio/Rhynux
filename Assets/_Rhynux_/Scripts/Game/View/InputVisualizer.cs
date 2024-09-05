@@ -11,7 +11,9 @@ public class InputVisualizer : MonoBehaviour {
 	}
 
 	private void Update() {
-		if (Input.GetKey(KeyCode.F))
-			Debug.Log ("F");
+		if (Input.GetKeyDown(KeyCode.F))
+			m_Highlight.SetActive (true);
+		if (Input.GetKeyUp(KeyCode.F))
+			m_Highlight.SetActive (false);
 	}
 }
