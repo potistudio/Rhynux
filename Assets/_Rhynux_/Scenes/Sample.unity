@@ -1164,7 +1164,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c83b54aa3c047834f8b8550ca6b9396d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ChartAsset: {fileID: 11400000, guid: 7716b209b4519444997356dd74894ea2, type: 2}
   m_TitleTextField: {fileID: 1715008196}
   m_ArtistTextField: {fileID: 454955418}
 --- !u!1 &705167125

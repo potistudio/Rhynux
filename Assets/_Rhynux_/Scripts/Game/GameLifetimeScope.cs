@@ -44,6 +44,7 @@ public class GameLifetimeScope : LifetimeScope {
 		builder.Register (_ => m_NotesReferee, Lifetime.Singleton);
 
 		builder.RegisterComponentInHierarchy<FloorTorquer>();
+		builder.RegisterComponentInHierarchy<TrackInfoBanner>();
 
 		builder.RegisterEntryPoint<_FullLogic>();
 	}
