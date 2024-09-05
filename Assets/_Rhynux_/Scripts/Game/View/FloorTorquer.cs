@@ -1,31 +1,40 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class FloorTorquer : MonoBehaviour {
-	//TODO
-	[SerializeField] private ChartAsset m_Chart;
-	[SerializeField] private MusicPlayer m_MusicPlayer;
-
 	[SerializeField] private Rigidbody m_Rigidbody;
 	[SerializeField] private float m_ForcePower;
 
 	private Note[] notes;
+	private Chart m_Chart;
 	private int m_CurrentIndex;
 
-	private void Start() {
-		Chart c = m_Chart.Chart;
-		notes = c.Notes.ToArray();
+	private MusicPlayer m_MusicPlayer;
+
+	[VContainer.Inject]
+	private void Init (MusicPlayer _musicPlayer, SessionData _session) {
+		m_MusicPlayer = _musicPlayer;
+
+		notes = _session.Notes.ToArray();
 	}
 
 	private void Update() {
-		var t = notes[m_CurrentIndex].Time;
+		if (m_CurrentIndex >= notes.Length) {
+			Debug.Log ("End");
+			return;
+		}
 
-		if (m_MusicPlayer.CurrentTime >= t * (60f / m_Chart.Chart.BPM)) {
-			AddTorque (notes[m_CurrentIndex].Position - 1.5f);
+		Debug.Log (notes[m_CurrentIndex].Time);
+
+		if (m_MusicPlayer.CurrentTime >= notes[m_CurrentIndex].Time) {
+			AddTorque (notes[m_CurrentIndex].Position - 2.5f);
 			m_CurrentIndex++;
 		}
+	}
+
+	[Alchemy.Inspector.Button]
+	private void AddTorque (float _distance = 0f) {
+		m_Rigidbody.AddForceAtPosition (Vector3.down * m_ForcePower, Vector3.right * _distance);
 	}
 
 	private float aaa (float x, float t) {
@@ -38,11 +47,4 @@ public class FloorTorquer : MonoBehaviour {
 			return x - lower;
 		}
 	}
-
-	[Alchemy.Inspector.Button]
-	private void AddTorque (float _distance = 0f) {
-		Debug.Log (_distance);
-		m_Rigidbody.AddForceAtPosition (Vector3.down * m_ForcePower, Vector3.right * _distance);
-	}
-
 }

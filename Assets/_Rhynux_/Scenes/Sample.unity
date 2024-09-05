@@ -819,6 +819,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 454955416}
   m_CullTransparentMesh: 1
+--- !u!1 &484046094
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 484046095}
+  - component: {fileID: 484046097}
+  m_Layer: 0
+  m_Name: LifetimeScope
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 0
+--- !u!4 &484046095
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 484046094}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1669892220}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &484046097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 484046094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98d9d15c427891148a65f4c2269cbc3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentReference:
+    TypeName: 
+  autoRun: 0
+  autoInjectGameObjects: []
+  m_NotesGenerator:
+    rid: 3568514597756338176
+  m_Chart: {fileID: 11400000, guid: f4a83585701c38b49b4ac611a89ae19d, type: 2}
+  references:
+    version: 2
+    RefIds:
+    - rid: 3568514597756338176
+      type: {class: ProceduralNotesGenerator, ns: , asm: Rhynux.Game.Model}
+      data: 
 --- !u!1 &538463028
 GameObject:
   m_ObjectHideFlags: 0
@@ -931,8 +988,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c0ba253980476e45afe50a0c175c26b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Chart: {fileID: 11400000, guid: 125c54264a0bafe4fb16c85f83dbea6a, type: 2}
-  m_MusicPlayer: {fileID: 1368391243}
   m_Rigidbody: {fileID: 1852307525}
   m_ForcePower: 8
 --- !u!1 &592906941
@@ -1559,7 +1614,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -1938,8 +1993,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1368391246}
-  - component: {fileID: 1368391245}
-  - component: {fileID: 1368391247}
   - component: {fileID: 1368391244}
   - component: {fileID: 1368391243}
   m_Layer: 0
@@ -1974,35 +2027,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34b48b026e8ffa64caabffd978be3325, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ChartAsset: {fileID: 11400000, guid: 125c54264a0bafe4fb16c85f83dbea6a, type: 2}
   m_NotePrefab: {fileID: 3098643999654750239, guid: 426151648244d7b4b95cec37690ae380, type: 3}
-  m_MusicPlayer: {fileID: 1368391243}
-  m_ScrollSpeed: 24
+  m_ScrollSpeed: 80
   m_UserOffset: 0
   m_FloorWidth: 4
   m_NotesContainer: {fileID: 384625837}
---- !u!114 &1368391245
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1368391242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4f11c55432fd0b46aad3fe102446356, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_NotesGenerator:
-    rid: 594862297852411904
-  m_MusicPlayer: {fileID: 1368391243}
-  m_FullLogic: {fileID: 1368391244}
-  references:
-    version: 2
-    RefIds:
-    - rid: 594862297852411904
-      type: {class: ProceduralNotesGenerator, ns: , asm: Rhynux.Game.Model}
-      data: 
 --- !u!4 &1368391246
 Transform:
   m_ObjectHideFlags: 0
@@ -2018,22 +2047,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1368391247
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1368391242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20b960293682ca945bd6959dbaebfe09, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentReference:
-    TypeName: 
-  autoRun: 1
-  autoInjectGameObjects: []
 --- !u!1 &1378000341
 GameObject:
   m_ObjectHideFlags: 0
@@ -2362,6 +2375,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6615608228512300083, guid: 426151648244d7b4b95cec37690ae380, type: 3}
   m_PrefabInstance: {fileID: 1670391533}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1669892218
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1669892220}
+  - component: {fileID: 1669892219}
+  m_Layer: 0
+  m_Name: Entry Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!114 &1669892219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1669892218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 554b0f512cdc7dd49b7ab5d7baa83c6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1669892220
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1669892218}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 484046095}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1670391533
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3527,6 +3585,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1669892220}
   - {fileID: 629082658}
   - {fileID: 379567733}
   - {fileID: 1719795652}
