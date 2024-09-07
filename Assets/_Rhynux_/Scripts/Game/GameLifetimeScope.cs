@@ -45,6 +45,8 @@ public class GameLifetimeScope : LifetimeScope {
 
 		builder.RegisterComponentInHierarchy<FloorTorquer>();
 		builder.RegisterComponentInHierarchy<TrackInfoBanner>();
+		builder.RegisterComponentInHierarchy<JudgementDisplay>();
+		builder.RegisterComponentInHierarchy<InputVisualizer>();
 
 		builder.RegisterEntryPoint<_FullLogic>();
 	}

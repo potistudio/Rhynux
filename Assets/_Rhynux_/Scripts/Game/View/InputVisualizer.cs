@@ -5,15 +5,24 @@ using UniRx;
 using UniRx.Triggers;
 
 public class InputVisualizer : MonoBehaviour {
-	[SerializeField] private GameObject m_Highlight;
+	[SerializeField] private GameObject[] m_Highlight;
 
-	private void Start() {
+	[VContainer.Inject]
+	private void Init (IInputHandler _inputHandler) {
+		_inputHandler.OnPressed.Subscribe (_ => {
+			Activate (_);
+		});
+
+		_inputHandler.OnReleased.Subscribe (_ => {
+			Deactivate (_);
+		});
 	}
 
-	private void Update() {
-		if (Input.GetKeyDown(KeyCode.F))
-			m_Highlight.SetActive (true);
-		if (Input.GetKeyUp(KeyCode.F))
-			m_Highlight.SetActive (false);
+	private void Activate (int lane) {
+		m_Highlight[lane - 1].SetActive (true);
+	}
+
+	private void Deactivate (int lane) {
+		m_Highlight[lane - 1].SetActive (false);
 	}
 }
