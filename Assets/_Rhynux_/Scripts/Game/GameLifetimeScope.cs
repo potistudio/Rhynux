@@ -6,6 +6,8 @@ using VContainer.Unity;
 
 public class GameLifetimeScope : LifetimeScope {
 	[UnityEngine.SerializeReference] public INotesGenerator m_NotesGenerator;
+	// [UnityEngine.SerializeReference] public IInputHandler m_InputHandler;
+	[UnityEngine.SerializeField] private InputHandlers m_InputHandler;
 	[UnityEngine.SerializeField] private ChartAsset m_Chart;
 
 	private _FullLogic m_FullLogic;
@@ -27,7 +29,15 @@ public class GameLifetimeScope : LifetimeScope {
 		builder.Register (_ => sessionData, Lifetime.Singleton);
 		builder.Register (_ => m_Chart.Chart, Lifetime.Singleton);
 
+		switch (m_InputHandler) {
+			case InputHandlers.Auto:
+				builder.RegisterEntryPoint<AutoInputHandler>();
+				break;
 
+			case InputHandlers.Keyboard:
+				builder.Register<KeyboardInputHandler>(Lifetime.Singleton).As<IInputHandler>();
+				break;
+		}
 
 		builder.Register<ReactiveReferee>(Lifetime.Singleton);
 
@@ -39,5 +49,10 @@ public class GameLifetimeScope : LifetimeScope {
 		builder.RegisterComponentInHierarchy<InputVisualizer>();
 
 		builder.RegisterEntryPoint<_FullLogic>();
+	}
+
+	private enum InputHandlers {
+		Auto,
+		Keyboard
 	}
 }

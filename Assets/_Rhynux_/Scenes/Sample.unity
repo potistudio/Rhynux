@@ -870,6 +870,7 @@ MonoBehaviour:
   m_NotesGenerator:
     rid: 3568514597756338176
   m_Chart: {fileID: 11400000, guid: f4a83585701c38b49b4ac611a89ae19d, type: 2}
+  m_InputHandler: 0
   references:
     version: 2
     RefIds:

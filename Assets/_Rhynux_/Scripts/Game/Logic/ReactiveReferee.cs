@@ -1,5 +1,7 @@
 
+using System;
 using System.Linq;
+using UniRx;
 
 public class ReactiveReferee {
 	private readonly System.Collections.Generic.IReadOnlyList<Note> m_NotesList;
@@ -8,8 +10,11 @@ public class ReactiveReferee {
 	private UniRx.Subject<(int, AccuracyLevel)> m_OnHit = new();
 	public System.IObservable<(int, AccuracyLevel)> OnHit => m_OnHit;
 
-	public ReactiveReferee (System.Collections.Generic.IReadOnlyList<Note> _notes) {
-		m_NotesList = _notes;
+	public ReactiveReferee (SessionData _session, IInputHandler _inputHandler) {
+		m_NotesList = _session.Notes;
+		_inputHandler.OnPressed.Subscribe (x => {
+			JudgeHit (x);
+		});
 	}
 
 	/// <summary>
