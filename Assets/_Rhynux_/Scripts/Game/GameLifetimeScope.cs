@@ -24,25 +24,15 @@ public class GameLifetimeScope : LifetimeScope {
 		System.Collections.Generic.List<Note> generatedNotes = m_NotesGenerator.Generate (m_Chart.Chart).ToList();
 
 		SessionData sessionData = new (generatedNotes);
-
-		m_SessionManager = new SessionManager (m_Chart.Chart, generatedNotes);
-		m_RealtimeReferee = new RealtimeReferee (generatedNotes);
-		m_ReactiveReferee = new ReactiveReferee (generatedNotes);
-		m_NotesReferee = new NotesReferee (m_SessionManager, m_RealtimeReferee, m_ReactiveReferee);
-
-		new ComboOperator (m_SessionManager, m_NotesReferee);
-
-
-		builder.Register (_ => m_Chart.Chart, Lifetime.Singleton);
 		builder.Register (_ => sessionData, Lifetime.Singleton);
+		builder.Register (_ => m_Chart.Chart, Lifetime.Singleton);
+
+
+
+		builder.Register<ReactiveReferee>(Lifetime.Singleton);
 
 		builder.RegisterComponentInHierarchy<_FullLogic>();
 		builder.RegisterComponentInHierarchy<MusicPlayer>();
-		builder.Register (_ => m_SessionManager, Lifetime.Singleton);
-		builder.Register (_ => m_RealtimeReferee, Lifetime.Singleton);
-		builder.Register (_ => m_ReactiveReferee, Lifetime.Singleton);
-		builder.Register (_ => m_NotesReferee, Lifetime.Singleton);
-
 		builder.RegisterComponentInHierarchy<FloorTorquer>();
 		builder.RegisterComponentInHierarchy<TrackInfoBanner>();
 		builder.RegisterComponentInHierarchy<JudgementDisplay>();
