@@ -21,14 +21,16 @@ public class GameLifetimeScope : LifetimeScope {
 	protected override void Configure (IContainerBuilder builder) {
 		UnityEngine.Debug.Log ("-------- Injection --------");
 
+		//* Lifecycle *//
 		builder.RegisterSceneLifecycle<SceneEntryPoint>();
 
+		//* Notes Generator *//
 		System.Collections.Generic.List<Note> generatedNotes = m_NotesGenerator.Generate (m_Chart.Chart).ToList();
-
 		SessionData sessionData = new (generatedNotes);
 		builder.Register (_ => sessionData, Lifetime.Singleton);
 		builder.Register (_ => m_Chart.Chart, Lifetime.Singleton);
 
+		//* Input Handler *//
 		switch (m_InputHandler) {
 			case InputHandlers.Auto:
 				builder.RegisterEntryPoint<AutoInputHandler>();
@@ -39,8 +41,10 @@ public class GameLifetimeScope : LifetimeScope {
 				break;
 		}
 
+		//* Logic *//
 		builder.Register<ReactiveReferee>(Lifetime.Singleton);
 
+		//* View *//
 		builder.RegisterComponentInHierarchy<_FullLogic>();
 		builder.RegisterComponentInHierarchy<MusicPlayer>();
 		builder.RegisterComponentInHierarchy<FloorTorquer>();
@@ -48,6 +52,7 @@ public class GameLifetimeScope : LifetimeScope {
 		builder.RegisterComponentInHierarchy<JudgementDisplay>();
 		builder.RegisterComponentInHierarchy<InputVisualizer>();
 
+		//FIXME
 		builder.RegisterEntryPoint<_FullLogic>();
 	}
 
