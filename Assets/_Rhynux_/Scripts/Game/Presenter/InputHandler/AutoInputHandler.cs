@@ -1,3 +1,5 @@
+using UniRx;
+
 [System.Serializable]
 public class AutoInputHandler : IInputHandler, VContainer.Unity.ITickable {
 	private readonly UniRx.Subject<int> m_Pressed = new();
@@ -24,7 +26,7 @@ public class AutoInputHandler : IInputHandler, VContainer.Unity.ITickable {
 		m_Released.OnNext (_lane);
 	}
 
-	public void Tick() {
+	public async void Tick() {
 		if (m_CurrentIndex >= notes.Length) {
 			UnityEngine.Debug.Log ("End");
 			return;
@@ -32,11 +34,10 @@ public class AutoInputHandler : IInputHandler, VContainer.Unity.ITickable {
 
 		if (m_MusicPlayer.CurrentTime >= notes[m_CurrentIndex].Time) {
 			Press (notes[m_CurrentIndex].Position);
-		}
-
-		if (m_MusicPlayer.CurrentTime >= notes[m_CurrentIndex].Time + 0.08f) {
-			Release (notes[m_CurrentIndex].Position);
 			m_CurrentIndex++;
+
+			await Cysharp.Threading.Tasks.UniTask.Delay (80);
+			Release (notes[m_CurrentIndex - 1].Position);
 		}
 	}
 }
