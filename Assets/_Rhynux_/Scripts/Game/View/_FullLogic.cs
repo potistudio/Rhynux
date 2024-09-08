@@ -31,6 +31,10 @@ public class _FullLogic : MonoBehaviour {
 		m_MusicPlayer.Play();
 	}
 
+	public void DeactivateNote (int _index) {
+		m_NoteObjects[_index].Item2.SetActive (false);
+	}
+
 	private void Update() {
 		float noteWidth = m_FloorWidth / 4f;
 		foreach (var x in m_NoteObjects) {
