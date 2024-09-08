@@ -1,17 +1,25 @@
-
-using UnityEngine;
 using UniRx;
 
-public class JudgementDisplay : MonoBehaviour {
-	[SerializeField] private Transform m_TargetCanvas;
-	[SerializeField] private GameObject m_PopupPrefab;
+public sealed class JudgementDisplay : VContainer.Unity.IInitializable, System.IDisposable {
+	private readonly ReactiveReferee m_ReactiveReferee;
+	private readonly AccuracyPopupEmitter m_PopupEmitter;
+	private readonly CompositeDisposable m_Disposable = new();
 
-	[VContainer.Inject]
-	private void Init (ReactiveReferee _reactiveReferee) {
-		_reactiveReferee.OnHit.Subscribe (_ => Debug.Log("Hit" + _));
+	public JudgementDisplay (ReactiveReferee _reactiveReferee, AccuracyPopupEmitter _accuracyPopupEmitter) {
+		m_ReactiveReferee = _reactiveReferee;
+		m_PopupEmitter = _accuracyPopupEmitter;
 	}
 
-	public void ShowPopup (string _text) {
-		Instantiate (m_PopupPrefab, m_TargetCanvas).GetComponent<Popup>().PopupText = _text;
+	public void Initialize() {
+		m_ReactiveReferee.OnHit.Subscribe (x => {
+			if (x.Item3 == AccuracyLevel.Pass)
+				return;
+
+			m_PopupEmitter.Emit (x.Item3);
+		}).AddTo (m_Disposable);
+	}
+
+	public void Dispose() {
+		m_Disposable.Dispose();
 	}
 }

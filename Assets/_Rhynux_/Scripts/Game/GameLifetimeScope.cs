@@ -47,15 +47,16 @@ public class GameLifetimeScope : LifetimeScope {
 		//* Presenter *//
 		builder.RegisterEntryPoint<SessionTimeUpdater>(Lifetime.Singleton);
 		builder.RegisterEntryPoint<HitListener>(Lifetime.Singleton);
+		builder.RegisterEntryPoint<JudgementDisplay>(Lifetime.Singleton);
 
 		//* View *//
 		builder.RegisterComponentInHierarchy<_FullLogic>();
 		builder.RegisterComponentInHierarchy<MusicPlayer>();
 		builder.RegisterComponentInHierarchy<FloorTorquer>();
 		builder.RegisterComponentInHierarchy<TrackInfoBanner>();
-		builder.RegisterComponentInHierarchy<JudgementDisplay>();
 		builder.RegisterComponentInHierarchy<InputVisualizer>();
 		builder.RegisterComponentInHierarchy<HitEffectGenerator>();
+		builder.RegisterComponentInHierarchy<AccuracyPopupEmitter>();
 	}
 
 	private enum InputHandlers {

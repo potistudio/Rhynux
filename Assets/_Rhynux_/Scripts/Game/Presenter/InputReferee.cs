@@ -30,7 +30,7 @@ public class InputReferee : UnityEngine.MonoBehaviour {
 					return;
 			}
 
-			m_JudgementDisplay.ShowPopup (popupMessage);
+			// m_JudgementDisplay.ShowPopup (popupMessage);
 		}).AddTo (this);
 	}
 }
