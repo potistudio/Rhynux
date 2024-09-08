@@ -3732,7 +3732,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4616613eb2fe993428144fc8d7a1a082, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HitEffectPrefab: {fileID: 7894368112019780312, guid: bb970a113cb570949ae64a03a72a5a88, type: 3}
+  m_PerfectHitEffectPrefab: {fileID: 7894368112019780312, guid: bb970a113cb570949ae64a03a72a5a88, type: 3}
+  m_GoodHitEffectPrefab: {fileID: 7894368112019780312, guid: 3bf94be18d6ca9642a2d43c36608020b, type: 3}
+  m_MissHitEffectPrefab: {fileID: 7894368112019780312, guid: f9bb3a611d855fb42acf48eb307a4563, type: 3}
   m_Lifetime: 1.6
 --- !u!4 &1988439607 stripped
 Transform:
