@@ -1,15 +1,20 @@
 
+using System;
 using System.Linq;
+using UniRx;
 
 public class ReactiveReferee {
 	private readonly System.Collections.Generic.IReadOnlyList<Note> m_NotesList;
 	private float m_CurrentTime;
 
-	private UniRx.Subject<(int, AccuracyLevel)> m_OnHit = new();
-	public System.IObservable<(int, AccuracyLevel)> OnHit => m_OnHit;
+	private UniRx.Subject<(int index, int lane, AccuracyLevel accuracy)> m_OnHit = new();
+	public System.IObservable<(int, int, AccuracyLevel)> OnHit => m_OnHit;
 
-	public ReactiveReferee (System.Collections.Generic.IReadOnlyList<Note> _notes) {
-		m_NotesList = _notes;
+	public ReactiveReferee (SessionData _session, IInputHandler _inputHandler) {
+		m_NotesList = _session.Notes;
+		_inputHandler.OnPressed.Subscribe (x => {
+			JudgeHit (x);
+		});
 	}
 
 	/// <summary>
@@ -36,16 +41,16 @@ public class ReactiveReferee {
 					break;
 				}
 
-				if (count == notesCountByLane - 1) {
-					currentIndex = i;
-					break;
-				}
-
 				minDistance = gap;
 				preventIndex = i;
 
 				count++;
 			}
+
+		}
+
+		if (count == notesCountByLane - 1) {
+			currentIndex = count;
 		}
 
 		return (currentIndex, minDistance);
@@ -53,9 +58,9 @@ public class ReactiveReferee {
 
 	private AccuracyLevel Judge (float _distance) {
 		return _distance switch {
-			<= 60f => AccuracyLevel.Perfect,
-			<= 120f => AccuracyLevel.Good,
-			<= 160f => AccuracyLevel.Miss,
+			<= 0.060f => AccuracyLevel.Perfect,
+			<= 0.120f => AccuracyLevel.Good,
+			<= 0.160f => AccuracyLevel.Miss,
 			_ => AccuracyLevel.Pass,
 		};
 	}
@@ -72,7 +77,7 @@ public class ReactiveReferee {
 		(int a, float nearestNoteDistance) = FindNearestNote (m_CurrentTime, _targetLane);
 		AccuracyLevel accuracyLevel = Judge (nearestNoteDistance);
 
-		m_OnHit.OnNext ((a, accuracyLevel));
+		m_OnHit.OnNext ((a, _targetLane, accuracyLevel));
 		return accuracyLevel;
 	}
 }

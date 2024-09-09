@@ -37,11 +37,12 @@ public class NotesReferee {
 		});
 
 		m_ReactiveReferee.OnHit.Subscribe (x => {
-			if (x.Item2 == AccuracyLevel.Pass)
-				return;
+			//FIXME
+			// if (x.Item2 == AccuracyLevel.Pass)
+			// 	return;
 
-			if (m_SessionManager.NotesCollection[x.Item1].AvailableStatus == NoteAvailableStatus.Available)
-				m_OnHit.OnNext (x.Item2);
+			// if (m_SessionManager.NotesCollection[x.Item1].AvailableStatus == NoteAvailableStatus.Available)
+			// 	m_OnHit.OnNext (x.Item2);
 
 			m_SessionManager.SetNoteStatus (x.Item1, NoteAvailableStatus.Hit);
 		});

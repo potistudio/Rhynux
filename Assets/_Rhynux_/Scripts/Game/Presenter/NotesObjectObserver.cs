@@ -32,8 +32,8 @@ public class NotesObjectObserver : UnityEngine.MonoBehaviour {
 			int index = m_NotesList.FindIndex (y => y.Item1 == x);
 			m_NotesList[index].Item2.SetActive (false);
 
-			if (x.AvailableStatus == NoteAvailableStatus.Fell)
-				m_JudgementDisplay.ShowPopup ("Miss");
+			// if (x.AvailableStatus == NoteAvailableStatus.Fell)
+				// m_JudgementDisplay.ShowPopup ("Miss");
 		}).AddTo (this);
 	}
 

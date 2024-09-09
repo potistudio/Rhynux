@@ -13,14 +13,14 @@ public class SingleLineConstantIntervalNotesGenerator : INotesGenerator {
 	public IList<Note> Generate (Chart _chart) {
 		List<Note> notes = new();
 
-		// "s" to "ms" by multiplying 1000
-		float length = _chart.Track.SoundClip.length * 1000;
+		float length = _chart.Track.SoundClip.length;
 		float currentTime = 0f;
-		float interval = 60f / _chart.BPM * 1000;
+		float interval = 60f / _chart.BPM;
+		float offset = _chart.Offset * (60f / _chart.BPM);
 
 		while (currentTime <= length) {
+			notes.Add (new Note(currentTime + offset, m_TargetLine));
 			currentTime += interval;
-			notes.Add (new Note(currentTime, m_TargetLine));
 		}
 
 		m_OnNotesGenerated.OnNext (notes);

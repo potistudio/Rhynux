@@ -121,7 +121,7 @@ public partial class @KeyboardActions: IInputActionCollection2, IDisposable
                     ""id"": ""2199cb06-53e2-4529-b8d2-eaca4d588a32"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Press"",
+                    ""interactions"": ""Press(behavior=1)"",
                     ""initialStateCheck"": false
                 },
                 {
@@ -130,7 +130,7 @@ public partial class @KeyboardActions: IInputActionCollection2, IDisposable
                     ""id"": ""49fb5949-2069-43a2-93ef-1e49aa9e2769"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Press"",
+                    ""interactions"": ""Press(behavior=1)"",
                     ""initialStateCheck"": false
                 },
                 {
@@ -139,7 +139,7 @@ public partial class @KeyboardActions: IInputActionCollection2, IDisposable
                     ""id"": ""df563929-99f9-4486-bf7b-7e38c76c3b55"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Press"",
+                    ""interactions"": ""Press(behavior=1)"",
                     ""initialStateCheck"": false
                 },
                 {
@@ -148,7 +148,7 @@ public partial class @KeyboardActions: IInputActionCollection2, IDisposable
                     ""id"": ""51a33477-7824-4ec7-a308-af64f4bc9567"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Press"",
+                    ""interactions"": ""Press(behavior=1)"",
                     ""initialStateCheck"": false
                 }
             ],

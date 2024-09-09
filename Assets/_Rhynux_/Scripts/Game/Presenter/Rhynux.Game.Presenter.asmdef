@@ -2,11 +2,15 @@
     "name": "Rhynux.Game.Presenter",
     "rootNamespace": "",
     "references": [
+        "GUID:75469ad4d38634e559750d17036d5f7c",
         "GUID:b0214a6008ed146ff8f122a6a9c2f6cc",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23",
         "GUID:560b04d1a97f54a4e82edc0cbbb69285",
         "GUID:048465f7c8ae7fd4c88015adf29aa9f6",
+        "GUID:b11338bb849a44848b44326146330eec",
         "GUID:1921220cf469e2448babe21a1fbf6c6d",
-        "GUID:db2764692b50bf349866d338759d412b"
+        "GUID:db2764692b50bf349866d338759d412b",
+        "GUID:e59823872c02ecb4d981e708fae1c4ca"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
