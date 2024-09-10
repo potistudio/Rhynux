@@ -11,6 +11,7 @@ public class SingleLineConstantIntervalNotesGenerator : INotesGenerator {
 	public List<Note> GeneratedNotes { get; private set; }
 
 	public IList<Note> Generate (Chart _chart) {
+		UnityEngine.Debug.Log ("Notes Generated with Single");
 		List<Note> notes = new();
 
 		float length = _chart.Track.SoundClip.length;

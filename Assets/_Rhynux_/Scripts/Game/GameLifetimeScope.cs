@@ -19,8 +19,6 @@ public class GameLifetimeScope : LifetimeScope {
 	private NotesReferee m_NotesReferee;
 
 	protected override void Configure (IContainerBuilder builder) {
-		UnityEngine.Debug.Log ("-------- Injection --------");
-
 		//* Lifecycle *//
 		builder.RegisterSceneLifecycle<SceneEntryPoint>();
 
@@ -57,6 +55,8 @@ public class GameLifetimeScope : LifetimeScope {
 		builder.RegisterComponentInHierarchy<InputVisualizer>();
 		builder.RegisterComponentInHierarchy<HitEffectGenerator>();
 		builder.RegisterComponentInHierarchy<AccuracyPopupEmitter>();
+
+		UnityEngine.Debug.Log ("VContainer Injection has Completed");
 	}
 
 	private enum InputHandlers {

@@ -11,13 +11,13 @@ public sealed class SceneEntryPoint : SceneLifecycleBase {
 	[SerializeField] private _FullLogic m_FullLogic;
 
 	protected override UniTask OnInitialize(ISceneDataReader reader, System.IProgress<MackySoft.Navigathena.IProgressDataStore> progress, CancellationToken cancellationToken) {
-		Debug.Log ("Initialize");
+		Debug.Log ("Scene Initialized");
 
 		return base.OnInitialize (reader, progress, cancellationToken);
 	}
 
 	protected override UniTask OnEnter (ISceneDataReader reader, CancellationToken cancellationToken) {
-		Debug.Log ("Enter");
+		Debug.Log ("Scene Entered");
 
 		return base.OnEnter (reader, cancellationToken);
 	}
