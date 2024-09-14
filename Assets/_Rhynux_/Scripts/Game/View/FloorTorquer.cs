@@ -25,7 +25,7 @@ public class FloorTorquer : MonoBehaviour {
 		}
 
 		if (m_MusicPlayer.CurrentTime >= notes[m_CurrentIndex].Time) {
-			AddTorque (notes[m_CurrentIndex].Position - 2.5f);
+			AddTorque (notes[m_CurrentIndex].Position - 1.5f);
 			m_CurrentIndex++;
 		}
 	}
