@@ -39,7 +39,7 @@ public class _FullLogic : MonoBehaviour {
 		float noteWidth = m_FloorWidth / 4f;
 		foreach (var x in m_NoteObjects) {
 			x.Item2.transform.localPosition = new Vector3 (
-				(x.Item1.Position - 2.5f) * 1.5f,
+				(x.Item1.Position - 1.5f) * 1.5f,
 				0f,
 				((x.Item1.Time + m_UserOffset) + (-m_MusicPlayer.CurrentTime)) * m_ScrollSpeed
 			);

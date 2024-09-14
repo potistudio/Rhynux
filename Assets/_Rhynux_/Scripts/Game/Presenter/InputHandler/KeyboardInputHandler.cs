@@ -27,15 +27,15 @@ public class KeyboardInputHandler : IInputHandler, System.IDisposable {
 		m_KeyboardActions.Enable();
 	}
 
-	private void PressedD (UnityEngine.InputSystem.InputAction.CallbackContext _context) { m_Pressed.OnNext (1); }
-	private void PressedF (UnityEngine.InputSystem.InputAction.CallbackContext _context) { m_Pressed.OnNext (2); }
-	private void PressedJ (UnityEngine.InputSystem.InputAction.CallbackContext _context) { m_Pressed.OnNext (3); }
-	private void PressedK (UnityEngine.InputSystem.InputAction.CallbackContext _context) { m_Pressed.OnNext (4); }
+	private void PressedD (UnityEngine.InputSystem.InputAction.CallbackContext _context) { m_Pressed.OnNext (0); }
+	private void PressedF (UnityEngine.InputSystem.InputAction.CallbackContext _context) { m_Pressed.OnNext (1); }
+	private void PressedJ (UnityEngine.InputSystem.InputAction.CallbackContext _context) { m_Pressed.OnNext (2); }
+	private void PressedK (UnityEngine.InputSystem.InputAction.CallbackContext _context) { m_Pressed.OnNext (3); }
 
-	private void ReleasedD (UnityEngine.InputSystem.InputAction.CallbackContext _context) { m_Released.OnNext (1); }
-	private void ReleasedF (UnityEngine.InputSystem.InputAction.CallbackContext _context) { m_Released.OnNext (2); }
-	private void ReleasedJ (UnityEngine.InputSystem.InputAction.CallbackContext _context) { m_Released.OnNext (3); }
-	private void ReleasedK (UnityEngine.InputSystem.InputAction.CallbackContext _context) { m_Released.OnNext (4); }
+	private void ReleasedD (UnityEngine.InputSystem.InputAction.CallbackContext _context) { m_Released.OnNext (0); }
+	private void ReleasedF (UnityEngine.InputSystem.InputAction.CallbackContext _context) { m_Released.OnNext (1); }
+	private void ReleasedJ (UnityEngine.InputSystem.InputAction.CallbackContext _context) { m_Released.OnNext (2); }
+	private void ReleasedK (UnityEngine.InputSystem.InputAction.CallbackContext _context) { m_Released.OnNext (3); }
 
 	public void Dispose() {
 		m_KeyboardActions.Pressed.D.performed -= PressedD;

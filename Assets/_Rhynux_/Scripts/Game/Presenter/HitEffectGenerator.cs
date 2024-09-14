@@ -30,7 +30,7 @@ public class HitEffectGenerator : MonoBehaviour {
 					return;
 			}
 
-			GameObject effect = Instantiate (target, Vector3.right * ((x.Item2 - 2.5f) * 1.5f), Quaternion.identity);
+			GameObject effect = Instantiate (target, Vector3.right * ((x.Item2 - 1.5f) * 1.5f), Quaternion.identity);
 			Destroy (effect, m_Lifetime);
 		});
 	}

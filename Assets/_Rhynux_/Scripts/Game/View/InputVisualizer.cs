@@ -19,10 +19,10 @@ public class InputVisualizer : MonoBehaviour {
 	}
 
 	private void Activate (int lane) {
-		m_Highlight[lane - 1].SetActive (true);
+		m_Highlight[lane].SetActive (true);
 	}
 
 	private void Deactivate (int lane) {
-		m_Highlight[lane - 1].SetActive (false);
+		m_Highlight[lane].SetActive (false);
 	}
 }
