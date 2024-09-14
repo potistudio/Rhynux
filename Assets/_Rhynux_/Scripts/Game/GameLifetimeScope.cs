@@ -42,6 +42,7 @@ public class GameLifetimeScope : LifetimeScope {
 		//* Logic *//
 		builder.Register<ReactiveReferee>(Lifetime.Singleton);
 		builder.Register<ScoreManager>(Lifetime.Singleton);
+		builder.Register<ComboManager>(Lifetime.Singleton);
 
 		//* Presenter *//
 		builder.RegisterEntryPoint<SessionTimeUpdater>(Lifetime.Singleton);
@@ -49,6 +50,9 @@ public class GameLifetimeScope : LifetimeScope {
 		builder.RegisterEntryPoint<JudgementDisplay>(Lifetime.Singleton);
 
 		builder.RegisterEntryPoint<ScoreDisplayPresenter>(Lifetime.Singleton);
+
+		builder.RegisterEntryPoint<ComboPresenter>(Lifetime.Singleton);
+		builder.RegisterEntryPoint<ComboDisplayPresenter>(Lifetime.Singleton);
 
 		//* View *//
 		builder.RegisterComponentInHierarchy<_FullLogic>();
@@ -60,6 +64,7 @@ public class GameLifetimeScope : LifetimeScope {
 		builder.RegisterComponentInHierarchy<AccuracyPopupEmitter>();
 
 		builder.RegisterComponentInHierarchy<ScoreDisplay>();
+		builder.RegisterComponentInHierarchy<ComboDisplay>();
 
 		UnityEngine.Debug.Log ("VContainer Injection has Completed");
 	}
