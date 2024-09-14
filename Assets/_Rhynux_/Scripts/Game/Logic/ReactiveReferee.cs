@@ -77,7 +77,9 @@ public class ReactiveReferee {
 		(int a, float nearestNoteDistance) = FindNearestNote (m_CurrentTime, _targetLane);
 		AccuracyLevel accuracyLevel = Judge (nearestNoteDistance);
 
-		m_OnHit.OnNext ((a, _targetLane, accuracyLevel));
+		if (accuracyLevel != AccuracyLevel.Pass)
+			m_OnHit.OnNext ((a, _targetLane, accuracyLevel));
+
 		return accuracyLevel;
 	}
 }

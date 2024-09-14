@@ -12,9 +12,6 @@ public sealed class JudgementDisplay : VContainer.Unity.IInitializable, System.I
 
 	public void Initialize() {
 		m_ReactiveReferee.OnHit.Subscribe (x => {
-			if (x.Item3 == AccuracyLevel.Pass)
-				return;
-
 			m_PopupEmitter.Emit (x.Item3);
 		}).AddTo (m_Disposable);
 	}

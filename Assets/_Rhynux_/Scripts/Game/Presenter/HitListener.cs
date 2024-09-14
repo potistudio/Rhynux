@@ -13,9 +13,6 @@ public class HitListener : System.IDisposable, VContainer.Unity.IInitializable {
 
 	public void Initialize() {
 		m_ReactiveReferee.OnHit.Subscribe (x => {
-			if (x.Item3 == AccuracyLevel.Pass)
-				return;
-
 			m_FullLogic.DeactivateNote (x.Item1);
 		}).AddTo (m_Disposables);
 	}
