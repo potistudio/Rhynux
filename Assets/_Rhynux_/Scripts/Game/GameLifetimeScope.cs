@@ -41,11 +41,14 @@ public class GameLifetimeScope : LifetimeScope {
 
 		//* Logic *//
 		builder.Register<ReactiveReferee>(Lifetime.Singleton);
+		builder.Register<ScoreManager>(Lifetime.Singleton);
 
 		//* Presenter *//
 		builder.RegisterEntryPoint<SessionTimeUpdater>(Lifetime.Singleton);
 		builder.RegisterEntryPoint<HitListener>(Lifetime.Singleton);
 		builder.RegisterEntryPoint<JudgementDisplay>(Lifetime.Singleton);
+
+		builder.RegisterEntryPoint<ScoreDisplayPresenter>(Lifetime.Singleton);
 
 		//* View *//
 		builder.RegisterComponentInHierarchy<_FullLogic>();
@@ -55,6 +58,8 @@ public class GameLifetimeScope : LifetimeScope {
 		builder.RegisterComponentInHierarchy<InputVisualizer>();
 		builder.RegisterComponentInHierarchy<HitEffectGenerator>();
 		builder.RegisterComponentInHierarchy<AccuracyPopupEmitter>();
+
+		builder.RegisterComponentInHierarchy<ScoreDisplay>();
 
 		UnityEngine.Debug.Log ("VContainer Injection has Completed");
 	}

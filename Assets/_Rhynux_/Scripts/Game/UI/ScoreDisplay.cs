@@ -4,14 +4,19 @@ public class ScoreDisplay : MonoBehaviour {
 	[SerializeField] private string m_Format;
     [SerializeField] private TMPro.TextMeshProUGUI m_Label;
 
-	//TODO: tmp
+	private int m_CurrentScore;
+	private int m_TargetScore;
+
 	private void Update() {
-		float __time = Time.time;
-		SetScore (Mathf.RoundToInt(__time));
+		m_CurrentScore = Mathf.RoundToInt (Mathf.Lerp(m_CurrentScore, m_TargetScore, 0.1f));
+	}
+
+	private void FixedUpdate() {
+		string formatted = string.Format (m_Format, m_CurrentScore);
+		m_Label.text = formatted;
 	}
 
 	public void SetScore (int _score) {
-		string formatted = string.Format (m_Format, _score);
-		m_Label.text = formatted;
+		m_TargetScore = _score;
 	}
 }
