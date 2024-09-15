@@ -45,7 +45,7 @@ public class GameTest {
 		System.Collections.Generic.List<Note> generatedNotes = notesGenerator.Generate (m_Chart).ToList();
 
 		m_SessionManager = new SessionManager (m_Chart, generatedNotes);
-		m_RealtimeReferee = new RealtimeReferee (generatedNotes);
+		// m_RealtimeReferee = new RealtimeReferee (generatedNotes);
 		// m_ReactiveReferee = new ReactiveReferee (generatedNotes);
 		m_NotesReferee = new NotesReferee (m_SessionManager, m_RealtimeReferee, m_ReactiveReferee);
 
