@@ -16,7 +16,7 @@ public class GameLifetimeScope : LifetimeScope {
 	private SessionManager m_SessionManager;
 	private RealtimeReferee m_RealtimeReferee;
 	private ReactiveReferee m_ReactiveReferee;
-	private NotesReferee m_NotesReferee;
+	private NotesRefereeComposer m_NotesReferee;
 
 	protected override void Configure (IContainerBuilder builder) {
 		//* Lifecycle *//
@@ -40,7 +40,10 @@ public class GameLifetimeScope : LifetimeScope {
 		}
 
 		//* Logic *//
+		builder.Register<RealtimeReferee>(Lifetime.Singleton);
 		builder.Register<ReactiveReferee>(Lifetime.Singleton);
+		builder.Register<NotesRefereeComposer>(Lifetime.Singleton);
+
 		builder.Register<ScoreManager>(Lifetime.Singleton);
 		builder.Register<ComboManager>(Lifetime.Singleton);
 
@@ -53,6 +56,7 @@ public class GameLifetimeScope : LifetimeScope {
 
 		builder.RegisterEntryPoint<ComboPresenter>(Lifetime.Singleton);
 		builder.RegisterEntryPoint<ComboDisplayPresenter>(Lifetime.Singleton);
+
 
 		//* View *//
 		builder.RegisterComponentInHierarchy<_FullLogic>();

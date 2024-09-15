@@ -6,7 +6,7 @@ public class InputReferee : UnityEngine.MonoBehaviour {
 	[UnityEngine.SerializeField] private JudgementDisplay m_JudgementDisplay;
 
 	[VContainer.Inject]
-	private void Inject (NotesReferee _notesReferee, ReactiveReferee _reactiveReferee) {
+	private void Inject (NotesRefereeComposer _notesReferee, ReactiveReferee _reactiveReferee) {
 		IInputInterface inputInterface = new KeyboardInput (new KeyboardActions());
 
 		inputInterface.OnPressed.Subscribe (_ => {

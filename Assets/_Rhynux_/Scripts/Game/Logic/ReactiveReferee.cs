@@ -8,7 +8,7 @@ public class ReactiveReferee {
 	private float m_CurrentTime;
 
 	private UniRx.Subject<(int index, int lane, AccuracyLevel accuracy)> m_OnHit = new();
-	public System.IObservable<(int, int, AccuracyLevel)> OnHit => m_OnHit;
+	public System.IObservable<(int index, int lane, AccuracyLevel accuracy)> OnHit => m_OnHit;
 
 	public ReactiveReferee (SessionData _session, IInputHandler _inputHandler) {
 		m_NotesList = _session.Notes;

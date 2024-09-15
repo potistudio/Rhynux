@@ -8,7 +8,7 @@ public class GameTest {
 	private SessionManager m_SessionManager;
 	private RealtimeReferee m_RealtimeReferee;
 	private ReactiveReferee m_ReactiveReferee;
-	private NotesReferee m_NotesReferee;
+	private NotesRefereeComposer m_NotesReferee;
 
 	private Chart m_Chart;
 	private int m_NotesCount;
@@ -47,10 +47,10 @@ public class GameTest {
 		m_SessionManager = new SessionManager (m_Chart, generatedNotes);
 		// m_RealtimeReferee = new RealtimeReferee (generatedNotes);
 		// m_ReactiveReferee = new ReactiveReferee (generatedNotes);
-		m_NotesReferee = new NotesReferee (m_SessionManager, m_RealtimeReferee, m_ReactiveReferee);
+		// m_NotesReferee = new NotesRefereeCompositer (m_SessionManager, m_RealtimeReferee, m_ReactiveReferee);
 
-		new NotesReferee (m_SessionManager, m_RealtimeReferee, m_ReactiveReferee);
-		new ComboOperator (m_SessionManager, m_NotesReferee);
+		// new NotesRefereeCompositer (m_SessionManager, m_RealtimeReferee, m_ReactiveReferee);
+		// new ComboOperator (m_SessionManager, m_NotesReferee);
 		//* ↑ DI with Manual ↑ *//
 
 		m_NotesCount = m_SessionManager.NotesCollection.Count;

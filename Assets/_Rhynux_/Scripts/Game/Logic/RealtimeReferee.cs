@@ -6,7 +6,7 @@ public class RealtimeReferee {
 	public System.IObservable<(int, NoteAvailableStatus)> OnNoteStatusChanged => m_NoteStatusChanged;
 
 	private readonly System.Collections.ObjectModel.ReadOnlyCollection<Note> m_NotesCollection;
-	private readonly float m_Margin = 160f;
+	private readonly float m_Margin = 0.160f;
 
 	private float m_CurrentTime = 0f;
 
@@ -26,7 +26,7 @@ public class RealtimeReferee {
 	}
 
 	private int FindBehindNote (float _time) {
-		var n = m_NotesCollection.Where (x => x.Time < _time);
+		var n = m_NotesCollection.Where (x => x.Time + m_Margin < _time);
 		if (n.Count() == 0)
 			return -1;
 
