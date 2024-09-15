@@ -2439,7 +2439,6 @@ GameObject:
   - component: {fileID: 1368391246}
   - component: {fileID: 1368391244}
   - component: {fileID: 1368391243}
-  - component: {fileID: 1368391247}
   m_Layer: 0
   m_Name: Main Logic
   m_TagString: Untagged
