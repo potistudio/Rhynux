@@ -1,7 +1,7 @@
 public class ScoreManager {
-	public readonly UniRx.ReactiveProperty<int> m_CurrentScore = new (0);
+	public readonly UniRx.ReactiveProperty<float> m_CurrentScore = new (0f);
 
-	public void AddScore (int _deltaScore) {
+	public void AddScore (float _deltaScore) {
 		m_CurrentScore.Value += _deltaScore;
 	}
 }
