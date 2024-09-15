@@ -52,6 +52,7 @@ public class GameLifetimeScope : LifetimeScope {
 		builder.RegisterEntryPoint<HitListener>(Lifetime.Singleton);
 		builder.RegisterEntryPoint<JudgementDisplay>(Lifetime.Singleton);
 
+		builder.RegisterEntryPoint<ScorePresenter>(Lifetime.Singleton);
 		builder.RegisterEntryPoint<ScoreDisplayPresenter>(Lifetime.Singleton);
 
 		builder.RegisterEntryPoint<ComboPresenter>(Lifetime.Singleton);
