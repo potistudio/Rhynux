@@ -2354,7 +2354,6 @@ MonoBehaviour:
   m_ScrollDuration: 0.24
   m_Scroller: {fileID: 1585302199}
   m_SongInfoView: {fileID: 8896216101871787105}
-  m_SongPreviewSource: {fileID: 207809040}
   m_CellPrefab: {fileID: 1619177585710879620, guid: 070b13b547d65e4439ee81cf85a85506, type: 3}
   m_TurnTable: {fileID: 1015115641}
 --- !u!114 &1585302202
@@ -2374,9 +2373,9 @@ MonoBehaviour:
   m_Charts:
   - {fileID: 11400000, guid: f7b877651a42a50469495d79202a7731, type: 2}
   - {fileID: 11400000, guid: a1e572ecd89dbb644bc999678f1f2fc1, type: 2}
+  - {fileID: 11400000, guid: 1caed5581c21e5a4c998c0a694d65f6a, type: 2}
   - {fileID: 11400000, guid: feabb063d2e5aca4db3419f4def4563e, type: 2}
   - {fileID: 11400000, guid: 6d0bde10c4daf634eaeae9d69e09d3f5, type: 2}
-  - {fileID: 11400000, guid: 1caed5581c21e5a4c998c0a694d65f6a, type: 2}
   - {fileID: 11400000, guid: 125c54264a0bafe4fb16c85f83dbea6a, type: 2}
   - {fileID: 11400000, guid: 6789ad9e650698046980146119ad788d, type: 2}
   - {fileID: 11400000, guid: 4293f14dbeb509c4ebfa624ffc3240a4, type: 2}

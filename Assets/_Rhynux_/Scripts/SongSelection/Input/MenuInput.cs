@@ -4,6 +4,13 @@ public sealed class MenuInput : UnityEngine.MonoBehaviour {
 	private ISceneIdentifier m_SceneIdentifier;
 	private Selection m_SelectionAction;
 
+	private SceneNavigator m_SceneNavigator;
+
+	[VContainer.Inject]
+	private void Init (SceneNavigator _sceneNavigator) {
+		m_SceneNavigator = _sceneNavigator;
+	}
+
 	private void Awake() {
 		m_SceneIdentifier = new BuiltInSceneIdentifier ("Sample");
 		m_SelectionAction = new Selection();
@@ -34,8 +41,9 @@ public sealed class MenuInput : UnityEngine.MonoBehaviour {
 		NextScene();
 	}
 
-	private async void NextScene() {
-		await GlobalSceneNavigator.Instance.Push (m_SceneIdentifier);
+	private void NextScene() {
+		// await GlobalSceneNavigator.Instance.Push (m_SceneIdentifier);
+		m_SceneNavigator.StartSession();
 	}
 
 	private async void BackScene() {

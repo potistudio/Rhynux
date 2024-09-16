@@ -11,7 +11,8 @@ public class ComboDisplay : MonoBehaviour {
 
 	private Tween m_Tween;
 
-	private void Start() {
+	[VContainer.Inject]
+	private void Init() {
 		m_Tween = m_Label.transform
 			.TweenLocalScale (Vector3.one *m_ScaleMultiplier, Vector3.one, m_Duration)
 			.SetEase (Ease.OutCubic)
