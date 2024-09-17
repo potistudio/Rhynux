@@ -2,7 +2,7 @@ using UnityEngine;
 using TMPro;
 using MagicTween;
 
-public class TrackInfoView : MonoBehaviour {
+public sealed class TrackInfoView : MonoBehaviour {
 	[SerializeField] private Transform m_TitleTextTransform;
 	[SerializeField] private Transform m_ArtistTextTransform;
 

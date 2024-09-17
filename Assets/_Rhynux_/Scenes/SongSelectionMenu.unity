@@ -357,16 +357,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30cc200d3c358c84eadedb7ee3f0c07f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_AlignToCenter: 1
-  m_GridSize: {x: 0, y: 0}
-  m_GridOffset: {x: 0, y: 0}
-  m_GridSpace: {x: 40, y: 40}
-  m_LineWidth: 0.4
-  m_LineColor: {r: 1, g: 1, b: 1, a: 0.22745098}
 --- !u!1 &207809035
 GameObject:
   m_ObjectHideFlags: 0
@@ -988,7 +978,7 @@ AudioSource:
   m_GameObject: {fileID: 515186272}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 1407168650263799623, guid: 301ab72c017cb6e419b799e08c3a1979, type: 2}
+  OutputAudioMixerGroup: {fileID: -5594764134018996795, guid: f12bb92b5ec50324f935ecb93a0b1ffd, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -1102,7 +1092,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a5c241bc179c6b47a0b363057165bac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TapSound: {fileID: 8300000, guid: c800d16c852ef0c46babe87baf909025, type: 3}
+  m_TapSound: {fileID: 8300000, guid: 2cefcc16259e9b242814f55e6e2883c0, type: 3}
   m_AudioSource: {fileID: 515186275}
 --- !u!1 &627741365
 GameObject:
@@ -2092,10 +2082,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49f400d0ac7f22d4f828014c4254c020, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ImageRect: {fileID: 1299503006}
-  m_ImageComponent: {fileID: 1299503004}
-  m_Duration: 1
-  m_Ease: 8
 --- !u!1 &1427753651
 GameObject:
   m_ObjectHideFlags: 0
@@ -2279,7 +2265,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1585302196}
-  - component: {fileID: 1585302202}
   - component: {fileID: 1585302201}
   - component: {fileID: 1585302199}
   - component: {fileID: 1585302203}
@@ -2353,32 +2338,9 @@ MonoBehaviour:
   cellContainer: {fileID: 1585302196}
   m_ScrollDuration: 0.24
   m_Scroller: {fileID: 1585302199}
-  m_SongInfoView: {fileID: 8896216101871787105}
+  m_SongInfoView: {fileID: 0}
   m_CellPrefab: {fileID: 1619177585710879620, guid: 070b13b547d65e4439ee81cf85a85506, type: 3}
   m_TurnTable: {fileID: 1015115641}
---- !u!114 &1585302202
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1585302195}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99afc3d87e0399049abe35d991485ec8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AutoGeneration: 0
-  m_GenerationCount: 100
-  m_Charts:
-  - {fileID: 11400000, guid: f7b877651a42a50469495d79202a7731, type: 2}
-  - {fileID: 11400000, guid: a1e572ecd89dbb644bc999678f1f2fc1, type: 2}
-  - {fileID: 11400000, guid: 1caed5581c21e5a4c998c0a694d65f6a, type: 2}
-  - {fileID: 11400000, guid: feabb063d2e5aca4db3419f4def4563e, type: 2}
-  - {fileID: 11400000, guid: 6d0bde10c4daf634eaeae9d69e09d3f5, type: 2}
-  - {fileID: 11400000, guid: 125c54264a0bafe4fb16c85f83dbea6a, type: 2}
-  - {fileID: 11400000, guid: 6789ad9e650698046980146119ad788d, type: 2}
-  - {fileID: 11400000, guid: 4293f14dbeb509c4ebfa624ffc3240a4, type: 2}
 --- !u!114 &1585302203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2403,6 +2365,7 @@ GameObject:
   - component: {fileID: 1669869985}
   - component: {fileID: 1669869984}
   - component: {fileID: 1669869986}
+  - component: {fileID: 1669869987}
   m_Layer: 5
   m_Name: ScrollerContainer
   m_TagString: Untagged
@@ -2482,6 +2445,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 0
+--- !u!114 &1669869987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1669869981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99afc3d87e0399049abe35d991485ec8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AutoGeneration: 0
+  m_GenerationCount: 27
+  m_Charts:
+  - {fileID: 11400000, guid: 4293f14dbeb509c4ebfa624ffc3240a4, type: 2}
+  - {fileID: 11400000, guid: f7b877651a42a50469495d79202a7731, type: 2}
+  - {fileID: 11400000, guid: a1e572ecd89dbb644bc999678f1f2fc1, type: 2}
+  - {fileID: 11400000, guid: feabb063d2e5aca4db3419f4def4563e, type: 2}
+  - {fileID: 11400000, guid: 6d0bde10c4daf634eaeae9d69e09d3f5, type: 2}
+  - {fileID: 11400000, guid: 1caed5581c21e5a4c998c0a694d65f6a, type: 2}
+  - {fileID: 11400000, guid: 125c54264a0bafe4fb16c85f83dbea6a, type: 2}
+  - {fileID: 11400000, guid: 6789ad9e650698046980146119ad788d, type: 2}
 --- !u!1 &1723752016
 GameObject:
   m_ObjectHideFlags: 0
@@ -3025,8 +3011,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8896216101871787103}
-  - component: {fileID: 8896216101871787105}
-  - component: {fileID: 8896216101871787106}
+  - component: {fileID: 8896216101871787104}
   m_Layer: 5
   m_Name: SongBannar
   m_TagString: Untagged
@@ -3252,7 +3237,7 @@ RectTransform:
   m_AnchoredPosition: {x: 240, y: 180}
   m_SizeDelta: {x: 680, y: 144}
   m_Pivot: {x: 0, y: 0.5}
---- !u!114 &8896216101871787105
+--- !u!114 &8896216101871787104
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3270,21 +3255,6 @@ MonoBehaviour:
   m_Duration: 0.4
   m_Delay: 0.08
   m_Ease: 8
---- !u!114 &8896216101871787106
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7044716706610177527}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e4b00fa0fb53ed44ba7a9941c299d3f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TargetTextFields:
-  - {fileID: 8799766811718225159}
-  - {fileID: 8181881670452327897}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

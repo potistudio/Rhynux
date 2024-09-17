@@ -1,19 +1,15 @@
-
 using UnityEngine;
-using FancyScrollView;
-using TMPro;
 
+public sealed class TrackCardElement : FancyScrollView.FancyCell<Chart> {
+	[SerializeField] private TMPro.TextMeshProUGUI m_TitleTextField;
+	[SerializeField] private TMPro.TextMeshProUGUI m_ArtistTextField;
 
-public class TrackCardElement : FancyCell<Chart> {
 	[SerializeField] private float m_Radius;
 	[SerializeField] private float m_StartAngle;
 	[SerializeField] private float m_EndAngle;
 
 	public float StartAngle => m_StartAngle;
 	public float EndAngle => m_EndAngle;
-
-	[SerializeField] private TextMeshProUGUI m_TitleTextField;
-	[SerializeField] private TextMeshProUGUI m_ArtistTextField;
 
 	public override void UpdateContent (Chart itemData) {
 		m_TitleTextField.text = itemData.Title;

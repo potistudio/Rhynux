@@ -1,7 +1,7 @@
 using UnityEngine;
 using UniRx;
 
-public class AudioEmitter : MonoBehaviour {
+public sealed class AudioEmitter : MonoBehaviour {
 	[SerializeField] private AudioClip m_TapSound;
 	[SerializeField] private AudioSource m_AudioSource;
 

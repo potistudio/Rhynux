@@ -1,10 +1,8 @@
-
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-
-public class ScrollItemRegistrar : MonoBehaviour {
+public sealed class ScrollItemRegistrar : MonoBehaviour {
     [SerializeField] private bool m_AutoGeneration;
     [SerializeField] private int m_GenerationCount;
 
