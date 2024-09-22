@@ -2,7 +2,7 @@ using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Json Chart", menuName = "Rhynux/Json Chart")]
-public class JsonChartAsset : ChartAsset {
+public sealed class JsonChartAsset : ChartAsset {
 	[SerializeField] private TextAsset m_JsonChartText;
 	[SerializeField] private AudioClip m_SongClip;
 	[SerializeField] private bool m_Secured;

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Raw Chart", menuName = "Rhynux/Raw Chart")]
-public class RawChartAsset : ChartAsset {
+public sealed class RawChartAsset : ChartAsset {
 	[SerializeField] private string m_Title;
 	[SerializeField] private string m_Artist;
 	[SerializeField] private float m_BPM;
