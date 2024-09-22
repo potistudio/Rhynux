@@ -75,7 +75,7 @@ public class AudioSpectrum : MonoBehaviour {
 			m_SampleRate = m_SampleRate,
 			m_SamplesOut = m_OutputResolution,
 			m_OutputMultiplier = m_OutputMultiplier,
-			m_FreqMin = -m_MinFrequency,
+			m_FreqMin = m_MinFrequency,
 			m_FreqMax = m_MaxFrequency,
 			m_AudioDuration = m_AudioDuration,
 			m_SmoothingTimeConstant = m_SmoothingTimeConstant,
