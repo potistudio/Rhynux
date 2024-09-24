@@ -5,6 +5,7 @@ using UnityEngine.AddressableAssets;
 
 public class _FullLogic : MonoBehaviour {
 	[SerializeField] private GameObject m_NotePrefab;
+	[SerializeField] private GameObject m_HoldNotePrefab;
 	[SerializeField] private float m_ScrollSpeed;
 	[SerializeField] private float m_UserOffset;
 	[SerializeField] private float m_FloorWidth;
@@ -22,9 +23,20 @@ public class _FullLogic : MonoBehaviour {
 		m_MusicPlayer = _musicPlayer;
 
 		foreach (Note note in _session.Notes) {
-			GameObject no = Instantiate(m_NotePrefab, Vector3.zero, Quaternion.identity);
-			m_NoteObjects.Add ((note, no));
-			no.transform.SetParent (m_NotesContainer);
+			GameObject noteObject;
+
+			if (note.NoteType == NoteType.Tap) {
+				noteObject = Instantiate(m_NotePrefab, Vector3.zero, Quaternion.identity);
+			} else if (note.NoteType == NoteType.Hold) {
+				noteObject = Instantiate(m_HoldNotePrefab, Vector3.zero, Quaternion.identity);
+				noteObject.transform.localScale = new Vector3(1f, 1f, (note as HoldNote).Duration * m_ScrollSpeed);
+				noteObject.transform.localPosition += Vector3.back * ((note as HoldNote).Duration * m_ScrollSpeed / 2f);
+			} else {
+				noteObject = new GameObject();
+			}
+
+			noteObject.transform.SetParent (m_NotesContainer);
+			m_NoteObjects.Add ((note, noteObject));
 		}
 
 		m_MusicPlayer.Clip = m_Chart.Track.SoundClip;
@@ -36,12 +48,17 @@ public class _FullLogic : MonoBehaviour {
 	}
 
 	private void Update() {
-		float noteWidth = m_FloorWidth / 4f;
 		foreach (var x in m_NoteObjects) {
+			float longNotePositionOffset = 0f;
+
+			if (x.Item1.NoteType == NoteType.Hold) {
+				longNotePositionOffset = (x.Item1 as HoldNote).Duration * m_ScrollSpeed / 2f;
+			}
+
 			x.Item2.transform.localPosition = new Vector3 (
 				(x.Item1.Position - 1.5f) * 1.5f,
 				0f,
-				((x.Item1.Time + m_UserOffset) + (-m_MusicPlayer.CurrentTime)) * m_ScrollSpeed
+				((x.Item1.Time + m_UserOffset) + (-m_MusicPlayer.CurrentTime)) * m_ScrollSpeed + longNotePositionOffset
 			);
 		}
 	}
