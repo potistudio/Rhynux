@@ -30,9 +30,6 @@ public sealed class ScrollView : FancyScrollView<Chart> {
 		m_Scroller.OnValueChanged (OnValueChanged);
 		m_Scroller.OnSelectionChanged (OnSelectionChanged);
 
-		m_ViewStartAngle = m_CellPrefab.GetComponent<TrackCardElement>().StartAngle;
-		m_ViewEndAngle = m_CellPrefab.GetComponent<TrackCardElement>().EndAngle;
-
 		m_SongInfoView = _songInfoView;
 	}
 

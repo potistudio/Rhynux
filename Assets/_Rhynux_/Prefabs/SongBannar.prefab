@@ -37,7 +37,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 800, y: 96}
+  m_SizeDelta: {x: 800, y: 146}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &4981147572161378366
 MonoBehaviour:
@@ -53,9 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TitleTextField: {fileID: 983096026353941364}
   m_ArtistTextField: {fileID: 445935450398852010}
-  m_Radius: 1680
-  m_StartAngle: -20
-  m_EndAngle: 32
+  m_Cosine: -0.259
 --- !u!1 &4009010114337046678
 GameObject:
   m_ObjectHideFlags: 0
@@ -341,7 +339,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8196258325836972257
 RectTransform:
   m_ObjectHideFlags: 0
