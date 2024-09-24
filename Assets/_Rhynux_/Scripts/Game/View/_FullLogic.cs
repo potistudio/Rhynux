@@ -29,8 +29,6 @@ public class _FullLogic : MonoBehaviour {
 				noteObject = Instantiate(m_NotePrefab, Vector3.zero, Quaternion.identity);
 			} else if (note.NoteType == NoteType.Hold) {
 				noteObject = Instantiate(m_HoldNotePrefab, Vector3.zero, Quaternion.identity);
-				noteObject.transform.localScale = new Vector3(1f, 1f, (note as HoldNote).Duration * m_ScrollSpeed);
-				noteObject.transform.localPosition += Vector3.back * ((note as HoldNote).Duration * m_ScrollSpeed / 2f);
 			} else {
 				noteObject = new GameObject();
 			}
@@ -50,9 +48,11 @@ public class _FullLogic : MonoBehaviour {
 	private void Update() {
 		foreach (var x in m_NoteObjects) {
 			float longNotePositionOffset = 0f;
+			float longNoteScale = 1f;
 
 			if (x.Item1.NoteType == NoteType.Hold) {
-				longNotePositionOffset = (x.Item1 as HoldNote).Duration * m_ScrollSpeed / 2f;
+				longNoteScale = (x.Item1 as HoldNote).Duration * m_ScrollSpeed / 8f;
+				longNotePositionOffset = longNoteScale / 2f;
 			}
 
 			x.Item2.transform.localPosition = new Vector3 (
@@ -60,6 +60,7 @@ public class _FullLogic : MonoBehaviour {
 				0f,
 				((x.Item1.Time + m_UserOffset) + (-m_MusicPlayer.CurrentTime)) * m_ScrollSpeed + longNotePositionOffset
 			);
+			x.Item2.transform.localScale = Vector3.one + Vector3.forward * longNoteScale;
 		}
 	}
 
