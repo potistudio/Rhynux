@@ -88,8 +88,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -40, y: 30}
+  m_AnchoredPosition: {x: 20, y: 32}
+  m_SizeDelta: {x: -88, y: 36}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &4974873233330991710
 CanvasRenderer:
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: Composener Name Here
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 23c929aa36a7d94489941cb1ba620c8b, type: 2}
   m_sharedMaterial: {fileID: 6107327133646438358, guid: 23c929aa36a7d94489941cb1ba620c8b, type: 2}
@@ -147,7 +147,7 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4294967295
   m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 16
@@ -222,8 +222,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 60}
+  m_AnchoredPosition: {x: 48, y: -24}
+  m_SizeDelta: {x: -72, y: 48}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &5490270890964363046
 CanvasRenderer:
@@ -253,7 +253,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: Track Title Here
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dfaf8f44df68fef4eb219027a3ff5ae2, type: 2}
   m_sharedMaterial: {fileID: -1633899867157443970, guid: dfaf8f44df68fef4eb219027a3ff5ae2, type: 2}
@@ -280,7 +280,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 48
+  m_fontSize: 33.1
   m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -288,7 +288,7 @@ MonoBehaviour:
   m_fontSizeMax: 64
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 1024
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -334,7 +334,7 @@ GameObject:
   - component: {fileID: 7488898159086990277}
   - component: {fileID: 263125810571063714}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
