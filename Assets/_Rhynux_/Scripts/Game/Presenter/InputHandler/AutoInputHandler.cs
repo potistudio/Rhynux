@@ -26,6 +26,11 @@ public sealed class AutoInputHandler : IInputHandler, VContainer.Unity.ITickable
 		Release (_lane);
 	}
 
+	private async void HoldThenRelease (int _lane, float _duration) {
+		await Cysharp.Threading.Tasks.UniTask.Delay (UnityEngine.Mathf.RoundToInt(_duration * 140));
+		Release (_lane);
+	}
+
 	private void Release (int _lane) {
 		m_Released.OnNext (_lane);
 	}
@@ -40,7 +45,11 @@ public sealed class AutoInputHandler : IInputHandler, VContainer.Unity.ITickable
 			Press (m_NotesCollection[m_CurrentIndex].Position);
 			m_CurrentIndex++;
 
-			WaitThenRelease (m_NotesCollection[m_CurrentIndex - 1].Position);
+			if (m_NotesCollection[m_CurrentIndex - 1].NoteType == NoteType.Tap) {
+				WaitThenRelease (m_NotesCollection[m_CurrentIndex - 1].Position);
+			} else if (m_NotesCollection[m_CurrentIndex - 1].NoteType == NoteType.Hold) {
+				HoldThenRelease (m_NotesCollection[m_CurrentIndex - 1].Position, (m_NotesCollection[m_CurrentIndex - 1] as HoldNote).Duration);
+			}
 		}
 	}
 }
