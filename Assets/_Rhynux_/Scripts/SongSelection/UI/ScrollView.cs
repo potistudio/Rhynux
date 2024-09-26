@@ -24,6 +24,7 @@ public sealed class ScrollView : FancyScrollView<Chart> {
 	private readonly Subject<Chart> m_OnSelectionChange = new();
 	public System.IObservable<Chart> OnSelectionChange => m_OnSelectionChange;
 	public int CurrentSelectingIndex { get; private set; }
+	public Chart CurrentSelectingChart { get { return m_Charts[CurrentSelectingIndex]; } }
 
 	[Inject]
 	private void Init (TrackInfoView _songInfoView) {
