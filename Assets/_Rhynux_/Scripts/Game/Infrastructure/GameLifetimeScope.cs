@@ -75,7 +75,9 @@ public class GameLifetimeScope : LifetimeScope {
 		// builder.RegisterComponentInHierarchy<_FullLogic>();
 		builder.RegisterComponentInHierarchy<MusicPlayer>();
 		// builder.RegisterComponentInHierarchy<FloorTorquer>();
-		// builder.RegisterComponentInHierarchy<TrackInfoBanner>();
+		builder.Register<SessionProxy>(Lifetime.Singleton);
+		builder.RegisterEntryPoint<TrackInfoPresenter>(Lifetime.Singleton);
+		builder.RegisterComponentInHierarchy<TrackInfoBanner>();
 		// builder.RegisterComponentInHierarchy<InputVisualizer>();
 		// builder.RegisterComponentInHierarchy<HitEffectGenerator>();
 		// builder.RegisterComponentInHierarchy<AccuracyPopupEmitter>();
