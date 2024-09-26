@@ -3,6 +3,7 @@ using MackySoft.Navigathena.SceneManagement;
 public sealed class MenuInput : UnityEngine.MonoBehaviour {
 	private ISceneIdentifier m_SceneIdentifier;
 	private Selection m_SelectionAction;
+	private SceneNavigator m_Navigator;
 
 	private SceneNavigator m_SceneNavigator;
 
