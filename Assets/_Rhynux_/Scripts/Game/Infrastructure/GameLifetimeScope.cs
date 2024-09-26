@@ -71,7 +71,9 @@ public class GameLifetimeScope : LifetimeScope {
 
 
 		//* View *//
-		// builder.RegisterComponentInHierarchy<_FullLogic>();
+		builder.RegisterEntryPoint<LogicPresenter>(Lifetime.Singleton);
+		builder.RegisterComponentInHierarchy<_FullLogic>();
+
 		// builder.RegisterComponentInHierarchy<FloorTorquer>();
 		// builder.RegisterComponentInHierarchy<InputVisualizer>();
 		// builder.RegisterComponentInHierarchy<HitEffectGenerator>();
@@ -79,6 +81,7 @@ public class GameLifetimeScope : LifetimeScope {
 
 		// builder.RegisterComponentInHierarchy<ScoreDisplay>();
 		// builder.RegisterComponentInHierarchy<ComboDisplay>();
+		builder.Register<SessionFacade>(Lifetime.Singleton);
 
 		//* Music Player
 		builder.RegisterEntryPoint<MusicPresenter>(Lifetime.Singleton);
