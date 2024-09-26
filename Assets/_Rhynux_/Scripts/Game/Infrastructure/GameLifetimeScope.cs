@@ -22,12 +22,13 @@ public class GameLifetimeScope : LifetimeScope {
 	protected override void Configure (IContainerBuilder builder) {
 		//* Lifecycle *//
 		builder.RegisterSceneLifecycle<SceneEntryPoint>();
+		builder.RegisterComponentInHierarchy<ScopedSceneEntryPoint>();
 
 		//* Notes Generator *//
-		System.Collections.Generic.List<Note> generatedNotes = m_NotesGenerator.Generate (m_Chart.Chart).ToList();
-		SessionData sessionData = new (generatedNotes);
-		builder.Register (_ => sessionData, Lifetime.Singleton);
-		builder.Register (_ => m_Chart.Chart, Lifetime.Singleton);
+		// System.Collections.Generic.List<Note> generatedNotes = m_NotesGenerator.Generate (m_Chart.Chart).ToList();
+		// SessionData sessionData = new (generatedNotes);
+		// builder.Register (_ => sessionData, Lifetime.Singleton);
+		// builder.Register (_ => m_Chart.Chart, Lifetime.Singleton);
 
 		//* Input Handler *//
 		// switch (m_InputHandler) {
@@ -41,41 +42,43 @@ public class GameLifetimeScope : LifetimeScope {
 		// }
 
 		//* Factory *//
-		builder.Register<InputHandlerFactory>(Lifetime.Singleton);
-		builder.Register<AutoInputHandler>(Lifetime.Singleton);
-		builder.Register<KeyboardInputHandler>(Lifetime.Singleton);
+		// builder.Register<InputHandlerFactory>(Lifetime.Singleton);
+		// builder.Register<AutoInputHandler>(Lifetime.Singleton);
+		// builder.Register<KeyboardInputHandler>(Lifetime.Singleton);
 
 		//* Logic *//
-		builder.Register<RealtimeReferee>(Lifetime.Singleton);
-		builder.Register<ReactiveReferee>(Lifetime.Singleton);
-		builder.Register<NotesRefereeComposer>(Lifetime.Singleton);
+		// builder.Register<RealtimeReferee>(Lifetime.Singleton);
+		// builder.Register<ReactiveReferee>(Lifetime.Singleton);
+		// builder.Register<NotesRefereeComposer>(Lifetime.Singleton);
 
-		builder.Register<ScoreManager>(Lifetime.Singleton);
-		builder.Register<ComboManager>(Lifetime.Singleton);
+		builder.Register<SessionFactory>(Lifetime.Singleton);
+
+		// builder.Register<ScoreManager>(Lifetime.Singleton);
+		// builder.Register<ComboManager>(Lifetime.Singleton);
 
 		//* Presenter *//
-		builder.RegisterEntryPoint<SessionTimeUpdater>(Lifetime.Singleton);
-		builder.RegisterEntryPoint<HitListener>(Lifetime.Singleton);
-		builder.RegisterEntryPoint<JudgementDisplay>(Lifetime.Singleton);
+		// builder.RegisterEntryPoint<SessionTimeUpdater>(Lifetime.Singleton);
+		// builder.RegisterEntryPoint<HitListener>(Lifetime.Singleton);
+		// builder.RegisterEntryPoint<JudgementDisplay>(Lifetime.Singleton);
 
-		builder.RegisterEntryPoint<ScorePresenter>(Lifetime.Singleton);
-		builder.RegisterEntryPoint<ScoreDisplayPresenter>(Lifetime.Singleton);
+		// builder.RegisterEntryPoint<ScorePresenter>(Lifetime.Singleton);
+		// builder.RegisterEntryPoint<ScoreDisplayPresenter>(Lifetime.Singleton);
 
-		builder.RegisterEntryPoint<ComboPresenter>(Lifetime.Singleton);
-		builder.RegisterEntryPoint<ComboDisplayPresenter>(Lifetime.Singleton);
+		// builder.RegisterEntryPoint<ComboPresenter>(Lifetime.Singleton);
+		// builder.RegisterEntryPoint<ComboDisplayPresenter>(Lifetime.Singleton);
 
 
 		//* View *//
-		builder.RegisterComponentInHierarchy<_FullLogic>();
+		// builder.RegisterComponentInHierarchy<_FullLogic>();
 		builder.RegisterComponentInHierarchy<MusicPlayer>();
-		builder.RegisterComponentInHierarchy<FloorTorquer>();
-		builder.RegisterComponentInHierarchy<TrackInfoBanner>();
-		builder.RegisterComponentInHierarchy<InputVisualizer>();
-		builder.RegisterComponentInHierarchy<HitEffectGenerator>();
-		builder.RegisterComponentInHierarchy<AccuracyPopupEmitter>();
+		// builder.RegisterComponentInHierarchy<FloorTorquer>();
+		// builder.RegisterComponentInHierarchy<TrackInfoBanner>();
+		// builder.RegisterComponentInHierarchy<InputVisualizer>();
+		// builder.RegisterComponentInHierarchy<HitEffectGenerator>();
+		// builder.RegisterComponentInHierarchy<AccuracyPopupEmitter>();
 
-		builder.RegisterComponentInHierarchy<ScoreDisplay>();
-		builder.RegisterComponentInHierarchy<ComboDisplay>();
+		// builder.RegisterComponentInHierarchy<ScoreDisplay>();
+		// builder.RegisterComponentInHierarchy<ComboDisplay>();
 
 		UnityEngine.Debug.Log ("VContainer Injection has Completed");
 	}
