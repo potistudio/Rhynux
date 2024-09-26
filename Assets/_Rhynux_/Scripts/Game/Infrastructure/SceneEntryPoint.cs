@@ -16,6 +16,13 @@ public sealed class SceneEntryPoint : SceneLifecycleBase {
 		Debug.Log ("Scene Initialized");
 		Debug.Log (m_Factory);
 
+		if (reader.TryRead(out GameSceneRequest data)) {
+			Debug.Log ("Read Chart " + data.AutoMode);
+
+			// Generate Session
+			SessionData session = m_Factory.Create (data.Chart);
+		};
+
 		return base.OnInitialize (reader, progress, cancellationToken);
 	}
 

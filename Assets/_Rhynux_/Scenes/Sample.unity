@@ -1091,9 +1091,10 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 3568514597756338176
       type: {class: ProceduralNotesGenerator, ns: , asm: Rhynux.Game.Model}
-      data: 
 --- !u!1 &496691789
 GameObject:
   m_ObjectHideFlags: 0
