@@ -8,12 +8,12 @@ public class InputVisualizer : MonoBehaviour {
 	[SerializeField] private GameObject[] m_Highlight;
 
 	[VContainer.Inject]
-	private void Init (IInputHandler _inputHandler) {
-		_inputHandler.OnPressed.Subscribe (_ => {
+	private void Init (IInputHandler _input) {
+		_input.OnPressed.Subscribe (_ => {
 			Activate (_);
 		});
 
-		_inputHandler.OnReleased.Subscribe (_ => {
+		_input.OnReleased.Subscribe (_ => {
 			Deactivate (_);
 		});
 	}

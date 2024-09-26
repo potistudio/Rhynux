@@ -12,7 +12,9 @@
         "Rhynux.Core",
         "Rhynux.Game.Core",
         "Rhynux.Game.Model",
-        "Rhynux.Game.Presenter"
+        "Rhynux.Game.Presenter",
+        "Rhynux.Game.Input",
+        "Rhynux.Game.Factories"
     ],
     "includePlatforms": [
         "Editor"
