@@ -20,6 +20,9 @@ public class GameLifetimeScope : LifetimeScope {
 	private NotesRefereeComposer m_NotesReferee;
 
 	protected override void Configure (IContainerBuilder builder) {
+		//* Instance *//
+		builder.RegisterInstance<Chart>(m_Chart.Chart);
+
 		//* Lifecycle *//
 		builder.RegisterSceneLifecycle<SceneEntryPoint>();
 		builder.RegisterComponentInHierarchy<ScopedSceneEntryPoint>();

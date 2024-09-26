@@ -6,10 +6,12 @@ using MackySoft.Navigathena.SceneManagement.VContainer;
 
 public sealed class SceneEntryPoint : SceneLifecycleBase {
 	private SessionFactory m_Factory;
+	private Chart m_Chart;
 
 	[VContainer.Inject]
-	private void Inject (SessionFactory _factory) {
+	private void Inject (SessionFactory _factory, Chart _chart = null) {
 		m_Factory = _factory;
+		m_Chart = _chart;
 	}
 
 	protected override UniTask OnInitialize(ISceneDataReader reader, System.IProgress<MackySoft.Navigathena.IProgressDataStore> progress, CancellationToken cancellationToken) {
@@ -21,7 +23,13 @@ public sealed class SceneEntryPoint : SceneLifecycleBase {
 
 			// Generate Session
 			SessionData session = m_Factory.Create (data.Chart);
-		};
+			Debug.Log (session.Notes.Length);
+		} else if (m_Chart != null) {
+			SessionData session = m_Factory.Create (m_Chart);
+			Debug.Log (session.Notes.Length);
+		} else {
+			throw new System.OperationCanceledException();
+		}
 
 		return base.OnInitialize (reader, progress, cancellationToken);
 	}

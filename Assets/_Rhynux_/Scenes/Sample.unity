@@ -1085,16 +1085,14 @@ MonoBehaviour:
   autoRun: 0
   autoInjectGameObjects: []
   m_NotesGenerator:
-    rid: 3568514597756338176
+    rid: -2
   m_InputHandler: 0
-  m_Chart: {fileID: 11400000, guid: 1caed5581c21e5a4c998c0a694d65f6a, type: 2}
+  m_Chart: {fileID: 11400000, guid: f7b877651a42a50469495d79202a7731, type: 2}
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 3568514597756338176
-      type: {class: ProceduralNotesGenerator, ns: , asm: Rhynux.Game.Model}
 --- !u!1 &496691789
 GameObject:
   m_ObjectHideFlags: 0
