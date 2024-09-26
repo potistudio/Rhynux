@@ -22,6 +22,6 @@ public sealed class SessionFactory {
 		RealtimeReferee realtimeReferee = new (session);
 		NotesRefereeComposer notesRefereeComposer = new (session, realtimeReferee, reactiveReferee);
 
-		return new SessionData (notes);
+		return session;
 	}
 }
