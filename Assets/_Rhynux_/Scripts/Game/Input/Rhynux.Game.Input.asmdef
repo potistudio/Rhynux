@@ -1,12 +1,15 @@
 {
-    "name": "Rhynux.Game.Model",
+    "name": "Rhynux.Game.Input",
     "rootNamespace": "",
     "references": [
+        "GUID:75469ad4d38634e559750d17036d5f7c",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23",
         "GUID:560b04d1a97f54a4e82edc0cbbb69285",
+        "GUID:b0214a6008ed146ff8f122a6a9c2f6cc",
         "GUID:048465f7c8ae7fd4c88015adf29aa9f6",
+        "GUID:a331842067848f840979b0c62c8a6ecd",
         "GUID:b11338bb849a44848b44326146330eec",
-        "GUID:2597e645266f56c4abb15867a6b0ae30",
-        "GUID:ee6cf72dd0c83c0449a925182a4b06ee"
+        "GUID:a40896d6e921eb242a3361f1a4ec2754"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

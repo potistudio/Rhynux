@@ -10,9 +10,11 @@ public class ReactiveReferee {
 	private UniRx.Subject<(int index, int lane, AccuracyLevel accuracy)> m_OnHit = new();
 	public System.IObservable<(int index, int lane, AccuracyLevel accuracy)> OnHit => m_OnHit;
 
-	public ReactiveReferee (SessionData _session, IInputHandler _inputHandler) {
+	public ReactiveReferee (SessionData _session, InputHandlerFactory _factory) {
 		m_NotesList = _session.Notes;
-		_inputHandler.OnPressed.Subscribe (x => {
+
+		var ih = _factory.CreateInputHandler (InputMode.Auto);
+		ih.OnPressed.Subscribe (x => {
 			JudgeHit (x);
 		});
 	}

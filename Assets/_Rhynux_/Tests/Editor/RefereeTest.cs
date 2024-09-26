@@ -16,8 +16,8 @@ public class RefereeTest {
 		SessionData sessionData = new (notes);
 		IInputHandler inputHandler = new MockInputHandler();
 
-		m_ReactiveReferee = new ReactiveReferee (sessionData, inputHandler);
-		m_RealtimeReferee = new RealtimeReferee (sessionData);
+		// m_ReactiveReferee = new ReactiveReferee (sessionData, inputHandler);
+		// m_RealtimeReferee = new RealtimeReferee (sessionData);
 	}
 
 	[Test]

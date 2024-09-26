@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Linq;
 using MackySoft.Navigathena.SceneManagement.VContainer;
@@ -29,15 +30,20 @@ public class GameLifetimeScope : LifetimeScope {
 		builder.Register (_ => m_Chart.Chart, Lifetime.Singleton);
 
 		//* Input Handler *//
-		switch (m_InputHandler) {
-			case InputHandlers.Auto:
-				builder.RegisterEntryPoint<AutoInputHandler>();
-				break;
+		// switch (m_InputHandler) {
+		// 	case InputHandlers.Auto:
+		// 		builder.RegisterEntryPoint<AutoInputHandler>();
+		// 		break;
 
-			case InputHandlers.Keyboard:
-				builder.Register<KeyboardInputHandler>(Lifetime.Singleton).As<IInputHandler>();
-				break;
-		}
+		// 	case InputHandlers.Keyboard:
+		// 		builder.Register<KeyboardInputHandler>(Lifetime.Singleton).As<IInputHandler>();
+		// 		break;
+		// }
+
+		//* Factory *//
+		builder.Register<InputHandlerFactory>(Lifetime.Singleton);
+		builder.Register<AutoInputHandler>(Lifetime.Singleton);
+		builder.Register<KeyboardInputHandler>(Lifetime.Singleton);
 
 		//* Logic *//
 		builder.Register<RealtimeReferee>(Lifetime.Singleton);
