@@ -78,6 +78,9 @@ public class GameLifetimeScope : LifetimeScope {
 		builder.Register<SessionProxy>(Lifetime.Singleton);
 		builder.RegisterEntryPoint<TrackInfoPresenter>(Lifetime.Singleton);
 		builder.RegisterComponentInHierarchy<TrackInfoBanner>();
+
+		builder.Register<SceneNavigator>(Lifetime.Singleton);
+		builder.RegisterComponentInHierarchy<SceneNavigationInput>();
 		// builder.RegisterComponentInHierarchy<InputVisualizer>();
 		// builder.RegisterComponentInHierarchy<HitEffectGenerator>();
 		// builder.RegisterComponentInHierarchy<AccuracyPopupEmitter>();
