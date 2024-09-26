@@ -54,7 +54,6 @@ public class GameLifetimeScope : LifetimeScope {
 		// builder.Register<ReactiveReferee>(Lifetime.Singleton);
 		// builder.Register<NotesRefereeComposer>(Lifetime.Singleton);
 
-		builder.Register<SessionFactory>(Lifetime.Singleton);
 
 		// builder.Register<ScoreManager>(Lifetime.Singleton);
 		// builder.Register<ComboManager>(Lifetime.Singleton);
@@ -73,21 +72,29 @@ public class GameLifetimeScope : LifetimeScope {
 
 		//* View *//
 		// builder.RegisterComponentInHierarchy<_FullLogic>();
-		builder.RegisterEntryPoint<MusicPresenter>(Lifetime.Singleton);
-		builder.RegisterComponentInHierarchy<MusicPlayer>();
 		// builder.RegisterComponentInHierarchy<FloorTorquer>();
-		builder.Register<SessionProxy>(Lifetime.Singleton);
-		builder.RegisterEntryPoint<TrackInfoPresenter>(Lifetime.Singleton);
-		builder.RegisterComponentInHierarchy<TrackInfoBanner>();
-
-		builder.Register<SceneNavigator>(Lifetime.Singleton);
-		builder.RegisterComponentInHierarchy<SceneNavigationInput>();
 		// builder.RegisterComponentInHierarchy<InputVisualizer>();
 		// builder.RegisterComponentInHierarchy<HitEffectGenerator>();
 		// builder.RegisterComponentInHierarchy<AccuracyPopupEmitter>();
 
 		// builder.RegisterComponentInHierarchy<ScoreDisplay>();
 		// builder.RegisterComponentInHierarchy<ComboDisplay>();
+
+		//* Music Player
+		builder.RegisterEntryPoint<MusicPresenter>(Lifetime.Singleton);
+		builder.RegisterComponentInHierarchy<MusicPlayer>();
+
+		//* Session
+		builder.Register<SessionProxy>(Lifetime.Singleton);
+		builder.Register<SessionFactory>(Lifetime.Singleton);
+
+		//* Track Info View
+		builder.RegisterEntryPoint<TrackInfoPresenter>(Lifetime.Singleton);
+		builder.RegisterComponentInHierarchy<TrackInfoBanner>();
+
+		//* Scene Navigation
+		builder.Register<SceneNavigator>(Lifetime.Singleton);
+		builder.RegisterComponentInHierarchy<SceneNavigationInput>();
 
 		UnityEngine.Debug.Log ("VContainer Injection has Completed");
 	}
