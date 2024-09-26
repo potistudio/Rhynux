@@ -73,6 +73,7 @@ public class GameLifetimeScope : LifetimeScope {
 
 		//* View *//
 		// builder.RegisterComponentInHierarchy<_FullLogic>();
+		builder.RegisterEntryPoint<MusicPresenter>(Lifetime.Singleton);
 		builder.RegisterComponentInHierarchy<MusicPlayer>();
 		// builder.RegisterComponentInHierarchy<FloorTorquer>();
 		builder.Register<SessionProxy>(Lifetime.Singleton);
