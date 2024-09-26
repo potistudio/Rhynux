@@ -10,7 +10,8 @@ public sealed class SessionData {
 	public Chart Chart { get { return m_Chart; }}
 	public Note[] Notes { get { return m_NotesCollection.DeepCopy().ToArray(); }}
 
-	public SessionData (System.Collections.Generic.IList<Note> _notes) {
+	public SessionData (Chart _chart, System.Collections.Generic.IList<Note> _notes) {
+		m_Chart = _chart;
 		m_NotesCollection = _notes.ToList().AsReadOnly();
 	}
 }

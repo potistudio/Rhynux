@@ -12,7 +12,7 @@ public sealed class SessionFactory {
 		var notesGenerator = new ProceduralNotesGenerator(); // flexible
 		var notes = notesGenerator.Generate (_chart);
 
-		SessionData session = new (notes);
+		SessionData session = new (_chart, notes);
 
 		//* Input Handler
 		IInputHandler inputHandler = new AutoInputHandler (m_MusicPlayer, session); // flexible
