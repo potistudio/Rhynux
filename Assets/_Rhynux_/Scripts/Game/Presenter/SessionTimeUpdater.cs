@@ -1,16 +1,13 @@
 public sealed class SessionTimeUpdater : VContainer.Unity.ITickable {
 	private readonly MusicPlayer m_MusicPlayer;
-	private readonly RealtimeReferee m_RealtimeReferee;
-	private readonly InputReferee m_ReactiveReferee;
+	private readonly RefereeFacade m_Referee;
 
-	public SessionTimeUpdater (MusicPlayer _musicPlayer, RealtimeReferee _realtimeReferee, InputReferee _reactiveReferee) {
+	public SessionTimeUpdater (MusicPlayer _musicPlayer, RefereeFacade _referee) {
 		m_MusicPlayer = _musicPlayer;
-		m_RealtimeReferee = _realtimeReferee;
-		m_ReactiveReferee = _reactiveReferee;
+		m_Referee = _referee;
 	}
 
 	public void Tick() {
-		m_RealtimeReferee.UpdateTime (m_MusicPlayer.CurrentTime);
-		m_ReactiveReferee.UpdateTime (m_MusicPlayer.CurrentTime);
+		m_Referee.UpdateTime (m_MusicPlayer.CurrentTime);
 	}
 }

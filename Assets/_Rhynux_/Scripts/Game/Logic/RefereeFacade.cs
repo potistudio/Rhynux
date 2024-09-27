@@ -1,3 +1,5 @@
+using UniRx;
+
 public sealed class RefereeFacade {
 	private readonly InputReferee m_InputReferee;
 	private readonly RealtimeReferee m_RealtimeReferee;
@@ -7,22 +9,27 @@ public sealed class RefereeFacade {
 
 	public RefereeFacade (SessionFactory _factory) {
 		m_InputReferee = new (_factory);
+
+		m_InputReferee.OnHit.Subscribe (x => {
+			m_OnHit.OnNext (x);
+		});
+	}
+
+	public void UpdateTime (float _time) {
+		// m_RealtimeReferee.UpdateTime (_time);
+		m_InputReferee.UpdateTime (_time);
+	}
+
+	public void Press (int _lane) {
+		m_InputReferee.JudgeHit (_lane);
+	}
+
+	public void Release (int _lane) {
+		// m_InputReferee.Release (_lane);
 	}
 
 	/*
 	public InputReferee m_ReactiveReferee { get; set; }
 	public RealtimeReferee m_RealtimeReferee { get; set; }
-
-
-	// public SessionFacade (ReactiveReferee _referee1, RealtimeReferee _referee2) {
-	// 	m_ReactiveReferee = _referee1;
-	// 	m_RealtimeReferee = _referee2;
-	// }
-
-	public void Start() {
-		m_ReactiveReferee.OnHit.Subscribe (x => {
-			m_OnHit.OnNext (x);
-		});
-	}
 	*/
 }

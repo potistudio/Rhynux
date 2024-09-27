@@ -50,10 +50,14 @@ public class GameLifetimeScope : LifetimeScope {
 
 		//* Logic *//
 		builder.Register<InputHandlerFactory>(Lifetime.Singleton);
-		builder.Register<InputReferee>(Lifetime.Singleton);
 		builder.RegisterEntryPoint<InputListener>(Lifetime.Singleton);
-		// builder.Register<RealtimeReferee>(Lifetime.Singleton);
-		// builder.Register<ReactiveReferee>(Lifetime.Singleton);
+
+		//* Referee
+		builder.Register<RealtimeReferee>(Lifetime.Singleton);
+		builder.Register<InputReferee>(Lifetime.Singleton);
+		builder.Register<RefereeFacade>(Lifetime.Singleton);
+		builder.RegisterEntryPoint<SessionTimeUpdater>(Lifetime.Singleton);
+
 		// builder.Register<NotesRefereeComposer>(Lifetime.Singleton);
 
 
@@ -63,7 +67,8 @@ public class GameLifetimeScope : LifetimeScope {
 		//* Presenter *//
 		// builder.RegisterEntryPoint<SessionTimeUpdater>(Lifetime.Singleton);
 		// builder.RegisterEntryPoint<HitListener>(Lifetime.Singleton);
-		// builder.RegisterEntryPoint<JudgementDisplay>(Lifetime.Singleton);
+		builder.RegisterEntryPoint<JudgementDisplay>(Lifetime.Singleton);
+		builder.RegisterComponentInHierarchy<AccuracyPopupEmitter>();
 
 		// builder.RegisterEntryPoint<ScorePresenter>(Lifetime.Singleton);
 		// builder.RegisterEntryPoint<ScoreDisplayPresenter>(Lifetime.Singleton);
@@ -82,7 +87,6 @@ public class GameLifetimeScope : LifetimeScope {
 		builder.RegisterComponentInHierarchy<InputVisualizer>();
 
 		// builder.RegisterComponentInHierarchy<HitEffectGenerator>();
-		// builder.RegisterComponentInHierarchy<AccuracyPopupEmitter>();
 
 		// builder.RegisterComponentInHierarchy<ScoreDisplay>();
 		// builder.RegisterComponentInHierarchy<ComboDisplay>();
