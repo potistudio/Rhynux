@@ -20,7 +20,7 @@ public sealed class SessionFactory {
 		IInputHandler inputHandler = new AutoInputHandler (m_MusicPlayer, session); // flexible
 
 		//* Referee
-		ReactiveReferee reactiveReferee = new (session, inputHandler);
+		InputReferee reactiveReferee = new (session, inputHandler);
 		RealtimeReferee realtimeReferee = new (session);
 		NotesRefereeComposer notesRefereeComposer = new (session, realtimeReferee, reactiveReferee);
 

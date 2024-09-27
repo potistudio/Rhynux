@@ -9,7 +9,7 @@ public class HitEffectGenerator : MonoBehaviour {
 	[SerializeField] private float m_Lifetime;
 
 	[VContainer.Inject]
-	private void Init (ReactiveReferee _reactiveReferee) {
+	private void Init (InputReferee _reactiveReferee) {
 		GameObject target;
 
 		_reactiveReferee.OnHit.Subscribe (x => {

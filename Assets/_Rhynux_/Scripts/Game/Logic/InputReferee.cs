@@ -1,16 +1,14 @@
-
-using System;
 using System.Linq;
 using UniRx;
 
-public class ReactiveReferee {
+public sealed class InputReferee {
 	private readonly System.Collections.Generic.IReadOnlyList<Note> m_NotesList;
 	private float m_CurrentTime;
 
 	private UniRx.Subject<(int index, int lane, AccuracyLevel accuracy)> m_OnHit = new();
 	public System.IObservable<(int index, int lane, AccuracyLevel accuracy)> OnHit => m_OnHit;
 
-	public ReactiveReferee (SessionData _session, IInputHandler _input) {
+	public InputReferee (SessionData _session, IInputHandler _input) {
 		m_NotesList = _session.Notes;
 
 		_input.OnPressed.Subscribe (x => {

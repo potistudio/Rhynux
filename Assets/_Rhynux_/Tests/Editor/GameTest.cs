@@ -7,7 +7,7 @@ using VContainer;
 public class GameTest {
 	private SessionManager m_SessionManager;
 	private RealtimeReferee m_RealtimeReferee;
-	private ReactiveReferee m_ReactiveReferee;
+	private InputReferee m_ReactiveReferee;
 	private NotesRefereeComposer m_NotesReferee;
 
 	private Chart m_Chart;

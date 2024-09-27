@@ -16,7 +16,7 @@ public class GameLifetimeScope : LifetimeScope {
 
 	private SessionManager m_SessionManager;
 	private RealtimeReferee m_RealtimeReferee;
-	private ReactiveReferee m_ReactiveReferee;
+	private InputReferee m_ReactiveReferee;
 	private NotesRefereeComposer m_NotesReferee;
 
 	protected override void Configure (IContainerBuilder builder) {

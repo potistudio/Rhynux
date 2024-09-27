@@ -1,7 +1,7 @@
 using UniRx;
 
 public sealed class SessionFacade : VContainer.Unity.IStartable {
-	public ReactiveReferee m_ReactiveReferee { get; set; }
+	public InputReferee m_ReactiveReferee { get; set; }
 	public RealtimeReferee m_RealtimeReferee { get; set; }
 
 	private UniRx.Subject<(int index, int lane, AccuracyLevel accuracy)> m_OnHit = new();

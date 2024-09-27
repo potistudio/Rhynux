@@ -2,7 +2,7 @@ using NUnit.Framework;
 using UniRx;
 
 public class RefereeTest {
-	private ReactiveReferee m_ReactiveReferee;
+	private InputReferee m_ReactiveReferee;
 	private RealtimeReferee m_RealtimeReferee;
 
 	[SetUp]
