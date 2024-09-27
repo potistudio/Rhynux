@@ -45,11 +45,13 @@ public class GameLifetimeScope : LifetimeScope {
 		// }
 
 		//* Factory *//
-		// builder.Register<InputHandlerFactory>(Lifetime.Singleton);
-		// builder.Register<AutoInputHandler>(Lifetime.Singleton);
-		// builder.Register<KeyboardInputHandler>(Lifetime.Singleton);
+		builder.Register<AutoInputHandler>(Lifetime.Singleton);
+		builder.Register<KeyboardInputHandler>(Lifetime.Singleton);
 
 		//* Logic *//
+		builder.Register<InputHandlerFactory>(Lifetime.Singleton);
+		builder.Register<InputReferee>(Lifetime.Singleton);
+		builder.RegisterEntryPoint<InputListener>(Lifetime.Singleton);
 		// builder.Register<RealtimeReferee>(Lifetime.Singleton);
 		// builder.Register<ReactiveReferee>(Lifetime.Singleton);
 		// builder.Register<NotesRefereeComposer>(Lifetime.Singleton);
@@ -81,7 +83,6 @@ public class GameLifetimeScope : LifetimeScope {
 
 		// builder.RegisterComponentInHierarchy<ScoreDisplay>();
 		// builder.RegisterComponentInHierarchy<ComboDisplay>();
-		builder.Register<SessionFacade>(Lifetime.Singleton);
 
 		//* Music Player
 		builder.RegisterEntryPoint<MusicPresenter>(Lifetime.Singleton);

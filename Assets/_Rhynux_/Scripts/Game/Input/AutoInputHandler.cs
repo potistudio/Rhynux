@@ -12,9 +12,9 @@ public sealed class AutoInputHandler : IInputHandler, VContainer.Unity.ITickable
 	public System.IObservable<int> OnPressed => m_Pressed;
 	public System.IObservable<int> OnReleased => m_Released;
 
-	public AutoInputHandler (MusicPlayer _musicPlayer, SessionData _session) {
+	public AutoInputHandler (MusicPlayer _musicPlayer, SessionFactory _session) {
 		m_MusicPlayer = _musicPlayer;
-		m_NotesCollection = _session.Notes.ToList().AsReadOnly();
+		m_NotesCollection = _session.SessionPool.Notes.ToList().AsReadOnly();
 	}
 
 	private void Press (int _lane) {
