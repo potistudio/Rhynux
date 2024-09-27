@@ -13,7 +13,7 @@ public sealed class RawChartAsset : ChartAsset {
 
 	public override Chart Chart {
 		get {
-			return new Chart (m_Title, m_Artist, m_BPM, m_Offset, m_SoundTrack, m_Notes, m_Secured) { Track = m_SoundTrack };
+			return new Chart (m_Title, m_Artist, m_BPM, m_Offset, m_SoundTrack, m_Notes, m_Artwork, m_Secured) { Track = m_SoundTrack };
 		}
 	}
 }
