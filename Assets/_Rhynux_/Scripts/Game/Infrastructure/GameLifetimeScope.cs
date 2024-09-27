@@ -95,6 +95,10 @@ public class GameLifetimeScope : LifetimeScope {
 		builder.RegisterEntryPoint<TrackInfoPresenter>(Lifetime.Singleton);
 		builder.RegisterComponentInHierarchy<TrackInfoBanner>();
 
+		//* Sprite Renderer
+		builder.RegisterEntryPoint<ArtworkRenderingPresenter>(Lifetime.Singleton);
+		builder.RegisterComponentInHierarchy<ArtworkRenderer>();
+
 		//* Scene Navigation
 		builder.Register<SceneNavigator>(Lifetime.Singleton);
 		builder.RegisterComponentInHierarchy<SceneNavigationInput>();
