@@ -27,23 +27,6 @@ public class GameLifetimeScope : LifetimeScope {
 		builder.RegisterSceneLifecycle<SceneEntryPoint>();
 		builder.RegisterComponentInHierarchy<ScopedSceneEntryPoint>();
 
-		//* Notes Generator *//
-		// System.Collections.Generic.List<Note> generatedNotes = m_NotesGenerator.Generate (m_Chart.Chart).ToList();
-		// SessionData sessionData = new (generatedNotes);
-		// builder.Register (_ => sessionData, Lifetime.Singleton);
-		// builder.Register (_ => m_Chart.Chart, Lifetime.Singleton);
-
-		//* Input Handler *//
-		// switch (m_InputHandler) {
-		// 	case InputHandlers.Auto:
-		// 		builder.RegisterEntryPoint<AutoInputHandler>();
-		// 		break;
-
-		// 	case InputHandlers.Keyboard:
-		// 		builder.Register<KeyboardInputHandler>(Lifetime.Singleton).As<IInputHandler>();
-		// 		break;
-		// }
-
 		//* Factory *//
 		builder.Register<AutoInputHandler>(Lifetime.Singleton);
 		builder.Register<KeyboardInputHandler>(Lifetime.Singleton);
@@ -58,18 +41,6 @@ public class GameLifetimeScope : LifetimeScope {
 		builder.Register<RefereeFacade>(Lifetime.Singleton);
 		builder.RegisterEntryPoint<SessionTimeUpdater>(Lifetime.Singleton);
 
-		// builder.Register<NotesRefereeComposer>(Lifetime.Singleton);
-
-
-
-
-
-		//* Presenter *//
-		// builder.RegisterEntryPoint<HitListener>(Lifetime.Singleton);
-
-
-
-
 		//* View *//
 		builder.RegisterEntryPoint<LogicPresenter>(Lifetime.Singleton);
 		builder.RegisterComponentInHierarchy<_FullLogic>();
@@ -77,6 +48,7 @@ public class GameLifetimeScope : LifetimeScope {
 		builder.RegisterEntryPoint<JudgementDisplay>(Lifetime.Singleton);
 		builder.RegisterComponentInHierarchy<AccuracyPopupEmitter>();
 		builder.RegisterComponentInHierarchy<HitEffectGenerator>();
+		builder.RegisterEntryPoint<HitListener>(Lifetime.Singleton);
 
 		//* Lane Visualizer
 		builder.RegisterEntryPoint<LaneVisualizingPresenter>(Lifetime.Singleton);

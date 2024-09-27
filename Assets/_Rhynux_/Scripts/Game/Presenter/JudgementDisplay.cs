@@ -14,6 +14,10 @@ public sealed class JudgementDisplay : VContainer.Unity.IInitializable, System.I
 		m_Referee.OnHit.Subscribe (x => {
 			m_PopupEmitter.Emit (x.accuracy);
 		}).AddTo (m_Disposable);
+
+		m_Referee.OnFall.Subscribe (x => {
+			m_PopupEmitter.Emit (AccuracyLevel.Miss);
+		}).AddTo (m_Disposable);
 	}
 
 	public void Dispose() {
