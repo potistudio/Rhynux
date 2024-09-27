@@ -1,21 +1,22 @@
 using UniRx;
 
 public sealed class JudgementDisplay : VContainer.Unity.IInitializable, System.IDisposable {
-	private readonly ReactiveReferee m_ReactiveReferee;
+	private readonly RefereeFacade m_Referee;
 	private readonly AccuracyPopupEmitter m_PopupEmitter;
 	private readonly CompositeDisposable m_Disposable = new();
 
-	public JudgementDisplay (ReactiveReferee _reactiveReferee, AccuracyPopupEmitter _accuracyPopupEmitter) {
-		m_ReactiveReferee = _reactiveReferee;
+	public JudgementDisplay (RefereeFacade _referee, AccuracyPopupEmitter _accuracyPopupEmitter) {
+		m_Referee = _referee;
 		m_PopupEmitter = _accuracyPopupEmitter;
 	}
 
 	public void Initialize() {
-		m_ReactiveReferee.OnHit.Subscribe (x => {
-			if (x.Item3 == AccuracyLevel.Pass)
-				return;
+		m_Referee.OnHit.Subscribe (x => {
+			m_PopupEmitter.Emit (x.accuracy);
+		}).AddTo (m_Disposable);
 
-			m_PopupEmitter.Emit (x.Item3);
+		m_Referee.OnFall.Subscribe (x => {
+			m_PopupEmitter.Emit (AccuracyLevel.Miss);
 		}).AddTo (m_Disposable);
 	}
 

@@ -1,10 +1,9 @@
-public class TrackInfoBanner : UnityEngine.MonoBehaviour {
+public sealed class TrackInfoBanner : UnityEngine.MonoBehaviour {
 	[UnityEngine.SerializeField] private TMPro.TextMeshProUGUI m_TitleTextField;
 	[UnityEngine.SerializeField] private TMPro.TextMeshProUGUI m_ArtistTextField;
 
-	[VContainer.Inject]
-	private void Init (Chart _chart) {
-		m_TitleTextField.text = _chart.Title;
-		m_ArtistTextField.text = _chart.Artist;
+	public void SetLabel (string _title, string _artist) {
+		m_TitleTextField.text = _title;
+		m_ArtistTextField.text = _artist;
 	}
 }

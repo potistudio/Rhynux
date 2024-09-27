@@ -5,27 +5,27 @@ public class FloorTorquer : MonoBehaviour {
 	[SerializeField] private Rigidbody m_Rigidbody;
 	[SerializeField] private float m_ForcePower;
 
-	private Note[] notes;
-	private Chart m_Chart;
 	private int m_CurrentIndex;
 
 	private MusicPlayer m_MusicPlayer;
+	private SessionFactory m_Session;
 
 	[VContainer.Inject]
-	private void Init (MusicPlayer _musicPlayer, SessionData _session) {
+	private void Init (MusicPlayer _musicPlayer, SessionFactory _session) {
 		m_MusicPlayer = _musicPlayer;
-
-		notes = _session.Notes.ToArray();
+		m_Session = _session;
 	}
 
 	private void Update() {
+		Note[] notes = m_Session.SessionPool.Notes;
+
 		if (m_CurrentIndex >= notes.Length) {
 			Debug.Log ("End");
 			return;
 		}
 
 		if (m_MusicPlayer.CurrentTime >= notes[m_CurrentIndex].Time) {
-			AddTorque (notes[m_CurrentIndex].Position - 2.5f);
+			AddTorque (notes[m_CurrentIndex].Position - 1.5f);
 			m_CurrentIndex++;
 		}
 	}

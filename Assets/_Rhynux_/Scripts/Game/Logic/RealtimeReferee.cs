@@ -1,50 +1,40 @@
-
 using System.Linq;
 
-public class RealtimeReferee {
-	private readonly System.Collections.ObjectModel.ReadOnlyCollection<Note> m_NotesCollection;
-	private float m_CurrentUpdatedTime = 0f;
-
+public sealed class RealtimeReferee {
 	private readonly UniRx.Subject<(int, NoteAvailableStatus)> m_NoteStatusChanged = new();
 	public System.IObservable<(int, NoteAvailableStatus)> OnNoteStatusChanged => m_NoteStatusChanged;
 
-	private readonly float m_Margin = 160f;
+	private readonly float m_Margin = 0.160f;
 
-	public RealtimeReferee (System.Collections.Generic.IList<Note> _notes) {
-		m_NotesCollection = _notes.DeepCopy().ToList().AsReadOnly();
-		// var a = (System.Collections.Generic.List<Queue>)m_NotesCollection; ← Cannot cast
-		// m_NotesCollection[0] = new Queue(_notes[0]); ← Cannot ReAssign
+	private float m_CurrentTime = 0f;
+	private readonly SessionFactory m_SessionFactory;
+
+	public RealtimeReferee (SessionFactory _session) {
+		m_SessionFactory = _session;
 	}
 
-	public void UpdateTime (float _targetTime) {
-		if (_targetTime == m_CurrentUpdatedTime)
-			return;
+	public void UpdateTime (float _time) {
+		Note[] notes = m_SessionFactory.SessionPool.Notes;
+		int newIndex = FindBehindNote (_time);
 
-		for (int i = 0; i < m_NotesCollection.Count; i++) {
-			if (m_NotesCollection[i].Time < _targetTime - m_Margin)
-				DisableNote (i);
-			else if (m_NotesCollection[i].Time >= _targetTime - m_Margin)
-				EnableNote (i);
+		var targets = notes.Where ((x, i) => i <= newIndex).Select ((x, i) => (x, i));
+		foreach ((Note x, int i) in targets) {
+			FallNote (i);
 		}
 
-		m_CurrentUpdatedTime = _targetTime;
+		m_CurrentTime = _time;
 	}
 
-	private void DisableNote (int _targetNoteIndex) {
-		// If Target Note was already Fallen, Ignore
-		if (m_NotesCollection[_targetNoteIndex].AvailableStatus == NoteAvailableStatus.Fell)
-			return;
+	private int FindBehindNote (float _time) {
+		Note[] notes = m_SessionFactory.SessionPool.Notes;
+		var n = notes.Where (x => x.Time + m_Margin < _time);
+		if (n.Count() == 0)
+			return -1;
 
-		m_NotesCollection[_targetNoteIndex].AvailableStatus = NoteAvailableStatus.Fell;
-		m_NoteStatusChanged.OnNext((_targetNoteIndex, NoteAvailableStatus.Fell));
+		return n.Select((x, i) => i).LastOrDefault();
 	}
 
-	private void EnableNote (int _targetNoteIndex) {
-		// If Target Note was already Fallen, Ignore
-		if (m_NotesCollection[_targetNoteIndex].AvailableStatus == NoteAvailableStatus.Available)
-			return;
-
-		m_NotesCollection[_targetNoteIndex].AvailableStatus = NoteAvailableStatus.Available;
-		m_NoteStatusChanged.OnNext((_targetNoteIndex, NoteAvailableStatus.Available));
+	private void FallNote (int _targetIndex) {
+		m_NoteStatusChanged.OnNext ((_targetIndex, NoteAvailableStatus.Fell));
 	}
 }

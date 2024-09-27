@@ -1,15 +1,13 @@
-using UniRx;
+public sealed class SessionTimeUpdater : VContainer.Unity.ITickable {
+	private readonly MusicPlayer m_MusicPlayer;
+	private readonly RefereeFacade m_Referee;
 
-public class SessionTimeUpdater : VContainer.Unity.ITickable {
-	private ReactiveReferee m_ReactiveReferee;
-	private MusicPlayer m_MusicPlayer;
-
-	private SessionTimeUpdater (ReactiveReferee _reactiveReferee, MusicPlayer _musicPlayer) {
-		m_ReactiveReferee = _reactiveReferee;
+	public SessionTimeUpdater (MusicPlayer _musicPlayer, RefereeFacade _referee) {
 		m_MusicPlayer = _musicPlayer;
+		m_Referee = _referee;
 	}
 
 	public void Tick() {
-		m_ReactiveReferee.UpdateTime (m_MusicPlayer.CurrentTime);
+		m_Referee.UpdateTime (m_MusicPlayer.CurrentTime);
 	}
 }

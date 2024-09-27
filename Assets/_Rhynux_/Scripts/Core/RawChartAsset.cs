@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Raw Chart", menuName = "Rhynux/Raw Chart")]
-public class RawChartAsset : ChartAsset {
+public sealed class RawChartAsset : ChartAsset {
 	[SerializeField] private string m_Title;
 	[SerializeField] private string m_Artist;
 	[SerializeField] private float m_BPM;
@@ -13,7 +13,7 @@ public class RawChartAsset : ChartAsset {
 
 	public override Chart Chart {
 		get {
-			return new Chart (m_Title, m_Artist, m_BPM, m_Offset, m_SoundTrack, m_Notes, m_Secured) { Track = m_SoundTrack };
+			return new Chart (m_Title, m_Artist, m_BPM, m_Offset, m_SoundTrack, m_Notes, m_Artwork, m_Secured) { Track = m_SoundTrack };
 		}
 	}
 }

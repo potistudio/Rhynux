@@ -13,22 +13,22 @@ public class _FullLogic : MonoBehaviour {
 	private Chart m_Chart;
 
 	private MusicPlayer m_MusicPlayer;
+	private SessionProxy m_Session;
 
 	private System.Collections.Generic.List<(Note, GameObject)> m_NoteObjects = new();
 
 	[VContainer.Inject]
-	private void Init (MusicPlayer _musicPlayer, SessionData _session, Chart _chart) {
-		m_Chart = _chart;
+	private void Inject (MusicPlayer _musicPlayer, SessionProxy _session) {
 		m_MusicPlayer = _musicPlayer;
+		m_Session = _session;
+	}
 
-		foreach (Note note in _session.Notes) {
+	public void Init() {
+		foreach (Note note in m_Session.Session.Notes) {
 			GameObject no = Instantiate(m_NotePrefab, Vector3.zero, Quaternion.identity);
 			m_NoteObjects.Add ((note, no));
 			no.transform.SetParent (m_NotesContainer);
 		}
-
-		m_MusicPlayer.Clip = m_Chart.Track.SoundClip;
-		m_MusicPlayer.Play();
 	}
 
 	public void DeactivateNote (int _index) {
@@ -39,7 +39,7 @@ public class _FullLogic : MonoBehaviour {
 		float noteWidth = m_FloorWidth / 4f;
 		foreach (var x in m_NoteObjects) {
 			x.Item2.transform.localPosition = new Vector3 (
-				(x.Item1.Position - 2.5f) * 1.5f,
+				(x.Item1.Position - 1.5f) * 1.5f,
 				0f,
 				((x.Item1.Time + m_UserOffset) + (-m_MusicPlayer.CurrentTime)) * m_ScrollSpeed
 			);

@@ -7,6 +7,10 @@ public class SceneLifetimeScope : VContainer.Unity.LifetimeScope {
 		base.Configure (builder);
 
 		builder.RegisterSceneLifecycle<SceneEntryPoint>();
+		builder.Register<SceneNavigator>(Lifetime.Singleton);
+
+		builder.RegisterComponentInHierarchy<MenuInput>();
+		builder.RegisterEntryPoint<TrackInfoViewPresenter>(Lifetime.Singleton);
 
 		builder.RegisterComponentInHierarchy<ScrollItemRegistrar>();
 		builder.RegisterComponentInHierarchy<TrackInfoView>();
