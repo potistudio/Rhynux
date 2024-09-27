@@ -1,6 +1,6 @@
 using UniRx;
 
-public class ComboDisplayPresenter : VContainer.Unity.IInitializable {
+public sealed class ComboDisplayPresenter : VContainer.Unity.IInitializable {
 	private readonly ComboDisplay m_View;
 	private readonly ComboManager m_ComboManager;
 

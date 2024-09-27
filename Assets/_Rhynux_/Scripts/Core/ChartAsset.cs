@@ -3,6 +3,7 @@ public abstract class ChartAsset : UnityEngine.ScriptableObject {
 	[UnityEngine.SerializeField] private int m_ChartDifficultyLevel;
 	[UnityEngine.SerializeField] private string m_Charter;
 
+	[UnityEngine.SerializeField] protected string m_Composer;
 	[UnityEngine.SerializeField] protected UnityEngine.Sprite m_Artwork;
 
 	public virtual Chart Chart { get; }

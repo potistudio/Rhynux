@@ -16,7 +16,7 @@ public class GameLifetimeScope : LifetimeScope {
 
 	private SessionManager m_SessionManager;
 	private RealtimeReferee m_RealtimeReferee;
-	private ReactiveReferee m_ReactiveReferee;
+	private InputReferee m_ReactiveReferee;
 	private NotesRefereeComposer m_NotesReferee;
 
 	protected override void Configure (IContainerBuilder builder) {
@@ -27,61 +27,44 @@ public class GameLifetimeScope : LifetimeScope {
 		builder.RegisterSceneLifecycle<SceneEntryPoint>();
 		builder.RegisterComponentInHierarchy<ScopedSceneEntryPoint>();
 
-		//* Notes Generator *//
-		// System.Collections.Generic.List<Note> generatedNotes = m_NotesGenerator.Generate (m_Chart.Chart).ToList();
-		// SessionData sessionData = new (generatedNotes);
-		// builder.Register (_ => sessionData, Lifetime.Singleton);
-		// builder.Register (_ => m_Chart.Chart, Lifetime.Singleton);
-
-		//* Input Handler *//
-		// switch (m_InputHandler) {
-		// 	case InputHandlers.Auto:
-		// 		builder.RegisterEntryPoint<AutoInputHandler>();
-		// 		break;
-
-		// 	case InputHandlers.Keyboard:
-		// 		builder.Register<KeyboardInputHandler>(Lifetime.Singleton).As<IInputHandler>();
-		// 		break;
-		// }
-
 		//* Factory *//
-		// builder.Register<InputHandlerFactory>(Lifetime.Singleton);
-		// builder.Register<AutoInputHandler>(Lifetime.Singleton);
-		// builder.Register<KeyboardInputHandler>(Lifetime.Singleton);
+		builder.Register<AutoInputHandler>(Lifetime.Singleton);
+		builder.Register<KeyboardInputHandler>(Lifetime.Singleton);
 
 		//* Logic *//
-		// builder.Register<RealtimeReferee>(Lifetime.Singleton);
-		// builder.Register<ReactiveReferee>(Lifetime.Singleton);
-		// builder.Register<NotesRefereeComposer>(Lifetime.Singleton);
+		builder.Register<InputHandlerFactory>(Lifetime.Singleton);
+		builder.RegisterEntryPoint<InputListener>(Lifetime.Singleton);
 
-
-		// builder.Register<ScoreManager>(Lifetime.Singleton);
-		// builder.Register<ComboManager>(Lifetime.Singleton);
-
-		//* Presenter *//
-		// builder.RegisterEntryPoint<SessionTimeUpdater>(Lifetime.Singleton);
-		// builder.RegisterEntryPoint<HitListener>(Lifetime.Singleton);
-		// builder.RegisterEntryPoint<JudgementDisplay>(Lifetime.Singleton);
-
-		// builder.RegisterEntryPoint<ScorePresenter>(Lifetime.Singleton);
-		// builder.RegisterEntryPoint<ScoreDisplayPresenter>(Lifetime.Singleton);
-
-		// builder.RegisterEntryPoint<ComboPresenter>(Lifetime.Singleton);
-		// builder.RegisterEntryPoint<ComboDisplayPresenter>(Lifetime.Singleton);
-
+		//* Referee
+		builder.Register<RealtimeReferee>(Lifetime.Singleton);
+		builder.Register<InputReferee>(Lifetime.Singleton);
+		builder.Register<RefereeFacade>(Lifetime.Singleton);
+		builder.RegisterEntryPoint<SessionTimeUpdater>(Lifetime.Singleton);
 
 		//* View *//
 		builder.RegisterEntryPoint<LogicPresenter>(Lifetime.Singleton);
 		builder.RegisterComponentInHierarchy<_FullLogic>();
+		builder.RegisterComponentInHierarchy<FloorTorquer>();
+		builder.RegisterEntryPoint<JudgementDisplay>(Lifetime.Singleton);
+		builder.RegisterComponentInHierarchy<AccuracyPopupEmitter>();
+		builder.RegisterComponentInHierarchy<HitEffectGenerator>();
+		builder.RegisterEntryPoint<HitListener>(Lifetime.Singleton);
 
-		// builder.RegisterComponentInHierarchy<FloorTorquer>();
-		// builder.RegisterComponentInHierarchy<InputVisualizer>();
-		// builder.RegisterComponentInHierarchy<HitEffectGenerator>();
-		// builder.RegisterComponentInHierarchy<AccuracyPopupEmitter>();
+		//* Lane Visualizer
+		builder.RegisterEntryPoint<LaneVisualizingPresenter>(Lifetime.Singleton);
+		builder.RegisterComponentInHierarchy<InputVisualizer>();
 
-		// builder.RegisterComponentInHierarchy<ScoreDisplay>();
-		// builder.RegisterComponentInHierarchy<ComboDisplay>();
-		builder.Register<SessionFacade>(Lifetime.Singleton);
+		//* Combo
+		builder.RegisterEntryPoint<ComboPresenter>(Lifetime.Singleton);
+		builder.RegisterEntryPoint<ComboDisplayPresenter>(Lifetime.Singleton);
+		builder.RegisterComponentInHierarchy<ComboDisplay>();
+		builder.Register<ComboManager>(Lifetime.Singleton);
+
+		//* Score
+		builder.Register<ScoreManager>(Lifetime.Singleton);
+		builder.RegisterComponentInHierarchy<ScoreDisplay>();
+		builder.RegisterEntryPoint<ScorePresenter>(Lifetime.Singleton);
+		builder.RegisterEntryPoint<ScoreDisplayPresenter>(Lifetime.Singleton);
 
 		//* Music Player
 		builder.RegisterEntryPoint<MusicPresenter>(Lifetime.Singleton);

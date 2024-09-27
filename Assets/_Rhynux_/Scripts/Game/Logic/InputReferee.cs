@@ -1,21 +1,17 @@
-
-using System;
 using System.Linq;
 using UniRx;
 
-public class ReactiveReferee {
-	private readonly System.Collections.Generic.IReadOnlyList<Note> m_NotesList;
+public sealed class InputReferee {
+	// private readonly System.Collections.Generic.IReadOnlyList<Note> m_NotesList;
+	private readonly SessionFactory m_SessionFactory;
 	private float m_CurrentTime;
 
 	private UniRx.Subject<(int index, int lane, AccuracyLevel accuracy)> m_OnHit = new();
 	public System.IObservable<(int index, int lane, AccuracyLevel accuracy)> OnHit => m_OnHit;
 
-	public ReactiveReferee (SessionData _session, IInputHandler _input) {
-		m_NotesList = _session.Notes;
-
-		_input.OnPressed.Subscribe (x => {
-			JudgeHit (x);
-		});
+	public InputReferee (SessionFactory _session) {
+		// m_NotesList = _session.Notes;
+		m_SessionFactory = _session;
 	}
 
 	/// <summary>
@@ -25,17 +21,19 @@ public class ReactiveReferee {
 	/// <param name="lane">Lane</param>
 	/// <returns>(int Index, float Distance)</returns>
 	private (int, float) FindNearestNote (float _time, int _lane) {
+		Note[] notes = m_SessionFactory.SessionPool.Notes;
+
 		int preventIndex = 0;
 		int currentIndex = 0;
 
-		int notesCountByLane = m_NotesList.Where (x => x.Position == _lane).Count();
+		int notesCountByLane = notes.Where (x => x.Position == _lane).Count();
 		int count = 0;
 
 		float minDistance = float.PositiveInfinity;
 
-		for (int i = 0; i < m_NotesList.Count; i++) {
-			if (m_NotesList[i].Position == _lane) {
-				float gap = System.Math.Abs (_time - m_NotesList[i].Time);
+		for (int i = 0; i < notes.Count(); i++) {
+			if (notes[i].Position == _lane) {
+				float gap = System.Math.Abs (_time - notes[i].Time);
 
 				if (gap > minDistance) {
 					currentIndex = preventIndex;

@@ -3,7 +3,7 @@ using UniRx;
 
 public sealed class NotesRefereeComposer {
 	private readonly RealtimeReferee m_RealtimeReferee;
-	private readonly ReactiveReferee m_ReactiveReferee;
+	private readonly InputReferee m_ReactiveReferee;
 
 	private readonly (Note note, NoteAvailableStatus status)[] m_NotesCollection;
 
@@ -13,7 +13,7 @@ public sealed class NotesRefereeComposer {
 	private readonly Subject<Unit> m_OnFall = new();
 	public System.IObservable<Unit> OnFall => m_OnFall;
 
-	public NotesRefereeComposer (SessionData _session, RealtimeReferee _realtimeReferee, ReactiveReferee _reactiveReferee) {
+	public NotesRefereeComposer (SessionData _session, RealtimeReferee _realtimeReferee, InputReferee _reactiveReferee) {
 		m_RealtimeReferee = _realtimeReferee;
 		m_ReactiveReferee = _reactiveReferee;
 		m_NotesCollection = _session.Notes.Select (x => (x, NoteAvailableStatus.Available)).ToArray();
