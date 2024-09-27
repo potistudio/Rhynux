@@ -18,5 +18,9 @@ public sealed class ComboPresenter : VContainer.Unity.IInitializable {
 
 			m_ComboManager.IncreaseCombo();
 		});
+
+		m_Referee.OnFall.Subscribe (x => {
+			m_ComboManager.ResetCombo();
+		});
 	}
 }
