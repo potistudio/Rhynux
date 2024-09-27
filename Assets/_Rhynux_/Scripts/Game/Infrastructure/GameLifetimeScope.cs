@@ -65,10 +65,8 @@ public class GameLifetimeScope : LifetimeScope {
 		// builder.Register<ComboManager>(Lifetime.Singleton);
 
 		//* Presenter *//
-		// builder.RegisterEntryPoint<SessionTimeUpdater>(Lifetime.Singleton);
 		// builder.RegisterEntryPoint<HitListener>(Lifetime.Singleton);
-		builder.RegisterEntryPoint<JudgementDisplay>(Lifetime.Singleton);
-		builder.RegisterComponentInHierarchy<AccuracyPopupEmitter>();
+
 
 		// builder.RegisterEntryPoint<ScorePresenter>(Lifetime.Singleton);
 		// builder.RegisterEntryPoint<ScoreDisplayPresenter>(Lifetime.Singleton);
@@ -81,12 +79,14 @@ public class GameLifetimeScope : LifetimeScope {
 		builder.RegisterEntryPoint<LogicPresenter>(Lifetime.Singleton);
 		builder.RegisterComponentInHierarchy<_FullLogic>();
 		builder.RegisterComponentInHierarchy<FloorTorquer>();
+		builder.RegisterEntryPoint<JudgementDisplay>(Lifetime.Singleton);
+		builder.RegisterComponentInHierarchy<AccuracyPopupEmitter>();
+		builder.RegisterComponentInHierarchy<HitEffectGenerator>();
 
 		//* Lane Visualizer
 		builder.RegisterEntryPoint<LaneVisualizingPresenter>(Lifetime.Singleton);
 		builder.RegisterComponentInHierarchy<InputVisualizer>();
 
-		// builder.RegisterComponentInHierarchy<HitEffectGenerator>();
 
 		// builder.RegisterComponentInHierarchy<ScoreDisplay>();
 		// builder.RegisterComponentInHierarchy<ComboDisplay>();

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UniRx;
 
-public class HitEffectGenerator : MonoBehaviour {
+public sealed class HitEffectGenerator : MonoBehaviour {
 	[SerializeField] private GameObject m_PerfectHitEffectPrefab;
 	[SerializeField] private GameObject m_GoodHitEffectPrefab;
 	[SerializeField] private GameObject m_MissHitEffectPrefab;
@@ -9,10 +9,10 @@ public class HitEffectGenerator : MonoBehaviour {
 	[SerializeField] private float m_Lifetime;
 
 	[VContainer.Inject]
-	private void Init (InputReferee _reactiveReferee) {
+	private void Inject (RefereeFacade _referee) {
 		GameObject target;
 
-		_reactiveReferee.OnHit.Subscribe (x => {
+		_referee.OnHit.Subscribe (x => {
 			switch (x.Item3) {
 				case AccuracyLevel.Perfect:
 					target = m_PerfectHitEffectPrefab;
