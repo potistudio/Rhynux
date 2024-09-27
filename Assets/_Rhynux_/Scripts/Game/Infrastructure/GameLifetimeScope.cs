@@ -62,7 +62,7 @@ public class GameLifetimeScope : LifetimeScope {
 
 
 		// builder.Register<ScoreManager>(Lifetime.Singleton);
-		// builder.Register<ComboManager>(Lifetime.Singleton);
+
 
 		//* Presenter *//
 		// builder.RegisterEntryPoint<HitListener>(Lifetime.Singleton);
@@ -71,8 +71,7 @@ public class GameLifetimeScope : LifetimeScope {
 		// builder.RegisterEntryPoint<ScorePresenter>(Lifetime.Singleton);
 		// builder.RegisterEntryPoint<ScoreDisplayPresenter>(Lifetime.Singleton);
 
-		// builder.RegisterEntryPoint<ComboPresenter>(Lifetime.Singleton);
-		// builder.RegisterEntryPoint<ComboDisplayPresenter>(Lifetime.Singleton);
+
 
 
 		//* View *//
@@ -89,7 +88,12 @@ public class GameLifetimeScope : LifetimeScope {
 
 
 		// builder.RegisterComponentInHierarchy<ScoreDisplay>();
-		// builder.RegisterComponentInHierarchy<ComboDisplay>();
+
+		//* Combo
+		builder.RegisterEntryPoint<ComboPresenter>(Lifetime.Singleton);
+		builder.RegisterEntryPoint<ComboDisplayPresenter>(Lifetime.Singleton);
+		builder.RegisterComponentInHierarchy<ComboDisplay>();
+		builder.Register<ComboManager>(Lifetime.Singleton);
 
 		//* Music Player
 		builder.RegisterEntryPoint<MusicPresenter>(Lifetime.Singleton);
