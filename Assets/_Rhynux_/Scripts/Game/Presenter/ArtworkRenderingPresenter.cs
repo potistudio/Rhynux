@@ -8,8 +8,7 @@ public sealed class ArtworkRenderingPresenter : VContainer.Unity.IStartable {
 	}
 
 	public void Start() {
-		Chart chart = m_Session.Session.Chart;
-		UnityEngine.Sprite sprite = chart.Artwork;
+		UnityEngine.Sprite sprite = m_Session.Session.Chart.Artwork;
 		m_Renderer.SetSprite (sprite);
 	}
 }
