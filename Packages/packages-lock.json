@@ -37,7 +37,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "1f57d5e49abb6ba7990dc61f43c66ad7d5223438"
+      "hash": "e11ce9c12c65c12f3bc35ae2ef7cacde6826e503"
     },
     "com.baracuda.runtime-monitoring": {
       "version": "https://github.com/JohnBaracuda/com.baracuda.runtime-monitoring.git",
@@ -65,7 +65,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "fbe0bf85155f42f8832205f7b3ac3df571ada33e"
+      "hash": "2e0917428bc49a88f8bb90f3cbdeabd4d978ae30"
     },
     "com.mackysoft.navigathena": {
       "version": "https://github.com/mackysoft/Navigathena.git?path=Assets/MackySoft/MackySoft.Navigathena",
@@ -86,7 +86,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "7cce378b3f8c8943b4cac8e847bdbb8e2e1802d1"
+      "hash": "6baeccf6c544c155497164327cca72f28163a578"
     },
     "com.unity.addressables": {
       "version": "1.22.2",
@@ -373,7 +373,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "b82cd291f930d25df0315c6ca0ac14240cb051d9"
+      "hash": "afaeff82040994f7836afa9f5116eb52a4e54f69"
     },
     "jp.setchi.fancyscrollview": {
       "version": "https://github.com/setchi/FancyScrollView.git#upm",
@@ -392,7 +392,7 @@
         "com.unity.shadergraph": "10.0.0",
         "com.unity.mathematics": "1.0.0"
       },
-      "hash": "7813092a7527445867cc6f27120a1e46d5aab3df"
+      "hash": "e20fd5aedff6bc15cc12a083967c4a3288e6ae91"
     },
     "com.unity.modules.animation": {
       "version": "1.0.0",
