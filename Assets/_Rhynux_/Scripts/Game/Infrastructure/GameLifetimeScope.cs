@@ -1,23 +1,9 @@
-using System;
-using System.Collections;
-using System.Linq;
-using MackySoft.Navigathena.SceneManagement.VContainer;
 using VContainer;
 using VContainer.Unity;
+using MackySoft.Navigathena.SceneManagement.VContainer;
 
-public class GameLifetimeScope : LifetimeScope {
-	[UnityEngine.SerializeReference] public INotesGenerator m_NotesGenerator;
-	// [UnityEngine.SerializeReference] public IInputHandler m_InputHandler;
-	[UnityEngine.SerializeField] private InputHandlers m_InputHandler;
+public sealed class GameLifetimeScope : LifetimeScope {
 	[UnityEngine.SerializeField] private ChartAsset m_Chart;
-
-	private _FullLogic m_FullLogic;
-	private MusicPlayer m_MusicPlayer;
-
-	private SessionManager m_SessionManager;
-	private RealtimeReferee m_RealtimeReferee;
-	private InputReferee m_ReactiveReferee;
-	private NotesRefereeComposer m_NotesReferee;
 
 	protected override void Configure (IContainerBuilder builder) {
 		//* Instance *//
@@ -87,10 +73,5 @@ public class GameLifetimeScope : LifetimeScope {
 		builder.RegisterComponentInHierarchy<SceneNavigationInput>();
 
 		UnityEngine.Debug.Log ("VContainer Injection has Completed");
-	}
-
-	private enum InputHandlers {
-		Auto,
-		Keyboard
 	}
 }
