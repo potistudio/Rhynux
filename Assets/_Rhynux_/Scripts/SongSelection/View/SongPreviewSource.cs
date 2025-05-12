@@ -1,7 +1,7 @@
 
 using UnityEngine;
 using UniRx;
-using MagicTween;
+using LitMotion;
 
 #if UNITY_EDITOR
 using UnityEditor;
