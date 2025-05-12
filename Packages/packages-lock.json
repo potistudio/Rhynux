@@ -5,7 +5,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "84fb71550bf28d2b5250adafac948e802ddd4b51"
+      "hash": "3f8d35f6d286aef760ca44fa4191790868df41eb"
     },
     "com.annulusgames.burst-linq": {
       "version": "https://github.com/AnnulusGames/BurstLinq.git?path=/Assets/BurstLinq",
@@ -23,7 +23,7 @@
         "com.unity.collections": "1.5.1",
         "com.unity.mathematics": "1.0.1"
       },
-      "hash": "b6002a25d18b889216d886ee787fe1878e66be00"
+      "hash": "b651c5866fe0e3fba065ce2e56dfdfcd59d3d109"
     },
     "com.annulusgames.magic-tween": {
       "version": "https://github.com/AnnulusGames/MagicTween.git?path=/MagicTween/Assets/MagicTween",
@@ -65,7 +65,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "2e0917428bc49a88f8bb90f3cbdeabd4d978ae30"
+      "hash": "06067cd4c83e372310d6f79d1c625f6870ff7a2a"
     },
     "com.mackysoft.navigathena": {
       "version": "https://github.com/mackysoft/Navigathena.git?path=Assets/MackySoft/MackySoft.Navigathena",
@@ -103,7 +103,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.burst": {
-      "version": "1.8.18",
+      "version": "1.8.21",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -164,7 +164,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.visualstudio": {
-      "version": "2.0.22",
+      "version": "2.0.23",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -189,10 +189,14 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.memoryprofiler": {
-      "version": "1.1.1",
+      "version": "1.1.6",
       "depth": 0,
       "source": "registry",
       "dependencies": {
+        "com.unity.burst": "1.8.0",
+        "com.unity.collections": "1.2.3",
+        "com.unity.mathematics": "1.2.1",
+        "com.unity.profiling.core": "1.0.0",
         "com.unity.editorcoroutines": "1.0.0"
       },
       "url": "https://packages.unity.com"
@@ -219,7 +223,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.render-pipelines.core": {
-      "version": "14.0.11",
+      "version": "14.0.10",
       "depth": 1,
       "source": "builtin",
       "dependencies": {
@@ -236,17 +240,17 @@
       "dependencies": {
         "com.unity.mathematics": "1.2.1",
         "com.unity.burst": "1.8.9",
-        "com.unity.render-pipelines.core": "14.0.11",
-        "com.unity.shadergraph": "14.0.11",
+        "com.unity.render-pipelines.core": "14.0.10",
+        "com.unity.shadergraph": "14.0.10",
         "com.unity.render-pipelines.universal-config": "14.0.9"
       }
     },
     "com.unity.render-pipelines.universal-config": {
-      "version": "14.0.10",
+      "version": "14.0.9",
       "depth": 1,
       "source": "builtin",
       "dependencies": {
-        "com.unity.render-pipelines.core": "14.0.10"
+        "com.unity.render-pipelines.core": "14.0.9"
       }
     },
     "com.unity.scriptablebuildpipeline": {
@@ -278,7 +282,7 @@
       "depth": 0,
       "source": "builtin",
       "dependencies": {
-        "com.unity.render-pipelines.core": "14.0.11",
+        "com.unity.render-pipelines.core": "14.0.10",
         "com.unity.searcher": "4.9.2"
       }
     },
@@ -329,7 +333,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.timeline": {
-      "version": "1.7.6",
+      "version": "1.7.7",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -341,7 +345,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.toolchain.win-x86_64-linux-x86_64": {
-      "version": "2.0.9",
+      "version": "2.0.10",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -364,8 +368,8 @@
       "depth": 0,
       "source": "builtin",
       "dependencies": {
-        "com.unity.shadergraph": "14.0.11",
-        "com.unity.render-pipelines.core": "14.0.11"
+        "com.unity.shadergraph": "14.0.10",
+        "com.unity.render-pipelines.core": "14.0.10"
       }
     },
     "jp.hadashikick.vcontainer": {
@@ -373,7 +377,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "afaeff82040994f7836afa9f5116eb52a4e54f69"
+      "hash": "53b5e3ac9ff889aa637580769d0d07b5d1e35e4f"
     },
     "jp.setchi.fancyscrollview": {
       "version": "https://github.com/setchi/FancyScrollView.git#upm",
@@ -392,7 +396,7 @@
         "com.unity.shadergraph": "10.0.0",
         "com.unity.mathematics": "1.0.0"
       },
-      "hash": "e20fd5aedff6bc15cc12a083967c4a3288e6ae91"
+      "hash": "4da23d4f010d1bbdfec0e024bb9f2758516ecf5f"
     },
     "com.unity.modules.animation": {
       "version": "1.0.0",
