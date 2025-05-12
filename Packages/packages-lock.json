@@ -377,7 +377,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "afaeff82040994f7836afa9f5116eb52a4e54f69"
+      "hash": "53b5e3ac9ff889aa637580769d0d07b5d1e35e4f"
     },
     "jp.setchi.fancyscrollview": {
       "version": "https://github.com/setchi/FancyScrollView.git#upm",
