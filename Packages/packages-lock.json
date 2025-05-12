@@ -25,13 +25,6 @@
       },
       "hash": "b651c5866fe0e3fba065ce2e56dfdfcd59d3d109"
     },
-    "com.annulusgames.magic-tween": {
-      "version": "https://github.com/AnnulusGames/MagicTween.git?path=/MagicTween/Assets/MagicTween",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "0a5b840044d206002b01f4f48f908592596e08b4"
-    },
     "com.annulusgames.u-pools": {
       "version": "https://github.com/AnnulusGames/uPools.git?path=/Assets/uPools",
       "depth": 0,
