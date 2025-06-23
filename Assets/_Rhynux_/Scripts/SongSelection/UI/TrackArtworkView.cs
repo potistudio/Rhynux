@@ -1,5 +1,6 @@
 using UnityEngine;
-using MagicTween;
+using LitMotion;
+using LitMotion.Extensions;
 
 public class TrackArtworkView : MonoBehaviour {
 	[SerializeField] private RectTransform m_ImageRect;
@@ -14,17 +15,16 @@ public class TrackArtworkView : MonoBehaviour {
 
 		m_ImageComponent.sprite = _sprite;
 
-		m_ImageRect.TweenLocalEulerAngles (Vector3.forward * 8f, Vector3.forward * 2f, m_Duration)
-			.SetEase (m_Ease);
+		LMotion.Create(Vector3.forward * 8f, Vector3.forward * 2f, m_Duration)
+			.WithEase(m_Ease)
+			.BindToLocalEulerAngles (m_ImageRect);
 
-		m_ImageRect.TweenLocalScale (Vector3.one * 0.9f, Vector3.one, m_Duration)
-			.SetEase (m_Ease);
+		LMotion.Create(Vector3.one * 0.9f, Vector3.one, m_Duration)
+			.WithEase(m_Ease)
+			.BindToLocalScale(m_ImageRect);
 
-		Tween.FromTo (x => {
-				Color color = m_ImageComponent.color;
-				color.a = x;
-				m_ImageComponent.color = color;
-			}, 0f, 1f, m_Duration)
-			.SetEase (m_Ease);
+		LMotion.Create (0f, 1f, m_Duration)
+			.WithEase (m_Ease)
+			.BindToColorA (m_ImageComponent);
 	}
 }

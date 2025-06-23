@@ -1,7 +1,7 @@
 
 using UnityEngine;
 using UniRx;
-using MagicTween;
+using LitMotion;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -64,29 +64,29 @@ public class SongPreviewSource : MonoBehaviour {
 								.AddTo (this);
 
 		//* Fade out
-		Tween.To (() => sourceFrom.volume, x => sourceFrom.volume = x, 0f, m_CrossFadingTime)
-			.SetEase (m_Ease)
-			.SetLink (sourceFrom.gameObject);
+		LMotion.Create (sourceFrom.volume, 0f, m_CrossFadingTime)
+			.WithEase (m_Ease)
+			.AddTo (sourceFrom.gameObject);
 
 		//* Fade in
-		Tween.To (() => sourceTo.volume, x => sourceTo.volume = x, 1f, m_CrossFadingTime)
-			.SetEase (m_Ease)
-			.SetLink (sourceTo.gameObject);
+		LMotion.Create (sourceTo.volume, 1f, m_CrossFadingTime)
+			.WithEase (m_Ease)
+			.AddTo (sourceTo.gameObject);
 
 		m_CurrentClip = clip;
 		m_CurrentAudioSource = sourceTo;
 	}
 
 	public void FadeOut (float _duration) {
-		Tween.To (() => m_CurrentAudioSource.volume, x => m_CurrentAudioSource.volume = x, 0f, _duration)
-			.SetEase (m_Ease)
-			.SetLink (m_CurrentAudioSource.gameObject);
+		LMotion.Create (m_CurrentAudioSource.volume, 0f, _duration)
+			.WithEase (m_Ease)
+			.AddTo (m_CurrentAudioSource.gameObject);
 	}
 
 	public void FadeIn (float _duration) {
-		Tween.To (() => m_CurrentAudioSource.volume, x => m_CurrentAudioSource.volume = x, 1f, _duration)
-			.SetEase (m_Ease)
-			.SetLink (m_CurrentAudioSource.gameObject);
+		LMotion.Create (m_CurrentAudioSource.volume, 1f, _duration)
+			.WithEase (m_Ease)
+			.AddTo (m_CurrentAudioSource.gameObject);
 	}
 }
 

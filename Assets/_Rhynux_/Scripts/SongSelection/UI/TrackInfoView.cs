@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
-using MagicTween;
+using LitMotion;
+using LitMotion.Extensions;
 
 public sealed class TrackInfoView : MonoBehaviour {
 	[SerializeField] private Transform m_TitleTextTransform;
@@ -18,7 +19,7 @@ public sealed class TrackInfoView : MonoBehaviour {
 
 	[SerializeField] private Ease m_Ease;
 
-	private Sequence m_Sequence;
+	private MotionHandle m_Sequence;
 
 	[VContainer.Inject]
 	private void Init() {
@@ -28,31 +29,36 @@ public sealed class TrackInfoView : MonoBehaviour {
 		m_DefaultTitleTextPosition = m_TitleTextTransform.localPosition;
 		m_DefaultArtistTextPosition = m_ArtistTextTransform.localPosition;
 
-		m_Sequence = Sequence.Create();
-		m_Sequence.SetAutoKill (false);
-		m_Sequence.SetAutoPlay (false);
+		MotionSequenceBuilder sequence = LSequence.Create();
 
-		m_Sequence.Append (
-			m_TitleTextTransform.TweenLocalPositionX (m_DefaultTitleTextPosition.x - m_Backing, m_DefaultTitleTextPosition.x, m_Duration)
-				.SetEase (m_Ease)
+		sequence.Append(
+			LMotion.Create(m_DefaultTitleTextPosition.x - m_Backing, m_DefaultTitleTextPosition.x, m_Duration)
+				.WithEase(m_Ease)
+				.BindToLocalPositionX(m_TitleTextTransform)
 		);
 
-		m_Sequence.Join (
-			m_ArtistTextTransform.TweenLocalPositionX (m_DefaultArtistTextPosition.x - m_Backing, m_DefaultArtistTextPosition.x, m_Duration)
-				.SetDelay (m_Delay)
-				.SetEase (m_Ease)
+		sequence.Join(
+			LMotion.Create(m_DefaultArtistTextPosition.x - m_Backing, m_DefaultArtistTextPosition.x, m_Duration)
+				.WithEase(m_Ease)
+				.WithDelay(m_Delay)
+				.BindToLocalPositionX(m_ArtistTextTransform)
 		);
 
-		m_Sequence.Join (
-			Tween.FromTo (x => m_TitleTextMesh.alpha = x, 0f, 1f, m_Duration)
-				.SetEase (m_Ease)
+		sequence.Join(
+			LMotion.Create(0f, 1f, m_Duration)
+				.WithEase(m_Ease)
+				.BindToColorA(m_TitleTextMesh)
 		);
 
-		m_Sequence.Join (
-			Tween.FromTo (x => m_ArtistTextMesh.alpha = x, 0f, 0.8f, m_Duration)
-				.SetDelay (m_Delay)
-				.SetEase (m_Ease)
+		sequence.Join(
+			LMotion.Create(0f, 0.8f, m_Duration)
+				.WithDelay(m_Delay)
+				.WithEase(m_Ease)
+				.BindToColorA(m_ArtistTextMesh)
 		);
+
+		m_Sequence = sequence.Run();
+		m_Sequence.Preserve();
 	}
 
 	public void ChangeInfoContent (string _title, string _artist) {
@@ -62,6 +68,6 @@ public sealed class TrackInfoView : MonoBehaviour {
 		m_TitleTextMesh.text = _title;
 		m_ArtistTextMesh.text = _artist;
 
-		m_Sequence.Restart();
+		m_Sequence.Complete();
 	}
 }
