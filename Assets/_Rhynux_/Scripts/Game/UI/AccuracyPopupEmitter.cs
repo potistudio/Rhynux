@@ -1,5 +1,5 @@
 using UnityEngine;
-using MagicTween;
+using LitMotion;
 
 public class AccuracyPopupEmitter : MonoBehaviour {
 	[SerializeField] private GameObject m_PopupObject;
@@ -8,25 +8,23 @@ public class AccuracyPopupEmitter : MonoBehaviour {
 	[SerializeField] private float m_Scale;
 
 	private TMPro.TextMeshProUGUI m_PopupText;
-	private Sequence m_Sequence;
+	private MotionHandle m_Sequence;
 
 	private void Start() {
 		m_PopupText = m_PopupObject.GetComponentInChildren<TMPro.TextMeshProUGUI>();
 
-		m_Sequence = Sequence.Create();
-		m_Sequence.SetAutoKill (false);
-		m_Sequence.SetAutoPlay (false);
-		m_Sequence.OnComplete (() => m_PopupObject.SetActive(false));
+		// MotionSequenceBuilder sequence = LSequence.Create();
+		// m_Sequence.OnComplete (() => m_PopupObject.SetActive(false));
 
-		m_Sequence.Join (m_PopupObject.transform
-			.TweenLocalScale (Vector3.one * m_Scale, Vector3.one, m_Duration)
-			.SetEase (Ease.OutCubic)
-		);
+		// m_Sequence.Join (m_PopupObject.transform
+		// 	.TweenLocalScale (Vector3.one * m_Scale, Vector3.one, m_Duration)
+		// 	.SetEase (Ease.OutCubic)
+		// );
 
-		m_Sequence.Join (m_PopupText
-			.TweenAlpha (1f, 0f, m_Duration)
-			.SetEase (Ease.OutCubic)
-		);
+		// m_Sequence.Join (m_PopupText
+		// 	.TweenAlpha (1f, 0f, m_Duration)
+		// 	.SetEase (Ease.OutCubic)
+		// );
 	}
 
 	public void Emit (AccuracyLevel _accuracyLevel) {
@@ -45,6 +43,6 @@ public class AccuracyPopupEmitter : MonoBehaviour {
 				break;
 		}
 
-		m_Sequence.Restart();
+		m_Sequence.Complete();
 	}
 }
