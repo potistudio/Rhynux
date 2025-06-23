@@ -65,7 +65,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "09adc32031f0c671bc84045de3803a00bcc4e781"
+      "hash": "0034a5d4ab27fac4ae8eea52b7c57a8d47c8a585"
     },
     "com.needle.compilation-visualizer": {
       "version": "https://github.com/needle-tools/compilation-visualizer.git",
