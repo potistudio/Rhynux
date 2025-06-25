@@ -7,20 +7,18 @@ public sealed class JsonChartAsset : ChartAsset {
 	[SerializeField] private AudioClip m_SongClip;
 	[SerializeField] private bool m_Secured;
 
-	public override Chart Chart {
-		get {
-			JsonChart jsonChart = JsonUtility.FromJson<JsonChart>(m_JsonChartText.text);
-			System.Collections.Generic.IList<Note> notes;
+	public override Chart Unpack() {
+		JsonChart jsonChart = JsonUtility.FromJson<JsonChart>(m_JsonChartText.text);
+		System.Collections.Generic.IList<Note> notes;
 
-			notes = jsonChart.notes.Select (x => {
-				float time = (float)x.num / (float)x.LPB;
-				int lane = x.block;
+		notes = jsonChart.notes.Select (x => {
+			float time = (float)x.num / (float)x.LPB;
+			int lane = x.block;
 
-				return new Note (time, lane);
-			}).ToArray();
+			return new Note (time, lane);
+		}).ToArray();
 
-			return new Chart (jsonChart.name, m_Composer, jsonChart.BPM, jsonChart.offset * 0.0001f, new SoundTrack(m_SongClip), notes, m_Artwork, m_Secured);
-		}
+		return new Chart (jsonChart.name, m_Composer, jsonChart.BPM, jsonChart.offset * 0.0001f, new SoundTrack(m_SongClip), notes, m_Artwork, m_Secured);
 	}
 
 	private class JsonChart {

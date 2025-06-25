@@ -6,8 +6,8 @@ public sealed class ScrollItemRegistrar : MonoBehaviour {
     [SerializeField] private bool m_AutoGeneration;
     [SerializeField] private int m_GenerationCount;
 
-    [SerializeField] private List<ChartAsset> m_Charts = new();
-	public List<Chart> Charts => m_Charts.Select(x => x.Chart).ToList();
+    [SerializeField] private List<ChartAsset> m_ChartAssets = new();
+	public List<Chart> Charts => m_ChartAssets.Select(x => x.Unpack()).ToList();
 
 	[VContainer.Inject]
     private void Init (ScrollView _scrollView) {
@@ -17,7 +17,7 @@ public sealed class ScrollItemRegistrar : MonoBehaviour {
             var i = Enumerable.Range (0, m_GenerationCount);
 			generatedCharts = i.Select (_ => new Chart(RandomBase64(), RandomBase64(), 120f, 0f, null, new Note[0]));
 		} else {
-			generatedCharts = m_Charts.Select(x => x.Chart);
+			generatedCharts = m_ChartAssets.Select(x => x.Unpack());
 		}
 
         _scrollView.UpdateData (generatedCharts.ToArray());

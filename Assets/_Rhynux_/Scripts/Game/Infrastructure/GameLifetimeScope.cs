@@ -3,11 +3,11 @@ using VContainer.Unity;
 using MackySoft.Navigathena.SceneManagement.VContainer;
 
 public sealed class GameLifetimeScope : LifetimeScope {
-	[UnityEngine.SerializeField] private ChartAsset m_Chart;
+	[UnityEngine.SerializeField] private ChartAsset m_ChartAsset;
 
 	protected override void Configure (IContainerBuilder builder) {
 		//* Instance *//
-		builder.RegisterInstance<Chart>(m_Chart.Chart);
+		builder.RegisterInstance<Chart>(m_ChartAsset.Unpack());
 
 		//* Lifecycle *//
 		builder.RegisterSceneLifecycle<SceneEntryPoint>();

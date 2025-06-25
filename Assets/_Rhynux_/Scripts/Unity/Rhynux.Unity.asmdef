@@ -1,0 +1,16 @@
+{
+    "name": "Rhynux.Unity",
+    "rootNamespace": "",
+    "references": [
+        "GUID:048465f7c8ae7fd4c88015adf29aa9f6"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

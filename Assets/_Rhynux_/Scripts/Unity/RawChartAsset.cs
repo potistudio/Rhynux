@@ -11,9 +11,7 @@ public sealed class RawChartAsset : ChartAsset {
 	[SerializeField] private System.Collections.Generic.List<Note> m_Notes;
 	[SerializeField] private bool m_Secured;
 
-	public override Chart Chart {
-		get {
+	public override Chart Unpack() {
 			return new Chart (m_Title, m_Artist, m_BPM, m_Offset, m_SoundTrack, m_Notes, m_Artwork, m_Secured) { Track = m_SoundTrack };
-		}
 	}
 }
