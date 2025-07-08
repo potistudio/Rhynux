@@ -15,7 +15,7 @@ public sealed class ScrollItemRegistrar : MonoBehaviour {
 
         if (m_AutoGeneration) {
             var i = Enumerable.Range (0, m_GenerationCount);
-			generatedCharts = i.Select (_ => new Chart(RandomBase64(), RandomBase64(), 120f, 0f, null, new Note[0]));
+			generatedCharts = i.Select (_ => new Chart(RandomBase64(), new string[] { RandomBase64() }, 120f, 0f, null, new Note[0]));
 		} else {
 			generatedCharts = m_ChartAssets.Select(x => x.Unpack());
 		}

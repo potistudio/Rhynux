@@ -1,0 +1,49 @@
+@startuml
+
+package MonoBehaviour {
+	package Presenter {
+		class TimeUpdater
+	}
+
+	package View {
+		class AudioPlayer
+		class NotesRenderer
+		class EffectsRenderer
+	}
+}
+
+package Logic {
+	class TimeManager
+	class Referee {
+		+new()
+		+reset()
+		+commit()
+		+accuracy()
+		+real_time_accuracy()
+		+score()
+		+on_new_frame()
+		+touch_transform()
+		+get_touches()
+		+update()
+	}
+	class JudgeInner {
+		+new()
+		+commit()
+		+reset()
+		+accuracy()
+		+real_time_accuracy()
+		+score()
+		+result()
+		+combo()
+		+counts()
+	}
+}
+
+Referee -> TimeManager
+NotesRenderer -> Referee
+EffectsRenderer -> Referee
+TimeUpdater -> TimeManager
+TimeUpdater -> AudioPlayer
+Referee -|> JudgeInner : uses
+
+@enduml

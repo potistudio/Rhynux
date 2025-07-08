@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Raw Chart", menuName = "Rhynux/Raw Chart")]
 public sealed class RawChartAsset : ChartAsset {
 	[SerializeField] private string m_Title;
-	[SerializeField] private string m_Artist;
+	[SerializeField] private string[] m_Artist;
 	[SerializeField] private float m_BPM;
 	[SerializeField] private float m_Offset;
 	[SerializeField] private AudioClip m_Clip;

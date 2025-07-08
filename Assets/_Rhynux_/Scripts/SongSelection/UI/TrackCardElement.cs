@@ -13,7 +13,7 @@ public sealed class TrackCardElement : FancyScrollView.FancyCell<Chart> {
 
 	public override void UpdateContent (Chart itemData) {
 		m_TitleTextField.text = itemData.Title;
-		m_ArtistTextField.text = itemData.Artist;
+		m_ArtistTextField.text = itemData.Artists[0];
 	}
 
 	public override void UpdatePosition (float position) {

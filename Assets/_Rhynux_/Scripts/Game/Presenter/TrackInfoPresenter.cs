@@ -9,6 +9,6 @@ public sealed class TrackInfoPresenter : VContainer.Unity.IStartable {
 
 	public void Start() {
 		Chart chart = m_Session.SessionPool.Chart;
-		m_TrackInfoBanner.SetLabel (chart.Title, chart.Artist);
+		m_TrackInfoBanner.SetLabel (chart.Title, chart.Artists[0]);
 	}
 }

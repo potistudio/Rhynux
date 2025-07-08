@@ -18,7 +18,7 @@ public sealed class JsonChartAsset : ChartAsset {
 			return new Note (time, lane);
 		}).ToArray();
 
-		return new Chart (jsonChart.name, m_Composer, jsonChart.BPM, jsonChart.offset * 0.0001f, new SoundTrack(m_SongClip), notes, m_Artwork, m_Secured);
+		return new Chart (jsonChart.name, m_Composers, jsonChart.BPM, jsonChart.offset * 0.0001f, new SoundTrack(m_SongClip), notes, m_Artwork, m_Secured);
 	}
 
 	private class JsonChart {

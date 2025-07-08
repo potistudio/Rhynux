@@ -13,7 +13,7 @@ public sealed class TrackInfoViewPresenter : VContainer.Unity.IInitializable, Sy
 
 	public void Initialize() {
 		m_ScrollView.OnSelectionChange.Subscribe (x => {
-			m_TrackInfoView.ChangeInfoContent (x.Title, x.Artist);
+			m_TrackInfoView.ChangeInfoContent (x.Title, x.Artists[0]);
 		}).AddTo (m_Disposable);
 	}
 
