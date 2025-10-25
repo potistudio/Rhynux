@@ -56,7 +56,7 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Rhynux.sln",
+    "dotnet.defaultSolution": "Rhynux.slnx",
     "cSpell.words": [
         "Addressables",
         "Behaviour",

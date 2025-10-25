@@ -1,0 +1,22 @@
+﻿<Solution>
+  <Project Path="Rhynux.Unity.csproj" />
+  <Project Path="Rhynux.InputActions.csproj" />
+  <Project Path="Rhynux.Core.csproj" />
+  <Project Path="Rhynux.Selection.UI.csproj" />
+  <Project Path="Rhynux.Game.Presenter.csproj" />
+  <Project Path="Rhynux.Game.Model.csproj" />
+  <Project Path="Rhynux.Game.Factories.csproj" />
+  <Project Path="Rhynux.Game.Audio.csproj" />
+  <Project Path="Rhynux.Selection.Input.csproj" />
+  <Project Path="Rhynux.Game.Core.csproj" />
+  <Project Path="Rhynux.Game.View.csproj" />
+  <Project Path="Tests.Editor.csproj" />
+  <Project Path="Rhynux.Game.Input.csproj" />
+  <Project Path="Rhynux.Game.UI.csproj" />
+  <Project Path="Rhynux.Selection.csproj" />
+  <Project Path="Rhynux.Selection.View.csproj" />
+  <Project Path="Rhynux.Game.Infrastructure.csproj" />
+  <Project Path="Rhynux.Selection.Presenter.csproj" />
+  <Project Path="Rhynux.Game.Proxy.csproj" />
+  <Project Path="Rhynux.Title.csproj" />
+</Solution>
