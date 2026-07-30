@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using MackySoft.Navigathena.SceneManagement;
 
@@ -11,9 +10,14 @@ public class SceneNavigator : MonoBehaviour {
 		m_ScrollView = _view;
 	}
 
-	public async void StartSession() {
+	public void StartSession() {
+		PushSessionAsync().Forget();
+	}
+
+	// UniTaskVoid over async void: an exception thrown inside async void is swallowed
+	// by the synchronization context, while Forget() routes it to UniTask's handler.
+	private async UniTaskVoid PushSessionAsync() {
 		ISceneIdentifier sceneIdentifier = new BuiltInSceneIdentifier ("Sample");
-		int index = m_ScrollView.CurrentSelectingIndex;
 		Chart selectingChart = m_ScrollView.CurrentSelectingChart;
 
 		await GlobalSceneNavigator.Instance.Push (sceneIdentifier, null, new GameSceneRequest { AutoMode = true, Chart = selectingChart });

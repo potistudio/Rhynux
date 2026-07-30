@@ -43,7 +43,13 @@ public sealed class MenuInput : UnityEngine.MonoBehaviour {
 		m_SceneNavigator.StartSession();
 	}
 
-	private async void BackScene() {
+	private void BackScene() {
+		PopAsync().Forget();
+	}
+
+	// UniTaskVoid over async void: an exception thrown inside async void is swallowed
+	// by the synchronization context, while Forget() routes it to UniTask's handler.
+	private async Cysharp.Threading.Tasks.UniTaskVoid PopAsync() {
 		await GlobalSceneNavigator.Instance.Pop ();
 	}
 }

@@ -7,7 +7,14 @@ public sealed class SceneMover : UnityEngine.MonoBehaviour {
 		m_SceneIdentifier = new BuiltInSceneIdentifier ("SongSelectionMenu");
 	}
 
-	public async void NextScene() {
+	// Stays a plain void so UnityEvent (button OnClick) can still bind to it.
+	public void NextScene() {
+		PushNextSceneAsync().Forget();
+	}
+
+	// UniTaskVoid over async void: an exception thrown inside async void is swallowed
+	// by the synchronization context, while Forget() routes it to UniTask's handler.
+	private async Cysharp.Threading.Tasks.UniTaskVoid PushNextSceneAsync() {
 		await GlobalSceneNavigator.Instance.Push (m_SceneIdentifier);
 	}
 }
