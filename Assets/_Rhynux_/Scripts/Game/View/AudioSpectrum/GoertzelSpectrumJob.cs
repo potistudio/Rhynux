@@ -13,7 +13,6 @@ public struct GoertzelSpectrumJob : Unity.Jobs.IJob {
 	public int m_FreqMax;
 	public int m_AudioDuration;
 
-	public float m_SmoothingTimeConstant;
 	public float m_WindowSkew;
 
 	private readonly float Remap (float _x, float _inMin, float _inMax, float _outMin, float _outMax) {
@@ -81,12 +80,6 @@ public struct GoertzelSpectrumJob : Unity.Jobs.IJob {
 		freqBands.Dispose();
 	}
 
-	private readonly void ApplySmoothingTimeConstant (ref NativeArray<float> _targetArray, in NativeArray<float> _sourceArray, float _factor = 0.5f) {
-		for (int i = 0; i < _targetArray.Length; i++) {
-			_targetArray[i] = (float.IsNaN(_targetArray[i]) ? 0f : _targetArray[i]) * _factor + (float.IsNaN(_sourceArray[i]) ? 0f : _sourceArray[i]) * (1f - _factor);
-		}
-	}
-
 	public void Execute() {
 		int FFT_SIZE = (int)System.Math.Round (m_AudioDuration * (m_SampleRate * 0.001f));
 
@@ -107,25 +100,21 @@ public struct GoertzelSpectrumJob : Unity.Jobs.IJob {
 
 		NativeArray<float> resultBuffer = new (m_SamplesOut, Allocator.Temp);
 		CalcGoertzelSpectrum (ref resultBuffer, audioBuffer);
-		NativeArray<float> dataArray = new (resultBuffer.Length, Allocator.Temp);
-		NativeArray<float> rs = new (m_SamplesOut, Allocator.Temp);
+
+		// The bands only depend on the configured range, so build them once per run
+		// rather than rebuilding the whole table for every single bin.
+		NativeArray<Freq> freqBands = new (m_SamplesOut, Allocator.Temp);
+		GenerateFreqBands (ref freqBands, m_SamplesOut, m_FreqMin, m_FreqMax);
+
+		float gain = DBToLinear (m_OutputMultiplier);
 
 		for (int i = 0; i < resultBuffer.Length; i++) {
-			NativeArray<Freq> freqBands = new (m_SamplesOut, Allocator.Temp);
-			GenerateFreqBands (ref freqBands, m_SamplesOut, m_FreqMin, m_FreqMax);
-			rs[i] = resultBuffer[i] * DBToLinear (m_OutputMultiplier) * CalcFreqTilt (freqBands[i].Mid, 440f, 0f) * ApplyWeight (freqBands[i].Mid, 0f);
-			freqBands.Dispose();
-		}
-
-		ApplySmoothingTimeConstant (ref dataArray, rs, m_SmoothingTimeConstant);
-
-		for (int i = 0; i < dataArray.Length; i++) {
-			m_SpectrumOutput[i] = (float)System.Math.Max (Ascale(dataArray[i], 1f, false, 70f, true), 0f);
+			float weighted = resultBuffer[i] * gain * CalcFreqTilt (freqBands[i].Mid, 440f, 0f) * ApplyWeight (freqBands[i].Mid, 0f);
+			m_SpectrumOutput[i] = (float)System.Math.Max (Ascale(weighted, 1f, false, 70f, true), 0f);
 		}
 
 		audioBuffer.Dispose();
 		resultBuffer.Dispose();
-		dataArray.Dispose();
-		rs.Dispose();
+		freqBands.Dispose();
 	}
 }

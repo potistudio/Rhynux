@@ -35,6 +35,14 @@ public class AudioSpectrum : MonoBehaviour {
 	private readonly float[] m_OutputAudioData = new float[SAMPLE_BUFFER_SIZE];
 	private int m_SampleRate = 48000;
 
+	// Kept alive across frames: the job is stateless, so the smoothed spectrum is
+	// the only place a previous frame survives. Reusing them also keeps Update()
+	// free of per-frame allocations.
+	private Unity.Collections.NativeArray<float> m_WaveformBuffer;
+	private Unity.Collections.NativeArray<float> m_SpectrumBuffer;
+	private float[] m_RawSpectrum;
+	private float[] m_SmoothedSpectrum;
+
 	private float Remap (float _x, float _inMin, float _inMax, float _outMin, float _outMax) {
 		return (_x - _inMin) / (_inMax - _inMin) * (_outMax - _outMin) + _outMin;
 	}
@@ -58,6 +66,9 @@ public class AudioSpectrum : MonoBehaviour {
 	}
 
 	private void Update() {
+		if (m_OutputResolution <= 0)
+			return;
+
 		// Get Output Waveform
 		m_AudioSource.GetOutputData (m_OutputAudioData, 0);
 
@@ -65,25 +76,19 @@ public class AudioSpectrum : MonoBehaviour {
 		// ProcessedAudioData = m_GoertzelSpectrumMono.Execute (m_OutputAudioData);
 
 		//* Use Job System *// 5ms
-		// Prepare Output Buffer
-		float[] processedSpectrum = new float[m_OutputResolution];
-		Unity.Collections.NativeArray<float> processedSpectrumBuffer = new (m_OutputResolution, Unity.Collections.Allocator.TempJob);
-
-		// Prepare Waveform Data as NativeArray
-		Unity.Collections.NativeArray<float> source = new (SAMPLE_BUFFER_SIZE, Unity.Collections.Allocator.TempJob);
-		source.CopyFrom (m_OutputAudioData);
+		EnsureBuffers();
+		m_WaveformBuffer.CopyFrom (m_OutputAudioData);
 
 		// Create Job
 		GoertzelSpectrumJob job = new() {
-			m_WaveformInput = source,
-			m_SpectrumOutput = processedSpectrumBuffer,
+			m_WaveformInput = m_WaveformBuffer,
+			m_SpectrumOutput = m_SpectrumBuffer,
 			m_SampleRate = m_SampleRate,
 			m_SamplesOut = m_OutputResolution,
 			m_OutputMultiplier = m_OutputMultiplier,
 			m_FreqMin = m_MinFrequency,
 			m_FreqMax = m_MaxFrequency,
 			m_AudioDuration = m_AudioDuration,
-			m_SmoothingTimeConstant = m_SmoothingTimeConstant,
 			m_WindowSkew = m_WindowSkew
 		};
 
@@ -92,12 +97,44 @@ public class AudioSpectrum : MonoBehaviour {
 		jobHandle.Complete();
 
 		// Copy Processed Job Buffer to Managed Array
-		processedSpectrumBuffer.CopyTo (processedSpectrum);
-		ProcessedAudioData = processedSpectrum;
+		m_SpectrumBuffer.CopyTo (m_RawSpectrum);
 
-		// Dispose NativeArray
-		source.Dispose();
-		processedSpectrumBuffer.Dispose();
+		// Blend against the previous frame. Running this inside the job always started
+		// from a freshly zeroed buffer, which reduced the time constant to a plain gain.
+		for (int i = 0; i < m_SmoothedSpectrum.Length; i++) {
+			float previous = float.IsNaN (m_SmoothedSpectrum[i]) ? 0f : m_SmoothedSpectrum[i];
+			float current = float.IsNaN (m_RawSpectrum[i]) ? 0f : m_RawSpectrum[i];
+
+			m_SmoothedSpectrum[i] = previous * m_SmoothingTimeConstant + current * (1f - m_SmoothingTimeConstant);
+		}
+
+		ProcessedAudioData = m_SmoothedSpectrum;
+	}
+
+	/// <summary>
+	/// Allocate the persistent buffers, reallocating only when the resolution changes.
+	/// </summary>
+	private void EnsureBuffers() {
+		if (!m_WaveformBuffer.IsCreated)
+			m_WaveformBuffer = new (SAMPLE_BUFFER_SIZE, Unity.Collections.Allocator.Persistent);
+
+		if (m_SpectrumBuffer.IsCreated && m_SpectrumBuffer.Length == m_OutputResolution)
+			return;
+
+		if (m_SpectrumBuffer.IsCreated)
+			m_SpectrumBuffer.Dispose();
+
+		m_SpectrumBuffer = new (m_OutputResolution, Unity.Collections.Allocator.Persistent);
+		m_RawSpectrum = new float[m_OutputResolution];
+		m_SmoothedSpectrum = new float[m_OutputResolution];
+	}
+
+	private void OnDestroy() {
+		if (m_WaveformBuffer.IsCreated)
+			m_WaveformBuffer.Dispose();
+
+		if (m_SpectrumBuffer.IsCreated)
+			m_SpectrumBuffer.Dispose();
 	}
 
 	#if UNITY_EDITOR
