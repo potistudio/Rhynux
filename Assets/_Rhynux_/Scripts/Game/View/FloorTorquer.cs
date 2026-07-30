@@ -35,14 +35,4 @@ public class FloorTorquer : MonoBehaviour {
 		m_Rigidbody.AddForceAtPosition (Vector3.down * m_ForcePower, Vector3.right * _distance);
 	}
 
-	private float aaa (float x, float t) {
-		float upper = Mathf.Ceil (t);  // 2.5 -> 3.0
-		float lower = Mathf.Floor (t); // 2.5 -> 2.0
-
-		if (x < upper) {
-			return x - upper;
-		} else {
-			return x - lower;
-		}
-	}
 }

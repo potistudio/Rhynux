@@ -1,10 +1,7 @@
 using MackySoft.Navigathena.SceneManagement;
 
 public sealed class MenuInput : UnityEngine.MonoBehaviour {
-	private ISceneIdentifier m_SceneIdentifier;
 	private Selection m_SelectionAction;
-	private SceneNavigator m_Navigator;
-
 	private SceneNavigator m_SceneNavigator;
 
 	[VContainer.Inject]
@@ -13,7 +10,6 @@ public sealed class MenuInput : UnityEngine.MonoBehaviour {
 	}
 
 	private void Awake() {
-		m_SceneIdentifier = new BuiltInSceneIdentifier ("Sample");
 		m_SelectionAction = new Selection();
 
 		m_SelectionAction.Menu.MenuNext.performed += NextMenu;

@@ -10,8 +10,6 @@ public class _FullLogic : MonoBehaviour {
 	[SerializeField] private float m_FloorWidth;
 	[SerializeField] private Transform m_NotesContainer;
 
-	private Chart m_Chart;
-
 	private MusicPlayer m_MusicPlayer;
 	private SessionProxy m_Session;
 
@@ -36,7 +34,6 @@ public class _FullLogic : MonoBehaviour {
 	}
 
 	private void Update() {
-		float noteWidth = m_FloorWidth / 4f;
 		foreach (var x in m_NoteObjects) {
 			x.Item2.transform.localPosition = new Vector3 (
 				(x.Item1.Position - 1.5f) * 1.5f,
@@ -46,14 +43,4 @@ public class _FullLogic : MonoBehaviour {
 		}
 	}
 
-	private float aaa (float x, float t) {
-		float upper = Mathf.Ceil (t);  // 2.5 -> 3.0
-		float lower = Mathf.Floor (t); // 2.5 -> 2.0
-
-		if (x < upper) {
-			return x - upper;
-		} else {
-			return x - lower;
-		}
-	}
 }
