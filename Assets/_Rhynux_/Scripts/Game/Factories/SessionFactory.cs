@@ -10,8 +10,6 @@ public sealed class SessionFactory {
 
 		SessionData session = new (_chart, notes);
 
-		UnityEngine.Debug.Log ("Session Generated");
-
 		m_SessionPool = session;
 		return session;
 	}

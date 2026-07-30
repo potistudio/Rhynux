@@ -8,8 +8,6 @@ public sealed class ProceduralNotesGenerator : INotesGenerator {
 	public IObservable<IReadOnlyList<Note>> OnNotesGenerated => m_OnNotesGenerated;
 
 	public IList<Note> Generate (Chart _chart) {
-		UnityEngine.Debug.Log ("Notes Generated with Procedural");
-
 		float secondsPerBeat = 60f / _chart.BPM;
 
 		// Note.Time is in beats, so it is the beat that scales by tempo.
