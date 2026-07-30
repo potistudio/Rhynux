@@ -21,7 +21,11 @@ public sealed class JsonChartAsset : ChartAsset {
 		// The editor format stores the offset in milliseconds.
 		const float MILLISECONDS_TO_SECONDS = 0.001f;
 
-		return new Chart (jsonChart.name, m_Composer, jsonChart.BPM, jsonChart.offset * MILLISECONDS_TO_SECONDS, new SoundTrack(m_SongClip), notes, m_Artwork, m_Secured);
+		return new Chart (jsonChart.name, m_Composer, jsonChart.BPM, jsonChart.offset * MILLISECONDS_TO_SECONDS, new SoundTrack(m_SongClip), notes, m_Artwork, m_Secured) {
+			Difficulty = m_Difficulty,
+			DifficultyLevel = m_ChartDifficultyLevel,
+			Charter = m_Charter
+		};
 	}
 
 	// JsonUtility writes these through reflection, which the compiler cannot see (CS0649).

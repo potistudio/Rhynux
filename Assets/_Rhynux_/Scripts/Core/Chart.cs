@@ -29,4 +29,10 @@ public class Chart {
 	public System.Collections.Generic.IReadOnlyList<Note> Notes => m_Notes;
 	public UnityEngine.Sprite Artwork => m_Artwork;
 	public bool Secured => m_Secured;
+
+	//* Authoring metadata. Set through an object initializer so the constructor
+	//* signature stays manageable; ChartAsset is the only producer.
+	public ChartDifficulty Difficulty { get; init; }
+	public int DifficultyLevel { get; init; }
+	public string Charter { get; init; }
 }

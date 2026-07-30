@@ -11,6 +11,10 @@ public sealed class RawChartAsset : ChartAsset {
 	[SerializeField] private bool m_Secured;
 
 	public override Chart Unpack() {
-		return new Chart (m_Title, m_Artist, m_BPM, m_Offset, m_SoundTrack, m_Notes, m_Artwork, m_Secured);
+		return new Chart (m_Title, m_Artist, m_BPM, m_Offset, m_SoundTrack, m_Notes, m_Artwork, m_Secured) {
+			Difficulty = m_Difficulty,
+			DifficultyLevel = m_ChartDifficultyLevel,
+			Charter = m_Charter
+		};
 	}
 }
