@@ -24,9 +24,13 @@ public sealed class JsonChartAsset : ChartAsset {
 		return new Chart (jsonChart.name, m_Composer, jsonChart.BPM, jsonChart.offset * MILLISECONDS_TO_SECONDS, new SoundTrack(m_SongClip), notes, m_Artwork, m_Secured);
 	}
 
+	// JsonUtility writes these through reflection, which the compiler cannot see (CS0649).
+	// It also only maps public fields, so private ones were silently never populated.
+	#pragma warning disable 0649
+
+	[System.Serializable]
 	private class JsonChart {
 		public float BPM;
-		private int maxBlock;
 		public string name;
 		public JsonNote[] notes;
 		public int offset;
@@ -36,8 +40,8 @@ public sealed class JsonChartAsset : ChartAsset {
 	private class JsonNote {
 		public int block;
 		public int LPB;
-		private JsonNote[] notes;
 		public int num;
-		private int type;
 	}
+
+	#pragma warning restore 0649
 }
