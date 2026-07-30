@@ -10,19 +10,7 @@ public class ComboDisplay : MonoBehaviour {
 	[SerializeField] private float m_ScaleMultiplier;
 	[SerializeField] private float m_Duration;
 
-	// private Tween m_Tween;
-
-	[VContainer.Inject]
-	private void Init() {
-		// m_Tween = m_Label.transform
-		// 	.TweenLocalScale (Vector3.one *m_ScaleMultiplier, Vector3.one, m_Duration)
-		// 	.SetEase (Ease.OutCubic)
-		// 	.SetAutoKill (false)
-		// 	.SetAutoPlay (false);
-		LSequence.Create()
-			.Append(LMotion.Create(Vector3.one * m_ScaleMultiplier, Vector3.one, m_Duration).BindToLocalPosition(m_Label.transform));
-
-	}
+	private MotionHandle m_PunchMotion;
 
 	public void SetValue (int _value) {
 		m_Label.gameObject.SetActive (_value > 3);
@@ -30,6 +18,12 @@ public class ComboDisplay : MonoBehaviour {
 		string formatted = string.Format (m_Format, _value);
 		m_Label.text = formatted;
 
-		// m_Tween.Restart();
+		// The punch has to restart on every combo change, and LitMotion motions are
+		// one-shot, so cancel the running one and build a new one.
+		m_PunchMotion.TryCancel();
+
+		m_PunchMotion = LMotion.Create (Vector3.one * m_ScaleMultiplier, Vector3.one, m_Duration)
+			.WithEase (Ease.OutCubic)
+			.BindToLocalScale (m_Label.transform);
 	}
 }

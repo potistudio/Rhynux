@@ -1,5 +1,6 @@
 using UnityEngine;
 using LitMotion;
+using LitMotion.Extensions;
 
 public class AccuracyPopupEmitter : MonoBehaviour {
 	[SerializeField] private GameObject m_PopupObject;
@@ -12,19 +13,6 @@ public class AccuracyPopupEmitter : MonoBehaviour {
 
 	private void Start() {
 		m_PopupText = m_PopupObject.GetComponentInChildren<TMPro.TextMeshProUGUI>();
-
-		// MotionSequenceBuilder sequence = LSequence.Create();
-		// m_Sequence.OnComplete (() => m_PopupObject.SetActive(false));
-
-		// m_Sequence.Join (m_PopupObject.transform
-		// 	.TweenLocalScale (Vector3.one * m_Scale, Vector3.one, m_Duration)
-		// 	.SetEase (Ease.OutCubic)
-		// );
-
-		// m_Sequence.Join (m_PopupText
-		// 	.TweenAlpha (1f, 0f, m_Duration)
-		// 	.SetEase (Ease.OutCubic)
-		// );
 	}
 
 	public void Emit (AccuracyLevel _accuracyLevel) {
@@ -43,6 +31,24 @@ public class AccuracyPopupEmitter : MonoBehaviour {
 				break;
 		}
 
-		m_Sequence.Complete();
+		// Judgements arrive faster than the popup lasts, so drop the one still
+		// playing and build a fresh pop. TryCancel tolerates an already-finished handle.
+		m_Sequence.TryCancel();
+
+		MotionSequenceBuilder sequence = LSequence.Create();
+
+		sequence.Append (
+			LMotion.Create (Vector3.one * m_Scale, Vector3.one, m_Duration)
+				.WithEase (Ease.OutCubic)
+				.BindToLocalScale (m_PopupObject.transform)
+		);
+
+		sequence.Join (
+			LMotion.Create (1f, 0f, m_Duration)
+				.WithEase (Ease.OutCubic)
+				.BindToColorA (m_PopupText)
+		);
+
+		m_Sequence = sequence.Run();
 	}
 }

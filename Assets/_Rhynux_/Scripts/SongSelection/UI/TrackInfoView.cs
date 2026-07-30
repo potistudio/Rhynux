@@ -28,6 +28,23 @@ public sealed class TrackInfoView : MonoBehaviour {
 
 		m_DefaultTitleTextPosition = m_TitleTextTransform.localPosition;
 		m_DefaultArtistTextPosition = m_ArtistTextTransform.localPosition;
+	}
+
+	public void ChangeInfoContent (string _title, string _artist) {
+		if (string.IsNullOrEmpty(_title) || string.IsNullOrEmpty(_artist))
+			return;
+
+		m_TitleTextMesh.text = _title;
+		m_ArtistTextMesh.text = _artist;
+
+		PlayIntro();
+	}
+
+	/// <summary>
+	/// Slide and fade the labels in. Built per call because LitMotion motions are one-shot.
+	/// </summary>
+	private void PlayIntro() {
+		m_Sequence.TryCancel();
 
 		MotionSequenceBuilder sequence = LSequence.Create();
 
@@ -58,16 +75,5 @@ public sealed class TrackInfoView : MonoBehaviour {
 		);
 
 		m_Sequence = sequence.Run();
-		m_Sequence.Preserve();
-	}
-
-	public void ChangeInfoContent (string _title, string _artist) {
-		if (string.IsNullOrEmpty(_title) || string.IsNullOrEmpty(_artist))
-			return;
-
-		m_TitleTextMesh.text = _title;
-		m_ArtistTextMesh.text = _artist;
-
-		m_Sequence.Complete();
 	}
 }
