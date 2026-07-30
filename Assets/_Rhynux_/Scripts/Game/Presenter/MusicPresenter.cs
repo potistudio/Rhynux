@@ -9,7 +9,15 @@ public sealed class MusicPresenter : VContainer.Unity.IStartable {
 	}
 
 	public void Start() {
-		m_MusicPlayer.Clip = m_Session.SessionPool.Chart.Track.SoundClip;
+		SoundTrack track = m_Session.SessionPool.Chart.Track;
+
+		// Procedurally generated charts carry no audio, so guard instead of throwing.
+		if (track?.SoundClip == null) {
+			UnityEngine.Debug.LogWarning ("Chart has no sound clip; skipping playback.");
+			return;
+		}
+
+		m_MusicPlayer.Clip = track.SoundClip;
 		m_MusicPlayer.Play();
 	}
 }

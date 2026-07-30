@@ -15,7 +15,9 @@ public sealed class ScrollItemRegistrar : MonoBehaviour {
 
         if (m_AutoGeneration) {
             var i = Enumerable.Range (0, m_GenerationCount);
-			generatedCharts = i.Select (_ => new Chart(RandomBase64(), RandomBase64(), 120f, 0f, null, new Note[0]));
+			// An empty SoundTrack rather than null: consumers reach for Chart.Track.SoundClip,
+			// and a null track throws before they get a chance to check the clip.
+			generatedCharts = i.Select (_ => new Chart(RandomBase64(), RandomBase64(), 120f, 0f, new SoundTrack(null), new Note[0]));
 		} else {
 			generatedCharts = m_ChartAssets.Select(x => x.Unpack());
 		}

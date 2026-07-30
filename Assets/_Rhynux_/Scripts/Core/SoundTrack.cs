@@ -19,9 +19,9 @@ public class SoundTrack {
 	public float DropTime { get => m_DropTime; set => m_DropTime = value; }
 
 	/// <summary>
-	/// The duration of this track
+	/// The duration of this track, or zero when no clip is assigned
 	/// </summary>
-	public float Duration => SoundClip.length;
+	public float Duration => SoundClip != null ? SoundClip.length : 0f;
 
 	/// <summary>
 	/// Create a new SoundTrack
