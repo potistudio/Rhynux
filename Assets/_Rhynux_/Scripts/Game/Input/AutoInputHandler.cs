@@ -1,14 +1,19 @@
-using System.Linq;
+using Cysharp.Threading.Tasks;
 
 public sealed class AutoInputHandler : IInputHandler, VContainer.Unity.ITickable {
+	private const int RELEASE_DELAY_MS = 40;
+
 	private readonly MusicPlayer m_MusicPlayer;
 	private readonly SessionFactory m_Session;
 
 	private readonly UniRx.Subject<int> m_Pressed = new();
 	private readonly UniRx.Subject<int> m_Released = new();
 
-	private readonly System.Collections.ObjectModel.ReadOnlyCollection<Note> m_NotesCollection;
 	private int m_CurrentIndex = 0;
+
+	// The container ticks this handler unconditionally, but it must only drive
+	// playback once InputHandlerFactory has actually selected auto mode.
+	private bool m_IsActive = false;
 
 	public System.IObservable<int> OnPressed => m_Pressed;
 	public System.IObservable<int> OnReleased => m_Released;
@@ -18,12 +23,16 @@ public sealed class AutoInputHandler : IInputHandler, VContainer.Unity.ITickable
 		m_Session = _session;
 	}
 
+	public void Activate() {
+		m_IsActive = true;
+	}
+
 	private void Press (int _lane) {
 		m_Pressed.OnNext (_lane);
 	}
 
-	private async void WaitThenRelease (int _lane) {
-		await Cysharp.Threading.Tasks.UniTask.Delay (40);
+	private async UniTaskVoid WaitThenRelease (int _lane) {
+		await UniTask.Delay (RELEASE_DELAY_MS);
 		Release (_lane);
 	}
 
@@ -32,18 +41,21 @@ public sealed class AutoInputHandler : IInputHandler, VContainer.Unity.ITickable
 	}
 
 	public void Tick() {
-		System.Collections.Generic.IReadOnlyList<Note> notes = m_Session.SessionPool.Notes;
-
-		if (m_CurrentIndex >= notes.Count) {
-			UnityEngine.Debug.Log ("End");
+		if (!m_IsActive)
 			return;
-		}
 
-		if (m_MusicPlayer.CurrentTime >= notes[m_CurrentIndex].Time) {
-			Press (notes[m_CurrentIndex].Position);
+		System.Collections.Generic.IReadOnlyList<Note> notes = m_Session.SessionPool.Notes;
+		float currentTime = m_MusicPlayer.CurrentTime;
+
+		// Notes can share a timestamp (chords) or bunch up inside a single frame at high
+		// BPM, so drain everything that is already due instead of one note per frame.
+		while (m_CurrentIndex < notes.Count && currentTime >= notes[m_CurrentIndex].Time) {
+			int lane = notes[m_CurrentIndex].Position;
+
+			Press (lane);
+			WaitThenRelease (lane).Forget();
+
 			m_CurrentIndex++;
-
-			WaitThenRelease (notes[m_CurrentIndex - 1].Position);
 		}
 	}
 }

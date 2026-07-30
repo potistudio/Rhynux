@@ -14,7 +14,8 @@ public sealed class GameLifetimeScope : LifetimeScope {
 		builder.RegisterComponentInHierarchy<ScopedSceneEntryPoint>();
 
 		//* Factory *//
-		builder.Register<AutoInputHandler>(Lifetime.Singleton);
+		// AutoInputHandler drives playback from ITickable, so it has to be an entry point.
+		builder.RegisterEntryPoint<AutoInputHandler>(Lifetime.Singleton).AsSelf();
 		builder.Register<KeyboardInputHandler>(Lifetime.Singleton);
 
 		//* Logic *//

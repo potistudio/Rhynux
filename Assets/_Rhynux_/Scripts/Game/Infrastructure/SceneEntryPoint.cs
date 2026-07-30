@@ -20,20 +20,20 @@ public sealed class SceneEntryPoint : SceneLifecycleBase {
 
 	protected override UniTask OnInitialize(ISceneDataReader reader, System.IProgress<MackySoft.Navigathena.IProgressDataStore> progress, CancellationToken cancellationToken) {
 		SessionData session;
-		IInputHandler inputHandler;
+		InputMode inputMode = InputMode.Keyboard;
 
 		if (reader.TryRead(out GameSceneRequest data)) {  // Read session request if available
-			Debug.Log ("Read Chart " + data.AutoMode);
 			session = m_SessionFactory.Create (data.Chart);
+			inputMode = data.AutoMode ? InputMode.Auto : InputMode.Keyboard;
 		} else if (m_Chart != null) {  // Read chart if session request is not available
 			session = m_SessionFactory.Create (m_Chart);
 		} else {  // throw error if there is no chart
 			throw new System.OperationCanceledException();
 		}
 
-		inputHandler = m_InputFactory.Create (InputMode.Keyboard);
+		m_SessionProxy.Session = session; // Set session before any handler reads it
 
-		m_SessionProxy.Session = session; // Set session
+		m_InputFactory.Create (inputMode);
 
 		Debug.Log ("Scene Initialized");
 		return base.OnInitialize (reader, progress, cancellationToken);

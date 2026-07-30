@@ -16,7 +16,9 @@ public sealed class InputHandlerFactory {
 
 		switch (_mode) {
 			case InputMode.Auto:
-				handler = m_Container.Resolve<AutoInputHandler>();
+				AutoInputHandler autoHandler = m_Container.Resolve<AutoInputHandler>();
+				autoHandler.Activate();
+				handler = autoHandler;
 				break;
 			case InputMode.Keyboard:
 				handler = m_Container.Resolve<KeyboardInputHandler>();
