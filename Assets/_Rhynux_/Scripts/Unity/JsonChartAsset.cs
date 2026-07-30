@@ -18,7 +18,10 @@ public sealed class JsonChartAsset : ChartAsset {
 			return new Note (time, lane);
 		}).ToArray();
 
-		return new Chart (jsonChart.name, m_Composer, jsonChart.BPM, jsonChart.offset * 0.0001f, new SoundTrack(m_SongClip), notes, m_Artwork, m_Secured);
+		// The editor format stores the offset in milliseconds.
+		const float MILLISECONDS_TO_SECONDS = 0.001f;
+
+		return new Chart (jsonChart.name, m_Composer, jsonChart.BPM, jsonChart.offset * MILLISECONDS_TO_SECONDS, new SoundTrack(m_SongClip), notes, m_Artwork, m_Secured);
 	}
 
 	private class JsonChart {

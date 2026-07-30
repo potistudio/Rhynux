@@ -9,7 +9,12 @@ public sealed class ProceduralNotesGenerator : INotesGenerator {
 	public IList<Note> Generate (Chart _chart) {
 		UnityEngine.Debug.Log ("Notes Generated with Procedural");
 
-		var n = _chart.Notes.Select (x => { var y = new Note((x.Time + _chart.Offset) * (60f / _chart.BPM), x.Position); return y; }).ToArray();
-		return n;
+		float secondsPerBeat = 60f / _chart.BPM;
+
+		// Note.Time is in beats, so it is the beat that scales by tempo.
+		// The chart offset is already in seconds and must be added afterwards.
+		return _chart.Notes
+			.Select (x => new Note(x.Time * secondsPerBeat + _chart.Offset, x.Position))
+			.ToArray();
 	}
 }
