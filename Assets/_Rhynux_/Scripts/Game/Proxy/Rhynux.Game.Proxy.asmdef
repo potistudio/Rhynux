@@ -1,6 +1,6 @@
 {
     "name": "Rhynux.Game.Proxy",
-    "rootNamespace": "",
+    "rootNamespace": "Rhynux.Game",
     "references": [
         "GUID:b11338bb849a44848b44326146330eec"
     ],

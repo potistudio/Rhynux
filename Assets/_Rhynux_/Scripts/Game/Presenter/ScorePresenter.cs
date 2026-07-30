@@ -1,35 +1,37 @@
 using UniRx;
 
-public sealed class ScorePresenter : VContainer.Unity.IInitializable, VContainer.Unity.IStartable, System.IDisposable {
-	private readonly RefereeFacade m_NotesReferee;
-	private readonly ScoreManager m_ScoreManager;
-	private readonly SessionFactory m_Session;
+namespace Rhynux.Game {
+	public sealed class ScorePresenter : VContainer.Unity.IInitializable, VContainer.Unity.IStartable, System.IDisposable {
+		private readonly RefereeFacade m_NotesReferee;
+		private readonly ScoreManager m_ScoreManager;
+		private readonly SessionFactory m_Session;
 
-	private readonly CompositeDisposable m_Disposables = new();
+		private readonly CompositeDisposable m_Disposables = new();
 
-	private int m_NotesCount;
-	private float m_DeltaScore;
+		private int m_NotesCount;
+		private float m_DeltaScore;
 
-	public ScorePresenter (SessionFactory _session, RefereeFacade _notesReferee, ScoreManager _scoreManager) {
-		m_Session = _session;
-		m_NotesReferee = _notesReferee;
-		m_ScoreManager = _scoreManager;
-	}
+		public ScorePresenter (SessionFactory _session, RefereeFacade _notesReferee, ScoreManager _scoreManager) {
+			m_Session = _session;
+			m_NotesReferee = _notesReferee;
+			m_ScoreManager = _scoreManager;
+		}
 
-	public void Initialize() {
-		m_NotesReferee.OnHit.Subscribe (x => {
-			m_ScoreManager.AddScore (m_DeltaScore);
-		}).AddTo (m_Disposables);
-	}
+		public void Initialize() {
+			m_NotesReferee.OnHit.Subscribe (x => {
+				m_ScoreManager.AddScore (m_DeltaScore);
+			}).AddTo (m_Disposables);
+		}
 
-	public void Start() {
-		m_NotesCount = m_Session.SessionPool.Notes.Count;
+		public void Start() {
+			m_NotesCount = m_Session.SessionPool.Notes.Count;
 
-		// An empty chart would otherwise divide by zero.
-		m_DeltaScore = m_NotesCount > 0 ? 1000000f / m_NotesCount : 0f;
-	}
+			// An empty chart would otherwise divide by zero.
+			m_DeltaScore = m_NotesCount > 0 ? 1000000f / m_NotesCount : 0f;
+		}
 
-	public void Dispose() {
-		m_Disposables.Dispose();
+		public void Dispose() {
+			m_Disposables.Dispose();
+		}
 	}
 }

@@ -2,85 +2,89 @@ using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 
-public class GameTest {
-	private Chart m_Chart;
+using Rhynux.Game;
 
-	[SetUp]
-	public void SetUp() {
-		Note[] notes = {
-			new (0f, 0),
-			new (1f, 1),
-			new (2f, 2),
-			new (3f, 3)
-		};
+namespace Rhynux.Tests {
+	public class GameTest {
+		private Chart m_Chart;
 
-		// Built in-process rather than loaded through Addressables: Chart is a plain
-		// C# class, not a UnityEngine.Object, so it was never loadable that way. The
-		// chart assets also live outside the repository.
-		m_Chart = new ("Test", "Tester", 60f, 0f, new SoundTrack(null), notes);
-	}
+		[SetUp]
+		public void SetUp() {
+			Note[] notes = {
+				new (0f, 0),
+				new (1f, 1),
+				new (2f, 2),
+				new (3f, 3)
+			};
 
-	[Test] // Combo has to survive between calls
-	public void ComboAccumulates() {
-		SessionManager session = new (m_Chart);
+			// Built in-process rather than loaded through Addressables: Chart is a plain
+			// C# class, not a UnityEngine.Object, so it was never loadable that way. The
+			// chart assets also live outside the repository.
+			m_Chart = new ("Test", "Tester", 60f, 0f, new SoundTrack(null), notes);
+		}
 
-		Assert.That (session.CurrentCombo.Value, Is.EqualTo(0));
+		[Test] // Combo has to survive between calls
+		public void ComboAccumulates() {
+			SessionManager session = new (m_Chart);
 
-		session.IncreaseCombo();
-		session.IncreaseCombo();
-		session.IncreaseCombo();
-		Assert.That (session.CurrentCombo.Value, Is.EqualTo(3));
+			Assert.That (session.CurrentCombo.Value, Is.EqualTo(0));
 
-		session.ResetCombo();
-		Assert.That (session.CurrentCombo.Value, Is.EqualTo(0));
-	}
+			session.IncreaseCombo();
+			session.IncreaseCombo();
+			session.IncreaseCombo();
+			Assert.That (session.CurrentCombo.Value, Is.EqualTo(3));
 
-	[Test] // Reading the exposed view repeatedly must not detach it from the source
-	public void ComboViewIsStable() {
-		SessionManager session = new (m_Chart);
+			session.ResetCombo();
+			Assert.That (session.CurrentCombo.Value, Is.EqualTo(0));
+		}
 
-		UniRx.ReadOnlyReactiveProperty<int> first = session.CurrentCombo;
-		session.IncreaseCombo();
-		UniRx.ReadOnlyReactiveProperty<int> second = session.CurrentCombo;
+		[Test] // Reading the exposed view repeatedly must not detach it from the source
+		public void ComboViewIsStable() {
+			SessionManager session = new (m_Chart);
 
-		Assert.That (first, Is.SameAs(second));
-		Assert.That (first.Value, Is.EqualTo(1));
-	}
+			UniRx.ReadOnlyReactiveProperty<int> first = session.CurrentCombo;
+			session.IncreaseCombo();
+			UniRx.ReadOnlyReactiveProperty<int> second = session.CurrentCombo;
 
-	[Test]
-	public void ScoreAccumulates() {
-		SessionManager session = new (m_Chart);
+			Assert.That (first, Is.SameAs(second));
+			Assert.That (first.Value, Is.EqualTo(1));
+		}
 
-		session.AddScore (120);
-		session.AddScore (80);
+		[Test]
+		public void ScoreAccumulates() {
+			SessionManager session = new (m_Chart);
 
-		Assert.That (session.CurrentScore.Value, Is.EqualTo(200));
-	}
+			session.AddScore (120);
+			session.AddScore (80);
 
-	[Test] // Beats convert by tempo; the offset is already in seconds
-	public void GeneratorAppliesOffsetInSeconds() {
-		Chart chart = new ("Offset", "Tester", 120f, 0.5f, new SoundTrack(null), new Note[]{ new (2f, 0) });
+			Assert.That (session.CurrentScore.Value, Is.EqualTo(200));
+		}
 
-		IList<Note> generated = new ProceduralNotesGenerator().Generate (chart);
+		[Test] // Beats convert by tempo; the offset is already in seconds
+		public void GeneratorAppliesOffsetInSeconds() {
+			Chart chart = new ("Offset", "Tester", 120f, 0.5f, new SoundTrack(null), new Note[]{ new (2f, 0) });
 
-		// 2 beats at 120 BPM is 1.0s, plus the 0.5s offset.
-		Assert.That (generated.Single().Time, Is.EqualTo(1.5f).Within(0.0001f));
-	}
+			IList<Note> generated = new ProceduralNotesGenerator().Generate (chart);
 
-	[Test]
-	public void SessionExposesEveryNote() {
-		SessionFactory factory = new();
-		SessionData session = factory.Create (m_Chart);
+			// 2 beats at 120 BPM is 1.0s, plus the 0.5s offset.
+			Assert.That (generated.Single().Time, Is.EqualTo(1.5f).Within(0.0001f));
+		}
 
-		Assert.That (session.Notes.Count, Is.EqualTo(4));
-		Assert.That (session.Notes.Select (x => x.Position), Is.EqualTo(new[]{ 0, 1, 2, 3 }));
-	}
+		[Test]
+		public void SessionExposesEveryNote() {
+			SessionFactory factory = new();
+			SessionData session = factory.Create (m_Chart);
 
-	[Test] // The same collection instance is handed out, not a fresh copy per read
-	public void SessionNotesDoNotReallocate() {
-		SessionFactory factory = new();
-		SessionData session = factory.Create (m_Chart);
+			Assert.That (session.Notes.Count, Is.EqualTo(4));
+			Assert.That (session.Notes.Select (x => x.Position), Is.EqualTo(new[]{ 0, 1, 2, 3 }));
+		}
 
-		Assert.That (session.Notes, Is.SameAs(session.Notes));
+		[Test] // The same collection instance is handed out, not a fresh copy per read
+		public void SessionNotesDoNotReallocate() {
+			SessionFactory factory = new();
+			SessionData session = factory.Create (m_Chart);
+
+			Assert.That (session.Notes, Is.SameAs(session.Notes));
+		}
 	}
 }

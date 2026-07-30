@@ -1,55 +1,57 @@
 using MackySoft.Navigathena.SceneManagement;
 
-public sealed class MenuInput : UnityEngine.MonoBehaviour {
-	private Selection m_SelectionAction;
-	private SceneNavigator m_SceneNavigator;
+namespace Rhynux.SongSelection {
+	public sealed class MenuInput : UnityEngine.MonoBehaviour {
+		private Selection m_SelectionAction;
+		private SceneNavigator m_SceneNavigator;
 
-	[VContainer.Inject]
-	private void Init (SceneNavigator _sceneNavigator) {
-		m_SceneNavigator = _sceneNavigator;
-	}
+		[VContainer.Inject]
+		private void Init (SceneNavigator _sceneNavigator) {
+			m_SceneNavigator = _sceneNavigator;
+		}
 
-	private void Awake() {
-		m_SelectionAction = new Selection();
+		private void Awake() {
+			m_SelectionAction = new Selection();
 
-		m_SelectionAction.Menu.MenuNext.performed += NextMenu;
-		m_SelectionAction.Menu.MenuBack.performed += BackMenu;
+			m_SelectionAction.Menu.MenuNext.performed += NextMenu;
+			m_SelectionAction.Menu.MenuBack.performed += BackMenu;
 
-		m_SelectionAction.Enable();
-	}
+			m_SelectionAction.Enable();
+		}
 
-	private void OnEnable() {
-		m_SelectionAction?.Enable();
-	}
+		private void OnEnable() {
+			m_SelectionAction?.Enable();
+		}
 
-	private void OnDisable() {
-		m_SelectionAction?.Disable();
-	}
+		private void OnDisable() {
+			m_SelectionAction?.Disable();
+		}
 
-	private void OnDestroy() {
-		m_SelectionAction.Dispose();
-	}
+		private void OnDestroy() {
+			m_SelectionAction.Dispose();
+		}
 
-	private void BackMenu (UnityEngine.InputSystem.InputAction.CallbackContext _context) {
-		BackScene();
-	}
+		private void BackMenu (UnityEngine.InputSystem.InputAction.CallbackContext _context) {
+			BackScene();
+		}
 
-	private void NextMenu (UnityEngine.InputSystem.InputAction.CallbackContext _context) {
-		NextScene();
-	}
+		private void NextMenu (UnityEngine.InputSystem.InputAction.CallbackContext _context) {
+			NextScene();
+		}
 
-	private void NextScene() {
-		// await GlobalSceneNavigator.Instance.Push (m_SceneIdentifier);
-		m_SceneNavigator.StartSession();
-	}
+		private void NextScene() {
+			// await GlobalSceneNavigator.Instance.Push (m_SceneIdentifier);
+			m_SceneNavigator.StartSession();
+		}
 
-	private void BackScene() {
-		PopAsync().Forget();
-	}
+		private void BackScene() {
+			PopAsync().Forget();
+		}
 
-	// UniTaskVoid over async void: an exception thrown inside async void is swallowed
-	// by the synchronization context, while Forget() routes it to UniTask's handler.
-	private async Cysharp.Threading.Tasks.UniTaskVoid PopAsync() {
-		await GlobalSceneNavigator.Instance.Pop ();
+		// UniTaskVoid over async void: an exception thrown inside async void is swallowed
+		// by the synchronization context, while Forget() routes it to UniTask's handler.
+		private async Cysharp.Threading.Tasks.UniTaskVoid PopAsync() {
+			await GlobalSceneNavigator.Instance.Pop ();
+		}
 	}
 }

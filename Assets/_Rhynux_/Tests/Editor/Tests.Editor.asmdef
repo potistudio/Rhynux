@@ -1,6 +1,6 @@
 {
     "name": "Tests.Editor",
-    "rootNamespace": "",
+    "rootNamespace": "Rhynux.Tests",
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",

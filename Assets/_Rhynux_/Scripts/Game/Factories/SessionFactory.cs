@@ -1,16 +1,18 @@
-public sealed class SessionFactory {
-	private SessionData m_SessionPool;
-	public SessionData SessionPool => m_SessionPool;
+namespace Rhynux.Game {
+	public sealed class SessionFactory {
+		private SessionData m_SessionPool;
+		public SessionData SessionPool => m_SessionPool;
 
-	// Manual DI
-	public SessionData Create (Chart _chart) {
-		//* Generate Notes
-		var notesGenerator = new ProceduralNotesGenerator(); // flexible
-		var notes = notesGenerator.Generate (_chart);
+		// Manual DI
+		public SessionData Create (Chart _chart) {
+			//* Generate Notes
+			var notesGenerator = new ProceduralNotesGenerator(); // flexible
+			var notes = notesGenerator.Generate (_chart);
 
-		SessionData session = new (_chart, notes);
+			SessionData session = new (_chart, notes);
 
-		m_SessionPool = session;
-		return session;
+			m_SessionPool = session;
+			return session;
+		}
 	}
 }

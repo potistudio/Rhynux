@@ -1,6 +1,6 @@
 {
     "name": "Rhynux.Game.Audio",
-    "rootNamespace": "",
+    "rootNamespace": "Rhynux.Game",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],

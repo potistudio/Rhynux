@@ -1,6 +1,6 @@
 {
     "name": "Rhynux.Game.Model",
-    "rootNamespace": "",
+    "rootNamespace": "Rhynux.Game",
     "references": [
         "GUID:560b04d1a97f54a4e82edc0cbbb69285",
         "GUID:048465f7c8ae7fd4c88015adf29aa9f6",

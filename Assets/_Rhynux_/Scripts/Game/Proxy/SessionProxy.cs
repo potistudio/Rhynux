@@ -1,3 +1,5 @@
-public sealed class SessionProxy {
-	public SessionData Session { get; set; }
+namespace Rhynux.Game {
+	public sealed class SessionProxy {
+		public SessionData Session { get; set; }
+	}
 }

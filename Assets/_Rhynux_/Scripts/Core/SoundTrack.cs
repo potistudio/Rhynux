@@ -1,34 +1,36 @@
 using UnityEngine;
 
-/// <summary>
-/// The sound track
-/// </summary>
-[System.Serializable]
-public class SoundTrack {
-	[SerializeField] AudioClip m_SoundClip;
-	[SerializeField] private float m_DropTime;
-
+namespace Rhynux {
 	/// <summary>
-	/// The sound clip
+	/// The sound track
 	/// </summary>
-	public AudioClip SoundClip { get => m_SoundClip; set => m_SoundClip = value; }
+	[System.Serializable]
+	public class SoundTrack {
+		[SerializeField] AudioClip m_SoundClip;
+		[SerializeField] private float m_DropTime;
 
-	/// <summary>
-	/// The time of the last drop marker
-	/// </summary>
-	public float DropTime { get => m_DropTime; set => m_DropTime = value; }
+		/// <summary>
+		/// The sound clip
+		/// </summary>
+		public AudioClip SoundClip { get => m_SoundClip; set => m_SoundClip = value; }
 
-	/// <summary>
-	/// The duration of this track, or zero when no clip is assigned
-	/// </summary>
-	public float Duration => SoundClip != null ? SoundClip.length : 0f;
+		/// <summary>
+		/// The time of the last drop marker
+		/// </summary>
+		public float DropTime { get => m_DropTime; set => m_DropTime = value; }
 
-	/// <summary>
-	/// Create a new SoundTrack
-	/// </summary>
-	/// <param name="_soundClip">The sound clip</param>
-	public SoundTrack (UnityEngine.AudioClip _soundClip) {
-		m_SoundClip = _soundClip;
-		m_DropTime = 0f;
+		/// <summary>
+		/// The duration of this track, or zero when no clip is assigned
+		/// </summary>
+		public float Duration => SoundClip != null ? SoundClip.length : 0f;
+
+		/// <summary>
+		/// Create a new SoundTrack
+		/// </summary>
+		/// <param name="_soundClip">The sound clip</param>
+		public SoundTrack (UnityEngine.AudioClip _soundClip) {
+			m_SoundClip = _soundClip;
+			m_DropTime = 0f;
+		}
 	}
 }

@@ -1,5 +1,7 @@
-public enum InputMode {
-	Auto,
-	Keyboard,
-	Touch
+namespace Rhynux {
+	public enum InputMode {
+		Auto,
+		Keyboard,
+		Touch
+	}
 }
