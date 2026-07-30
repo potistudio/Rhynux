@@ -26,7 +26,7 @@ public class Chart {
 	public float BPM => m_BPM;
 	public float Offset => m_Offset;
 	public SoundTrack Track { get => m_SoundTrack; set => m_SoundTrack = value; }
-	public System.Collections.Generic.IList<Note> Notes => m_Notes.DeepCopy();
+	public System.Collections.Generic.IReadOnlyList<Note> Notes => m_Notes;
 	public UnityEngine.Sprite Artwork => m_Artwork;
 	public bool Secured => m_Secured;
 }

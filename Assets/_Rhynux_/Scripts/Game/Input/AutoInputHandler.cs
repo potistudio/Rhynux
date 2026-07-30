@@ -32,9 +32,9 @@ public sealed class AutoInputHandler : IInputHandler, VContainer.Unity.ITickable
 	}
 
 	public void Tick() {
-		Note[] notes = m_Session.SessionPool.Notes;
+		System.Collections.Generic.IReadOnlyList<Note> notes = m_Session.SessionPool.Notes;
 
-		if (m_CurrentIndex >= notes.Count()) {
+		if (m_CurrentIndex >= notes.Count) {
 			UnityEngine.Debug.Log ("End");
 			return;
 		}

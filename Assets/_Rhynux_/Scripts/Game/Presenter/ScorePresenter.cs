@@ -21,7 +21,7 @@ public sealed class ScorePresenter : VContainer.Unity.IInitializable, VContainer
 	}
 
 	public void Start() {
-		m_NotesCount = m_Session.SessionPool.Notes.Length;
+		m_NotesCount = m_Session.SessionPool.Notes.Count;
 		m_DeltaScore = 1000000f / m_NotesCount;
 	}
 }

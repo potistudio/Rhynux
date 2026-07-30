@@ -17,9 +17,9 @@ public class FloorTorquer : MonoBehaviour {
 	}
 
 	private void Update() {
-		Note[] notes = m_Session.SessionPool.Notes;
+		System.Collections.Generic.IReadOnlyList<Note> notes = m_Session.SessionPool.Notes;
 
-		if (m_CurrentIndex >= notes.Length) {
+		if (m_CurrentIndex >= notes.Count) {
 			Debug.Log ("End");
 			return;
 		}
