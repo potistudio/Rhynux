@@ -1,6 +1,6 @@
 {
     "name": "Rhynux.Game.Factories",
-    "rootNamespace": "",
+    "rootNamespace": "Rhynux.Game",
     "references": [
         "GUID:b0214a6008ed146ff8f122a6a9c2f6cc",
         "GUID:560b04d1a97f54a4e82edc0cbbb69285",

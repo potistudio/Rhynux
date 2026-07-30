@@ -1,13 +1,22 @@
 using MackySoft.Navigathena.SceneManagement;
 
-public sealed class SceneMover : UnityEngine.MonoBehaviour {
-	private ISceneIdentifier m_SceneIdentifier;
+namespace Rhynux.Title {
+	public sealed class SceneMover : UnityEngine.MonoBehaviour {
+		private ISceneIdentifier m_SceneIdentifier;
 
-	private void Awake() {
-		m_SceneIdentifier = new BuiltInSceneIdentifier ("SongSelectionMenu");
-	}
+		private void Awake() {
+			m_SceneIdentifier = new BuiltInSceneIdentifier ("SongSelectionMenu");
+		}
 
-	public async void NextScene() {
-		await GlobalSceneNavigator.Instance.Push (m_SceneIdentifier);
+		// Stays a plain void so UnityEvent (button OnClick) can still bind to it.
+		public void NextScene() {
+			PushNextSceneAsync().Forget();
+		}
+
+		// UniTaskVoid over async void: an exception thrown inside async void is swallowed
+		// by the synchronization context, while Forget() routes it to UniTask's handler.
+		private async Cysharp.Threading.Tasks.UniTaskVoid PushNextSceneAsync() {
+			await GlobalSceneNavigator.Instance.Push (m_SceneIdentifier);
+		}
 	}
 }

@@ -1,6 +1,6 @@
 {
     "name": "Rhynux.Core",
-    "rootNamespace": "",
+    "rootNamespace": "Rhynux",
     "references": [
         "GUID:75469ad4d38634e559750d17036d5f7c",
         "GUID:19e824f9fd05b4f4a8cd9aaafc8c4550",

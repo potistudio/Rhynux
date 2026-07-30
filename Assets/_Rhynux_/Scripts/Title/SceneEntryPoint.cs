@@ -3,5 +3,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using MackySoft.Navigathena.SceneManagement;
 
-public sealed class SceneEntryPoint : SceneEntryPointBase {
+namespace Rhynux.Title {
+	public sealed class SceneEntryPoint : SceneEntryPointBase {
+	}
 }

@@ -1,77 +1,84 @@
+using UnityEngine.Serialization;
 using VContainer;
 using VContainer.Unity;
 using MackySoft.Navigathena.SceneManagement.VContainer;
 
-public sealed class GameLifetimeScope : LifetimeScope {
-	[UnityEngine.SerializeField] private ChartAsset m_ChartAsset;
+namespace Rhynux.Game {
+	public sealed class GameLifetimeScope : LifetimeScope {
+		// The field was renamed from m_Chart, but the scene still stores the old name,
+		// so without this the reference deserializes as null.
+		[UnityEngine.SerializeField, FormerlySerializedAs("m_Chart")]
+		private ChartAsset m_ChartAsset;
 
-	protected override void Configure (IContainerBuilder builder) {
-		//* Instance *//
-		builder.RegisterInstance<Chart>(m_ChartAsset.Unpack());
+		protected override void Configure (IContainerBuilder builder) {
+			//* Instance *//
+			builder.RegisterInstance<Chart>(m_ChartAsset.Unpack());
 
-		//* Lifecycle *//
-		builder.RegisterSceneLifecycle<SceneEntryPoint>();
-		builder.RegisterComponentInHierarchy<ScopedSceneEntryPoint>();
+			//* Lifecycle *//
+			builder.RegisterSceneLifecycle<SceneEntryPoint>();
+			builder.RegisterComponentInHierarchy<ScopedSceneEntryPoint>();
 
-		//* Factory *//
-		builder.Register<AutoInputHandler>(Lifetime.Singleton);
-		builder.Register<KeyboardInputHandler>(Lifetime.Singleton);
+			//* Factory *//
+			// AutoInputHandler drives playback from ITickable, so it has to be an entry point.
+			builder.RegisterEntryPoint<AutoInputHandler>(Lifetime.Singleton).AsSelf();
+			builder.Register<KeyboardInputHandler>(Lifetime.Singleton);
 
-		//* Logic *//
-		builder.Register<InputHandlerFactory>(Lifetime.Singleton);
-		builder.RegisterEntryPoint<InputListener>(Lifetime.Singleton);
+			//* Logic *//
+			builder.Register<InputHandlerFactory>(Lifetime.Singleton);
+			builder.RegisterEntryPoint<InputListener>(Lifetime.Singleton);
 
-		//* Referee
-		builder.Register<RealtimeReferee>(Lifetime.Singleton);
-		builder.Register<InputReferee>(Lifetime.Singleton);
-		builder.Register<RefereeFacade>(Lifetime.Singleton);
-		builder.RegisterEntryPoint<SessionTimeUpdater>(Lifetime.Singleton);
+			//* Referee
+			builder.Register<RealtimeReferee>(Lifetime.Singleton);
+			builder.Register<InputReferee>(Lifetime.Singleton);
+			builder.Register<RefereeFacade>(Lifetime.Singleton);
+			builder.RegisterEntryPoint<SessionTimeUpdater>(Lifetime.Singleton);
 
-		//* View *//
-		builder.RegisterEntryPoint<LogicPresenter>(Lifetime.Singleton);
-		builder.RegisterComponentInHierarchy<_FullLogic>();
-		builder.RegisterComponentInHierarchy<FloorTorquer>();
-		builder.RegisterEntryPoint<JudgementDisplay>(Lifetime.Singleton);
-		builder.RegisterComponentInHierarchy<AccuracyPopupEmitter>();
-		builder.RegisterComponentInHierarchy<HitEffectGenerator>();
-		builder.RegisterEntryPoint<HitListener>(Lifetime.Singleton);
+			//* View *//
+			builder.RegisterEntryPoint<LogicPresenter>(Lifetime.Singleton);
+			builder.RegisterComponentInHierarchy<_FullLogic>();
+			builder.RegisterComponentInHierarchy<FloorTorquer>();
+			builder.RegisterEntryPoint<JudgementDisplay>(Lifetime.Singleton);
+			builder.RegisterComponentInHierarchy<AccuracyPopupEmitter>();
+			builder.RegisterComponentInHierarchy<HitEffectGenerator>();
+			builder.RegisterEntryPoint<HitListener>(Lifetime.Singleton);
 
-		//* Lane Visualizer
-		builder.RegisterEntryPoint<LaneVisualizingPresenter>(Lifetime.Singleton);
-		builder.RegisterComponentInHierarchy<InputVisualizer>();
+			//* Lane Visualizer
+			builder.RegisterEntryPoint<LaneVisualizingPresenter>(Lifetime.Singleton);
+			builder.RegisterComponentInHierarchy<InputVisualizer>();
 
-		//* Combo
-		builder.RegisterEntryPoint<ComboPresenter>(Lifetime.Singleton);
-		builder.RegisterEntryPoint<ComboDisplayPresenter>(Lifetime.Singleton);
-		builder.RegisterComponentInHierarchy<ComboDisplay>();
-		builder.Register<ComboManager>(Lifetime.Singleton);
+			//* Combo
+			builder.RegisterEntryPoint<ComboPresenter>(Lifetime.Singleton);
+			builder.RegisterEntryPoint<ComboDisplayPresenter>(Lifetime.Singleton);
+			builder.RegisterComponentInHierarchy<ComboDisplay>();
+			builder.Register<ComboManager>(Lifetime.Singleton);
 
-		//* Score
-		builder.Register<ScoreManager>(Lifetime.Singleton);
-		builder.RegisterComponentInHierarchy<ScoreDisplay>();
-		builder.RegisterEntryPoint<ScorePresenter>(Lifetime.Singleton);
-		builder.RegisterEntryPoint<ScoreDisplayPresenter>(Lifetime.Singleton);
+			//* Score
+			builder.Register<ScoreManager>(Lifetime.Singleton);
+			builder.RegisterComponentInHierarchy<ScoreDisplay>();
+			builder.RegisterEntryPoint<ScorePresenter>(Lifetime.Singleton);
+			builder.RegisterEntryPoint<ScoreDisplayPresenter>(Lifetime.Singleton);
 
-		//* Music Player
-		builder.RegisterEntryPoint<MusicPresenter>(Lifetime.Singleton);
-		builder.RegisterComponentInHierarchy<MusicPlayer>();
+			//* Music Player
+			builder.RegisterEntryPoint<MusicPresenter>(Lifetime.Singleton);
+			builder.RegisterComponentInHierarchy<MusicPlayer>();
 
-		//* Session
-		builder.Register<SessionProxy>(Lifetime.Singleton);
-		builder.Register<SessionFactory>(Lifetime.Singleton);
+			//* Session
+			builder.Register<SessionProxy>(Lifetime.Singleton);
+			builder.Register<SessionFactory>(Lifetime.Singleton);
 
-		//* Track Info View
-		builder.RegisterEntryPoint<TrackInfoPresenter>(Lifetime.Singleton);
-		builder.RegisterComponentInHierarchy<TrackInfoBanner>();
+			//* Track Info View
+			builder.RegisterEntryPoint<TrackInfoPresenter>(Lifetime.Singleton);
+			builder.RegisterComponentInHierarchy<TrackInfoBanner>();
 
-		//* Sprite Renderer
-		builder.RegisterEntryPoint<ArtworkRenderingPresenter>(Lifetime.Singleton);
-		builder.RegisterComponentInHierarchy<ArtworkRenderer>();
+			//* Sprite Renderer
+			builder.RegisterEntryPoint<ArtworkRenderingPresenter>(Lifetime.Singleton);
+			builder.RegisterComponentInHierarchy<ArtworkRenderer>();
 
-		//* Scene Navigation
-		builder.Register<SceneNavigator>(Lifetime.Singleton);
-		builder.RegisterComponentInHierarchy<SceneNavigationInput>();
+			//* Scene Navigation
+			builder.Register<SceneNavigator>(Lifetime.Singleton);
+			builder.RegisterComponentInHierarchy<SceneNavigationInput>();
 
-		UnityEngine.Debug.Log ("VContainer Injection has Completed");
+			UnityEngine.Debug.Log ("VContainer Injection has Completed");
+		}
 	}
 }

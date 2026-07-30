@@ -1,6 +1,8 @@
-public enum ChartDifficulty {
-	Easy,
-	Normal,
-	Hard,
-	Special
+namespace Rhynux {
+	public enum ChartDifficulty {
+		Easy,
+		Normal,
+		Hard,
+		Special
+	}
 }

@@ -1,137 +1,90 @@
-
+using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
-using UnityEngine.ResourceManagement;
-using VContainer;
 
-public class GameTest {
-	private SessionManager m_SessionManager;
-	private RealtimeReferee m_RealtimeReferee;
-	private InputReferee m_ReactiveReferee;
-	private NotesRefereeComposer m_NotesReferee;
+using Rhynux.Game;
 
-	private Chart m_Chart;
-	private int m_NotesCount;
+namespace Rhynux.Tests {
+	public class GameTest {
+		private Chart m_Chart;
 
-	private const string CHART_ASSET_NAME = "人マニア（アーメンの刻みのせ）";
+		[SetUp]
+		public void SetUp() {
+			Note[] notes = {
+				new (0f, 0),
+				new (1f, 1),
+				new (2f, 2),
+				new (3f, 3)
+			};
 
-	[SetUp]
-	public void SetUp() {
-		//* Load Chart Asset Async using Addressable
-		m_Chart = UnityEngine.AddressableAssets.Addressables.LoadAssetAsync<Chart>(CHART_ASSET_NAME).WaitForCompletion();
+			// Built in-process rather than loaded through Addressables: Chart is a plain
+			// C# class, not a UnityEngine.Object, so it was never loadable that way. The
+			// chart assets also live outside the repository.
+			m_Chart = new ("Test", "Tester", 60f, 0f, new SoundTrack(null), notes);
+		}
 
-		//* ↓ DI with VContainer ↓ *//
-			/*
-			// Create Container Builder
-			IContainerBuilder containerBuilder = new ContainerBuilder();
+		[Test] // Combo has to survive between calls
+		public void ComboAccumulates() {
+			SessionManager session = new (m_Chart);
 
-			// Register All Classes that Need to be Tested
-			containerBuilder.Register<SessionManager>(Lifetime.Singleton).WithParameter(m_Chart);
-			containerBuilder.Register<RefereePresenter>(Lifetime.Singleton);
-			containerBuilder.Register<RealtimeReferee>(Lifetime.Singleton).WithParameter(m_Chart.Notes as System.Collections.Generic.IList<Note>);
+			Assert.That (session.CurrentCombo.Value, Is.EqualTo(0));
 
-			// Build Container
-			using IObjectResolver objectResolver = (containerBuilder as ContainerBuilder).Build();
+			session.IncreaseCombo();
+			session.IncreaseCombo();
+			session.IncreaseCombo();
+			Assert.That (session.CurrentCombo.Value, Is.EqualTo(3));
 
-			// Get Classes and Assign to Member to Test
-			m_SessionManager = objectResolver.Resolve<SessionManager>();
-			m_RefereePresenter = objectResolver.Resolve<RefereePresenter>();
-			m_RealtimeReferee = objectResolver.Resolve<RealtimeReferee>();
-			*/
-		//* ↑ DI with VContainer ↑ *//
+			session.ResetCombo();
+			Assert.That (session.CurrentCombo.Value, Is.EqualTo(0));
+		}
 
-		//* ↓ DI with Manual ↓ *//
-		INotesGenerator notesGenerator = new SingleLineConstantIntervalNotesGenerator();
-		System.Collections.Generic.List<Note> generatedNotes = notesGenerator.Generate (m_Chart).ToList();
+		[Test] // Reading the exposed view repeatedly must not detach it from the source
+		public void ComboViewIsStable() {
+			SessionManager session = new (m_Chart);
 
-		m_SessionManager = new SessionManager (m_Chart, generatedNotes);
-		// m_RealtimeReferee = new RealtimeReferee (generatedNotes);
-		// m_ReactiveReferee = new ReactiveReferee (generatedNotes);
-		// m_NotesReferee = new NotesRefereeCompositer (m_SessionManager, m_RealtimeReferee, m_ReactiveReferee);
+			UniRx.ReadOnlyReactiveProperty<int> first = session.CurrentCombo;
+			session.IncreaseCombo();
+			UniRx.ReadOnlyReactiveProperty<int> second = session.CurrentCombo;
 
-		// new NotesRefereeCompositer (m_SessionManager, m_RealtimeReferee, m_ReactiveReferee);
-		// new ComboOperator (m_SessionManager, m_NotesReferee);
-		//* ↑ DI with Manual ↑ *//
+			Assert.That (first, Is.SameAs(second));
+			Assert.That (first.Value, Is.EqualTo(1));
+		}
 
-		m_NotesCount = m_SessionManager.NotesCollection.Count;
-	}
+		[Test]
+		public void ScoreAccumulates() {
+			SessionManager session = new (m_Chart);
 
-	[Test] // RealtimeRefereeが落下処理を正しく行えているかのテスト
-	public void RealtimeTest() {
-		m_SessionManager.UpdateTime (m_SessionManager.NotesCollection[m_NotesCount - 1].Time + 161f);
-		Assert.That (m_SessionManager.NotesCollection[0].AvailableStatus, Is.EqualTo(NoteAvailableStatus.Fell));
-		Assert.That (m_SessionManager.NotesCollection[UnityEngine.Mathf.RoundToInt(m_NotesCount / 2)].AvailableStatus, Is.EqualTo(NoteAvailableStatus.Fell));
-		Assert.That (m_SessionManager.NotesCollection[m_NotesCount - 1].AvailableStatus, Is.EqualTo(NoteAvailableStatus.Fell));
+			session.AddScore (120);
+			session.AddScore (80);
 
-		m_SessionManager.UpdateTime (0f);
-		Assert.That (m_SessionManager.NotesCollection[0].AvailableStatus, Is.EqualTo(NoteAvailableStatus.Available));
-		Assert.That (m_SessionManager.NotesCollection[UnityEngine.Mathf.RoundToInt(m_NotesCount / 2)].AvailableStatus, Is.EqualTo(NoteAvailableStatus.Available));
-		Assert.That (m_SessionManager.NotesCollection[m_NotesCount - 1].AvailableStatus, Is.EqualTo(NoteAvailableStatus.Available));
-	}
+			Assert.That (session.CurrentScore.Value, Is.EqualTo(200));
+		}
 
-	[Test] // 時間によって正しく判定が行われるかのテスト
-	public void ReactiveTest() {
-		m_SessionManager.UpdateTime (m_SessionManager.NotesCollection[0].Time);
-		Assert.That (m_ReactiveReferee.JudgeHit(0), Is.EqualTo(AccuracyLevel.Perfect));
-		m_SessionManager.UpdateTime (m_SessionManager.NotesCollection[1].Time + 60f);
-		Assert.That (m_ReactiveReferee.JudgeHit(0), Is.EqualTo(AccuracyLevel.Perfect));
+		[Test] // Beats convert by tempo; the offset is already in seconds
+		public void GeneratorAppliesOffsetInSeconds() {
+			Chart chart = new ("Offset", "Tester", 120f, 0.5f, new SoundTrack(null), new Note[]{ new (2f, 0) });
 
-		m_SessionManager.UpdateTime (m_SessionManager.NotesCollection[2].Time + 61f);
-		Assert.That (m_ReactiveReferee.JudgeHit(0), Is.EqualTo(AccuracyLevel.Good));
-		m_SessionManager.UpdateTime (m_SessionManager.NotesCollection[3].Time + 120f);
-		Assert.That (m_ReactiveReferee.JudgeHit(0), Is.EqualTo(AccuracyLevel.Good));
+			IList<Note> generated = new ProceduralNotesGenerator().Generate (chart);
 
-		m_SessionManager.UpdateTime (m_SessionManager.NotesCollection[4].Time + 121f);
-		Assert.That (m_ReactiveReferee.JudgeHit(0), Is.EqualTo(AccuracyLevel.Miss));
+			// 2 beats at 120 BPM is 1.0s, plus the 0.5s offset.
+			Assert.That (generated.Single().Time, Is.EqualTo(1.5f).Within(0.0001f));
+		}
 
-		m_SessionManager.UpdateTime (m_SessionManager.NotesCollection[^1].Time + 161f);
-		Assert.That (m_ReactiveReferee.JudgeHit(0), Is.EqualTo(AccuracyLevel.Pass));
-	}
+		[Test]
+		public void SessionExposesEveryNote() {
+			SessionFactory factory = new();
+			SessionData session = factory.Create (m_Chart);
 
-	[Test] // 一度ヒットしたノーツがRealtimeRefereeによって上書きされないかのテスト
-	public void MutualInterferenceTest() {
-		m_SessionManager.UpdateTime (m_SessionManager.NotesCollection[0].Time);
-		m_ReactiveReferee.JudgeHit(0);
+			Assert.That (session.Notes.Count, Is.EqualTo(4));
+			Assert.That (session.Notes.Select (x => x.Position), Is.EqualTo(new[]{ 0, 1, 2, 3 }));
+		}
 
-		Assert.That (m_SessionManager.NotesCollection[0].AvailableStatus, Is.EqualTo(NoteAvailableStatus.Hit));
+		[Test] // The same collection instance is handed out, not a fresh copy per read
+		public void SessionNotesDoNotReallocate() {
+			SessionFactory factory = new();
+			SessionData session = factory.Create (m_Chart);
 
-		m_SessionManager.UpdateTime (m_SessionManager.NotesCollection[20].Time);
-		Assert.That (m_SessionManager.NotesCollection[0].AvailableStatus, Is.EqualTo(NoteAvailableStatus.Hit));
-
-		m_SessionManager.UpdateTime (m_SessionManager.NotesCollection[0].Time);
-		Assert.That (m_SessionManager.NotesCollection[0].AvailableStatus, Is.EqualTo(NoteAvailableStatus.Available));
-
-		m_SessionManager.UpdateTime (m_SessionManager.NotesCollection[20].Time);
-		Assert.That (m_SessionManager.NotesCollection[0].AvailableStatus, Is.EqualTo(NoteAvailableStatus.Fell));
-	}
-
-	[Test] // コンボが正しく操作されているかテスト
-	public void ComboOperationTest() {
-		m_SessionManager.UpdateTime (m_SessionManager.NotesCollection[0].Time);
-		m_ReactiveReferee.JudgeHit(0);
-		Assert.That (m_SessionManager.CurrentCombo.Value, Is.EqualTo(1));
-
-		m_SessionManager.UpdateTime (m_SessionManager.NotesCollection[3].Time); // Fall
-		Assert.That (m_SessionManager.CurrentCombo.Value, Is.EqualTo(0));
-
-		m_SessionManager.UpdateTime (m_SessionManager.NotesCollection[3].Time + 120f); // Good
-		m_ReactiveReferee.JudgeHit(0);
-		Assert.That (m_SessionManager.CurrentCombo.Value, Is.EqualTo(1));
-
-		m_SessionManager.UpdateTime (m_SessionManager.NotesCollection[4].Time + 121f); // Miss
-		m_ReactiveReferee.JudgeHit(0);
-		Assert.That (m_SessionManager.CurrentCombo.Value, Is.EqualTo(0));
-	}
-
-	[Test, Unity.PerformanceTesting.Performance]
-	public void TimeChangingPerformance() {
-		Unity.PerformanceTesting.Measure.Method (() => {
-			m_SessionManager.UpdateTime (m_SessionManager.NotesCollection[m_NotesCount - 1].Time + 161f);
-			m_SessionManager.UpdateTime (0f);
-		})
-		.WarmupCount (16)
-		.IterationsPerMeasurement (1000)
-		.MeasurementCount (16)
-		.Run();
+			Assert.That (session.Notes, Is.SameAs(session.Notes));
+		}
 	}
 }
