@@ -9,6 +9,6 @@ public sealed class AudioEmitter : MonoBehaviour {
 	private void Init (ScrollView _ScrollView) {
 		_ScrollView.OnSelectionChange.Subscribe (_ => {
 			m_AudioSource.PlayOneShot (m_TapSound);
-		});
+		}).AddTo (this);
 	}
 }

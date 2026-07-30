@@ -1,9 +1,11 @@
 using UniRx;
 
-public sealed class ScorePresenter : VContainer.Unity.IInitializable, VContainer.Unity.IStartable {
+public sealed class ScorePresenter : VContainer.Unity.IInitializable, VContainer.Unity.IStartable, System.IDisposable {
 	private readonly RefereeFacade m_NotesReferee;
 	private readonly ScoreManager m_ScoreManager;
 	private readonly SessionFactory m_Session;
+
+	private readonly CompositeDisposable m_Disposables = new();
 
 	private int m_NotesCount;
 	private float m_DeltaScore;
@@ -17,11 +19,17 @@ public sealed class ScorePresenter : VContainer.Unity.IInitializable, VContainer
 	public void Initialize() {
 		m_NotesReferee.OnHit.Subscribe (x => {
 			m_ScoreManager.AddScore (m_DeltaScore);
-		});
+		}).AddTo (m_Disposables);
 	}
 
 	public void Start() {
 		m_NotesCount = m_Session.SessionPool.Notes.Count;
-		m_DeltaScore = 1000000f / m_NotesCount;
+
+		// An empty chart would otherwise divide by zero.
+		m_DeltaScore = m_NotesCount > 0 ? 1000000f / m_NotesCount : 0f;
+	}
+
+	public void Dispose() {
+		m_Disposables.Dispose();
 	}
 }
