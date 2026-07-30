@@ -8,10 +8,15 @@ public class ScoreDisplay : MonoBehaviour {
 	private int m_TargetScore;
 
 	private void Update() {
-		m_CurrentScore = Mathf.RoundToInt (Mathf.Lerp(m_CurrentScore, m_TargetScore, 0.1f));
-	}
+		if (m_CurrentScore == m_TargetScore)
+			return;
 
-	private void FixedUpdate() {
+		// Rounding a Lerp stalls once the gap drops below one point, so snap the tail end.
+		if (Mathf.Abs (m_TargetScore - m_CurrentScore) <= 1)
+			m_CurrentScore = m_TargetScore;
+		else
+			m_CurrentScore = Mathf.RoundToInt (Mathf.Lerp(m_CurrentScore, m_TargetScore, 0.1f));
+
 		string formatted = string.Format (m_Format, m_CurrentScore);
 		m_Label.text = formatted;
 	}
