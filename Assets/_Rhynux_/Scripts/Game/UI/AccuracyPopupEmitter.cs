@@ -50,7 +50,9 @@ namespace Rhynux.Game {
 					.BindToColorA (m_PopupText)
 			);
 
-			m_Sequence = sequence.Run();
+			// Tie the motion to this component so scene teardown cancels it instead of
+			// leaving it writing into a destroyed transform.
+			m_Sequence = sequence.Run().AddTo (this);
 		}
 	}
 }

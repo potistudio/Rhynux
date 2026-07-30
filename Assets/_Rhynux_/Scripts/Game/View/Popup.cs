@@ -10,7 +10,9 @@ namespace Rhynux.Game {
 			LMotion.Create(0f, 2f, 1f)
 				.WithEase(Ease.OutCubic)
 				.WithOnComplete(() => Destroy(gameObject))
-				.BindToLocalPositionY(transform);
+				.BindToLocalPositionY(transform)
+				// A scene change can destroy the popup before the motion finishes.
+				.AddTo (this);
 		}
 	}
 }

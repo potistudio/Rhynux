@@ -25,7 +25,10 @@ namespace Rhynux.Game {
 
 			m_PunchMotion = LMotion.Create (Vector3.one * m_ScaleMultiplier, Vector3.one, m_Duration)
 				.WithEase (Ease.OutCubic)
-				.BindToLocalScale (m_Label.transform);
+				.BindToLocalScale (m_Label.transform)
+				// Tie the motion to this component so scene teardown cancels it instead of
+				// leaving it writing into a destroyed transform.
+				.AddTo (this);
 		}
 	}
 }

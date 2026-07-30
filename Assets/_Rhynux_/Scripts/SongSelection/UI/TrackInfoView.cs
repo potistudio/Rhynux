@@ -75,7 +75,9 @@ namespace Rhynux.SongSelection {
 					.BindToColorA(m_ArtistTextMesh)
 			);
 
-			m_Sequence = sequence.Run();
+			// Tie the motion to this component. It writes into the label transforms every
+			// frame, so it has to be cancelled when the scene tears them down.
+			m_Sequence = sequence.Run().AddTo (this);
 		}
 	}
 }
