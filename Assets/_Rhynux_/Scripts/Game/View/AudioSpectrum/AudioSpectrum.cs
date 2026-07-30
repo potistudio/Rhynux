@@ -27,7 +27,12 @@ public class AudioSpectrum : MonoBehaviour {
 
 	public float[] ProcessedAudioData { get; private set; }
 
-	private readonly float[] m_OutputAudioData = new float[8196];
+	/// <summary>
+	/// Sample window handed to AudioSource.GetOutputData, which requires a power of two.
+	/// </summary>
+	public const int SAMPLE_BUFFER_SIZE = 8192;
+
+	private readonly float[] m_OutputAudioData = new float[SAMPLE_BUFFER_SIZE];
 	private int m_SampleRate = 48000;
 
 	private float Remap (float _x, float _inMin, float _inMax, float _outMin, float _outMax) {
@@ -35,7 +40,7 @@ public class AudioSpectrum : MonoBehaviour {
 	}
 
 	private void OnValidate() {
-		int maxAudioDuration = Mathf.FloorToInt (8196 / (m_SampleRate * 0.001f));
+		int maxAudioDuration = Mathf.FloorToInt (SAMPLE_BUFFER_SIZE / (m_SampleRate * 0.001f));
 
 		if (m_AudioDuration < 0) m_AudioDuration = 0;
 		if (m_AudioDuration > maxAudioDuration) m_AudioDuration = maxAudioDuration;
@@ -65,7 +70,7 @@ public class AudioSpectrum : MonoBehaviour {
 		Unity.Collections.NativeArray<float> processedSpectrumBuffer = new (m_OutputResolution, Unity.Collections.Allocator.TempJob);
 
 		// Prepare Waveform Data as NativeArray
-		Unity.Collections.NativeArray<float> source = new (8196, Unity.Collections.Allocator.TempJob);
+		Unity.Collections.NativeArray<float> source = new (SAMPLE_BUFFER_SIZE, Unity.Collections.Allocator.TempJob);
 		source.CopyFrom (m_OutputAudioData);
 
 		// Create Job

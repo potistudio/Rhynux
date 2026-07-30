@@ -102,7 +102,7 @@ public class GoertzelSpectrumMono {
 			float x = i * 2f / (FFT_SIZE - 1) - 1;
 			float w = ApplyWindow (x, true, m_WindowSkew);
 
-			audioBuffer[i] = _waveform[i + (8196 - FFT_SIZE)] * w;
+			audioBuffer[i] = _waveform[i + (AudioSpectrum.SAMPLE_BUFFER_SIZE - FFT_SIZE)] * w;
 			normalized += w;
 		}
 

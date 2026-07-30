@@ -97,7 +97,7 @@ public struct GoertzelSpectrumJob : Unity.Jobs.IJob {
 			float x = i * 2f / (FFT_SIZE - 1) - 1;
 			float w = ApplyWindow (x, true, m_WindowSkew);
 
-			audioBuffer[i] = m_WaveformInput[i + (8196 - FFT_SIZE)] * w;
+			audioBuffer[i] = m_WaveformInput[i + (AudioSpectrum.SAMPLE_BUFFER_SIZE - FFT_SIZE)] * w;
 			normalized += w;
 		}
 
