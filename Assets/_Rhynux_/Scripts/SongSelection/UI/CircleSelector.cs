@@ -9,11 +9,31 @@ public class CircleSelector : Graphic {
 
 	[SerializeField] private ArcProperty[] m_Arcs;
 
+	private float Radius => Screen.height * 1.5f;
+
+	protected override void OnEnable() {
+		base.OnEnable();
+		UpdateAnchoredPosition();
+	}
+
+	protected override void OnRectTransformDimensionsChange() {
+		base.OnRectTransformDimensionsChange();
+		UpdateAnchoredPosition();
+	}
+
+	/// <summary>
+	/// Push the circle off to the left so only its right edge crosses the screen.
+	/// Kept out of OnPopulateMesh: writing to the RectTransform while the mesh is
+	/// being generated dirties the graphic again and can loop.
+	/// </summary>
+	private void UpdateAnchoredPosition() {
+		rectTransform.anchoredPosition = Vector2.left * (Radius - 200f * (Screen.width / 1920f));
+	}
+
 	protected override void OnPopulateMesh (VertexHelper vh) {
 		vh.Clear();
 
-		float radius = Screen.height * 1.5f;
-		GetComponent<RectTransform>().anchoredPosition = Vector2.left * (radius - 200f * (Screen.width / 1920f));
+		float radius = Radius;
 
 		UIUtilities.MakeCircleMesh (vh, transform.position + new Vector3(Screen.width, Screen.height) / 2, radius, m_LineWidth * (Screen.width / 1920f), m_LineColor, m_Resolution);
 
