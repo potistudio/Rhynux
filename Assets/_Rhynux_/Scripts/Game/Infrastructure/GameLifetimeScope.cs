@@ -1,10 +1,14 @@
+using UnityEngine.Serialization;
 using VContainer;
 using VContainer.Unity;
 using MackySoft.Navigathena.SceneManagement.VContainer;
 
 namespace Rhynux.Game {
 	public sealed class GameLifetimeScope : LifetimeScope {
-		[UnityEngine.SerializeField] private ChartAsset m_ChartAsset;
+		// The field was renamed from m_Chart, but the scene still stores the old name,
+		// so without this the reference deserializes as null.
+		[UnityEngine.SerializeField, FormerlySerializedAs("m_Chart")]
+		private ChartAsset m_ChartAsset;
 
 		protected override void Configure (IContainerBuilder builder) {
 			//* Instance *//

@@ -7,7 +7,10 @@ namespace Rhynux.SongSelection {
 	    [SerializeField] private bool m_AutoGeneration;
 	    [SerializeField] private int m_GenerationCount;
 
-	    [SerializeField] private List<ChartAsset> m_ChartAssets = new();
+	    // The field was renamed from m_Charts, but the scene still stores the old name,
+    // so without this the chart list deserializes as empty.
+    [SerializeField, UnityEngine.Serialization.FormerlySerializedAs("m_Charts")]
+    private List<ChartAsset> m_ChartAssets = new();
 		public List<Chart> Charts => m_ChartAssets.Select(x => x.Unpack()).ToList();
 
 		[VContainer.Inject]
