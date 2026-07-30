@@ -33,6 +33,8 @@ public class AudioSpectrumDrawer : UnityEngine.UI.Graphic {
 	}
 
 	private void Update() {
-		SetAllDirty();
+		// The spectrum changes every frame, so the mesh genuinely has to be rebuilt.
+		// Only the vertices change though; SetAllDirty also re-ran layout and material passes.
+		SetVerticesDirty();
 	}
 }

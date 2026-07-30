@@ -38,6 +38,7 @@ public class CanvasDotGrid : MonoBehaviour {
 		}
 
 		m_NoiseMap = GenerateNoiseMap (m_ActualSize.x, m_ActualSize.y, m_NoiseScale, m_NoiseOctaves, m_NoisePersistance, m_NoiseLacunality);
+		ApplyNoise();
 	}
 
 	// Realtime Editing
@@ -46,16 +47,25 @@ public class CanvasDotGrid : MonoBehaviour {
 			return;
 
 		m_NoiseMap = GenerateNoiseMap (m_ActualSize.x, m_ActualSize.y, m_NoiseScale, m_NoiseOctaves, m_NoisePersistance, m_NoiseLacunality);
+		ApplyNoise();
 	}
 
-	private void Update() {
-		if (m_Noise) {
-			for (int y = 0; y < m_ActualSize.y; y++) {
-				for (int x = 0; x < m_ActualSize.x; x++) {
-					Color color = m_Images[y * m_ActualSize.x + x].color;
-					color.a = m_NoiseMap[x, y];
-					m_Images[y * m_ActualSize.x + x].color = color;
-				}
+	/// <summary>
+	/// Push the noise map into the dot alphas.
+	/// The map is static, so this only runs when it is regenerated. Doing it per frame
+	/// rewrote every Image colour and dirtied the whole canvas on every single frame.
+	/// </summary>
+	private void ApplyNoise() {
+		if (!m_Noise || m_NoiseMap == null)
+			return;
+
+		for (int y = 0; y < m_ActualSize.y; y++) {
+			for (int x = 0; x < m_ActualSize.x; x++) {
+				UnityEngine.UI.Image image = m_Images[y * m_ActualSize.x + x];
+
+				Color color = image.color;
+				color.a = m_NoiseMap[x, y];
+				image.color = color;
 			}
 		}
 	}

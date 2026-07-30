@@ -23,15 +23,13 @@ public sealed class ScrollItemRegistrar : MonoBehaviour {
         _scrollView.UpdateData (generatedCharts.ToArray());
     }
 
-	private string RandomBase64() {
+	private static string RandomBase64() {
 		// Generate GUID as a Base64 string
 		System.Byte[] guidBytes = System.Guid.NewGuid().ToByteArray();
 		string base64 = System.Convert.ToBase64String (guidBytes);
 
-		// Remove last 3 characters '(QAgw)=='
-		System.Text.RegularExpressions.Regex regex = new (".{3}$");
-		string result = regex.Replace (base64, " ");
-
-		return result;
+		// Remove last 3 characters '(QAgw)=='.
+		// A GUID is always 24 Base64 characters, so slicing beats compiling a Regex per call.
+		return base64[..^3] + " ";
 	}
 }
