@@ -8,7 +8,7 @@ public class AudioSpectrumDrawer : UnityEngine.UI.Graphic {
 	[SerializeField] private float m_RightOffset;
 
 	private float Remap (float _x, float _inMin, float _inMax, float _outMin, float _outMax) {
-		return (_x - _inMax) / (_inMax - _inMin) * (_outMax - _outMin) + _outMin;
+		return (_x - _inMin) / (_inMax - _inMin) * (_outMax - _outMin) + _outMin;
 	}
 
 	private void AddVerticalLine (UnityEngine.UI.VertexHelper vh, Vector3 _position, float _height, float _width = 2f, Color _color = default) {

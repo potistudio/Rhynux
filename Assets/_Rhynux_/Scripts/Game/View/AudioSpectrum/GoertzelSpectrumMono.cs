@@ -23,7 +23,7 @@ public class GoertzelSpectrumMono {
 	}
 
 	private float Remap (float _x, float _inMin, float _inMax, float _outMin, float _outMax) {
-		return (_x - _inMax) / (_inMax - _inMin) * (_outMax - _outMin) + _outMin;
+		return (_x - _inMin) / (_inMax - _inMin) * (_outMax - _outMin) + _outMin;
 	}
 
 	private float ApplyWindow (float _posX, bool _truncate, float _skew) {
