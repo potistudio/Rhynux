@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class RandomTitle : MonoBehaviour {
+public class GlitchText : MonoBehaviour {
 	[SerializeField] private TMPro.TextMeshProUGUI[] m_TargetTextFields;
 
     private void FixedUpdate() {
