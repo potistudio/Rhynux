@@ -33,15 +33,17 @@ public class SessionManager {
 
 	//* Score
 	private readonly ReactiveProperty<int> m_CurrentScore = new();
-	public ReadOnlyReactiveProperty<int> CurrentScore => m_CurrentScore.ToReadOnlyReactiveProperty();
+	private readonly ReadOnlyReactiveProperty<int> m_CurrentScoreView;
+	public ReadOnlyReactiveProperty<int> CurrentScore => m_CurrentScoreView;
 
 	public void AddScore (int _deltaScore) {
 		m_CurrentScore.Value += _deltaScore;
 	}
 
 	//* Combo
-	private ReactiveProperty<int> m_CurrentCombo => new();
-	public ReadOnlyReactiveProperty<int> CurrentCombo => m_CurrentCombo.ToReadOnlyReactiveProperty();
+	private readonly ReactiveProperty<int> m_CurrentCombo = new();
+	private readonly ReadOnlyReactiveProperty<int> m_CurrentComboView;
+	public ReadOnlyReactiveProperty<int> CurrentCombo => m_CurrentComboView;
 
 	public void IncreaseCombo() {
 		m_CurrentCombo.Value++;
@@ -75,9 +77,7 @@ public class SessionManager {
 	///
 	/// </summary>
 	/// <param name="chart">Chart</param>
-	public SessionManager (Chart _chart) {
-		SetChart (_chart);
-		m_NotesCollection = _chart.Notes.ToList();
+	public SessionManager (Chart _chart) : this (_chart, _chart.Notes.ToList()) {
 	}
 
 	/// <summary>
@@ -88,5 +88,9 @@ public class SessionManager {
 	public SessionManager (Chart _chart, System.Collections.Generic.List<Note> _notes) {
 		SetChart (_chart);
 		m_NotesCollection = _notes;
+
+		// Create the read-only views once. Creating them per access would leak a new subscription every time.
+		m_CurrentScoreView = m_CurrentScore.ToReadOnlyReactiveProperty();
+		m_CurrentComboView = m_CurrentCombo.ToReadOnlyReactiveProperty();
 	}
 }
